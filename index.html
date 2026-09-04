@@ -176,7 +176,7 @@
                     <div class="flex-1 px-5 py-2 hover:bg-gray-50 rounded-full transition cursor-pointer group relative" onclick="openHeroModal('whereModal')">
                         <div class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5 group-hover:text-brand-cyan transition-colors">Where to</div>
                         <div class="font-semibold text-brand-dark text-sm flex items-center gap-2" id="where-value">
-                            Anywhere
+                            Enter location
                         </div>
                     </div>
                     
@@ -186,7 +186,7 @@
                     <div class="flex-1 px-5 py-2 hover:bg-gray-50 rounded-full transition cursor-pointer group relative" onclick="openHeroModal('whenModal')">
                         <div class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5 group-hover:text-brand-cyan transition-colors">When</div>
                         <div class="font-semibold text-gray-800 text-sm flex items-center gap-2" id="when-value">
-                            Any date
+                            Enter date
                         </div>
                     </div>
 
@@ -204,7 +204,16 @@
                         <button class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-50 text-gray-400 hover:text-gray-700 hover:bg-gray-200 transition-colors" onclick="closeHeroModals()">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
-                        <div class="font-bold text-lg text-gray-800 mb-5">Popular Destinations</div>
+                        <div class="font-bold text-lg text-gray-800 mb-4">Where to?</div>
+                        
+                        <!-- Search Input -->
+                        <div class="relative mb-5 flex items-center">
+                            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" id="custom-destination-input" placeholder="Search Ladakh, Rishikesh..." class="w-full bg-gray-50 border border-gray-200 text-brand-dark text-sm rounded-xl pl-10 pr-20 py-3 focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-all" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') { selectWhere(this.value.trim()); this.value=''; }">
+                            <button class="absolute right-2 top-1/2 -translate-y-1/2 bg-brand-cyan text-white text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-brand-darkcyan transition-colors" onclick="const val = document.getElementById('custom-destination-input').value.trim(); if(val) { selectWhere(val); document.getElementById('custom-destination-input').value=''; }">Set</button>
+                        </div>
+
+                        <div class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-3">Popular Regions</div>
                         <div class="grid grid-cols-2 gap-3">
                             <div class="flex items-center gap-3 p-3 border border-gray-100 hover:border-brand-cyan/30 hover:bg-brand-cyan/5 rounded-2xl cursor-pointer transition" onclick="selectWhere('India')">
                                 <img src="https://flagcdn.com/in.svg" class="w-8 h-8 object-cover rounded-full shadow-sm border border-gray-100" alt="India"> 
@@ -2156,8 +2165,8 @@
             const where = document.getElementById('where-value').innerText.trim();
             const when = document.getElementById('when-value').innerText.trim();
             const params = new URLSearchParams();
-            if (where && where !== 'Anywhere') params.set('where', where);
-            if (when && when !== 'Any date') params.set('when', when);
+            if (where && where !== 'Anywhere' && where !== 'Enter location') params.set('where', where);
+            if (when && when !== 'Any date' && when !== 'Enter date') params.set('when', when);
             window.location.href = 'search.html' + (params.toString() ? '?' + params.toString() : '');
         }
     </script>
