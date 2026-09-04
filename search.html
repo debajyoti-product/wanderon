@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
     <script>
         tailwind.config = {
             theme: {
@@ -34,7 +35,10 @@
         }
     </script>
     <style>
+        html { scroll-behavior: smooth; }
         html, body { overflow-x: clip; }
+        a, button, input, select, textarea { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+        img { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -119,7 +123,7 @@
 
             <!-- LEFT: Filters Card (Card with header 'Filters' styled same as Sort) -->
             <aside class="hidden lg:block w-[260px] flex-shrink-0">
-                <div class="sticky top-28 bg-white rounded-[2rem] p-6 shadow-soft border border-gray-100">
+                <div data-aos="fade-right" data-aos-delay="100" class="sticky top-28 bg-white rounded-[2rem] p-6 shadow-soft border border-gray-100">
                     <!-- Filters Card Header (Same style as Sort label) -->
                     <div class="flex items-center justify-between pb-4 mb-5 border-b border-gray-100">
                         <div class="flex items-center gap-2">
@@ -194,7 +198,7 @@
             <div class="flex-1 min-w-0 w-full">
 
                 <!-- Top Bar: Results Text on Left (in place of sort) + Sort Dropdown & Sold Out Toggle on Right -->
-                <div class="hidden lg:flex flex-wrap items-center justify-between gap-4 mb-7 bg-white/70 backdrop-blur-sm p-4 rounded-2xl border border-gray-100 relative z-50">
+                <div data-aos="fade-up" class="hidden lg:flex flex-wrap items-center justify-between gap-4 mb-7 bg-white/70 backdrop-blur-sm p-4 rounded-2xl border border-gray-100 relative z-50">
                     <!-- Left: Results text in place of sort -->
                     <div class="flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-brand-cyan"></span>
@@ -275,7 +279,7 @@
                 </div>
 
                 <!-- Trip Cards Grid (Wider cards: 2 columns on tablet/desktop, 1 column on mobile) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+                <div data-aos="fade-up" data-aos-delay="150" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
                     <template x-for="card in visibleCards" :key="card.id">
                         <div class="group cursor-pointer">
                             <a :href="card.href" class="block h-full focus:outline-none hover:-translate-y-1 transition-transform duration-300">
@@ -608,6 +612,10 @@
                 }
             };
         }
+    </script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
     </script>
 </body>
 </html>

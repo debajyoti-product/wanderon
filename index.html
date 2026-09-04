@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Lilita+One&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
     <script>
         tailwind.config = {
             theme: {
@@ -70,11 +71,15 @@
         }
     </script>
     <style>
+        html { scroll-behavior: smooth; }
         body { 
             background-color: #fcfbf8; 
             color: #1e293b;
             overflow-x: clip;
         }
+        a, button, input, select, textarea { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+        img { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease; }
+        .card-transition { transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
         
         /* Elegant Arch */
         .arch-mask {
@@ -191,7 +196,7 @@
                 <div class="absolute top-24 -left-6 z-20 animate-float pointer-events-none text-4xl drop-shadow-md" style="animation-delay: 2s;">🏔️</div>
                 <div class="absolute top-24 right-4 z-20 animate-float-delayed pointer-events-none text-3xl drop-shadow-md" style="animation-delay: 2.8s;">🤝</div>
 
-                <h1 class="font-display font-semibold text-5xl md:text-7xl leading-[1.05] tracking-tight text-brand-dark mb-8 relative z-10">
+                <h1 data-aos="fade-up" data-aos-delay="100" class="font-display font-semibold text-5xl md:text-7xl leading-[1.05] tracking-tight text-brand-dark mb-8 relative z-10">
                     See the world <br>
                     <span class="text-brand-cyan relative inline-block mt-2">
                         Meet your people
@@ -200,7 +205,7 @@
                 </h1>
                 
                 <!-- Elegant Search Box (15% height reduction) -->
-                <div class="bg-white rounded-[2rem] md:rounded-full p-1.5 flex flex-col md:flex-row gap-1 w-full mt-12 max-w-4xl relative z-30 shadow-soft border border-gray-100" id="hero-search-bar">
+                <div data-aos="fade-up" data-aos-delay="250" class="bg-white rounded-[2rem] md:rounded-full p-1.5 flex flex-col md:flex-row gap-1 w-full mt-12 max-w-4xl relative z-30 shadow-soft border border-gray-100" id="hero-search-bar">
                     
                     <!-- WHERE TO -->
                     <div class="flex-1 px-5 py-2 hover:bg-gray-50 rounded-full transition cursor-pointer group relative" onclick="openHeroModal('whereModal')">
@@ -413,7 +418,7 @@
             </div>
             
             <!-- Right: Elegant Image Composition (aligned right & frosted frame, 15% wider on left) -->
-            <div class="order-1 lg:order-2 relative w-full flex justify-end items-center">
+            <div data-aos="fade-left" data-aos-delay="200" data-aos-duration="900" class="order-1 lg:order-2 relative w-full flex justify-end items-center">
                 <!-- Frosted Glass Frame -->
                 <div class="p-2.5 bg-white/40 backdrop-blur-md rounded-[2.5rem] shadow-glass border border-white/60 w-full max-w-[565px] ml-auto">
                     <!-- Main Image -->
@@ -465,7 +470,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                 <!-- Card 1 -->
-                <div class="bg-white/80 backdrop-blur-sm border border-white rounded-[2rem] p-8 shadow-soft card-transition relative group hover:-translate-y-2">
+                <div data-aos="fade-up" data-aos-delay="0" class="bg-white/80 backdrop-blur-sm border border-white rounded-[2rem] p-8 shadow-soft card-transition relative group hover:-translate-y-2">
                     <div class="w-14 h-14 bg-blue-50 text-brand-cyan rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform shadow-sm border border-blue-100">
                         <i class="fa-solid fa-handshake-slash"></i>
                     </div>
@@ -474,7 +479,7 @@
                 </div>
                 
                 <!-- Card 2 -->
-                <div class="bg-white/80 backdrop-blur-sm border border-white rounded-[2rem] p-8 shadow-soft card-transition relative group hover:-translate-y-2 lg:translate-y-4">
+                <div data-aos="fade-up" data-aos-delay="100" class="bg-white/80 backdrop-blur-sm border border-white rounded-[2rem] p-8 shadow-soft card-transition relative group hover:-translate-y-2 lg:translate-y-4">
                     <div class="w-14 h-14 bg-teal-50 text-teal-500 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-transform shadow-sm border border-teal-100">
                         <i class="fa-solid fa-shield-halved"></i>
                     </div>
@@ -484,7 +489,7 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="bg-white/80 backdrop-blur-sm border border-white rounded-[2rem] p-8 shadow-soft card-transition relative group hover:-translate-y-2">
+                <div data-aos="fade-up" data-aos-delay="200" class="bg-white/80 backdrop-blur-sm border border-white rounded-[2rem] p-8 shadow-soft card-transition relative group hover:-translate-y-2">
                     <div class="w-14 h-14 bg-yellow-50 text-brand-yellow rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform shadow-sm border border-yellow-100">
                         <i class="fa-solid fa-people-arrows"></i>
                     </div>
@@ -493,7 +498,7 @@
                 </div>
 
                 <!-- Card 4 -->
-                <div class="bg-white/80 backdrop-blur-sm border border-white rounded-[2rem] p-8 shadow-soft card-transition relative group hover:-translate-y-2 lg:translate-y-4">
+                <div data-aos="fade-up" data-aos-delay="300" class="bg-white/80 backdrop-blur-sm border border-white rounded-[2rem] p-8 shadow-soft card-transition relative group hover:-translate-y-2 lg:translate-y-4">
                     <div class="w-14 h-14 bg-pink-50 text-pink-500 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-transform shadow-sm border border-pink-100">
                         <i class="fa-solid fa-mug-hot"></i>
                     </div>
@@ -510,7 +515,7 @@
             
             <!-- Header -->
             <div class="mb-[18px]">
-                <h2 class="font-display font-semibold text-[31px] md:text-[41px] text-brand-dark tracking-tight">
+                <h2 data-aos="fade-right" class="font-display font-semibold text-[31px] md:text-[41px] text-brand-dark tracking-tight">
                     Upcoming Community Trips
                 </h2>
             </div>
@@ -793,7 +798,7 @@
             <div class="w-full max-w-[720px] lg:ml-auto grid grid-cols-1 sm:grid-cols-2 gap-5 relative z-10">
                 
                 <!-- Solo Card -->
-                <div class="bg-white rounded-[2rem] p-7 shadow-soft border border-gray-100 hover:border-brand-yellow/40 hover:shadow-float transition-all relative overflow-hidden group flex flex-col h-full">
+                <div data-aos="fade-up" data-aos-delay="0" class="bg-white rounded-[2rem] p-7 shadow-soft border border-gray-100 hover:border-brand-yellow/40 hover:shadow-float transition-all relative overflow-hidden group flex flex-col h-full">
                     <div class="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-brand-yellow/10 to-transparent rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
                     <div class="w-12 h-12 rounded-2xl bg-brand-yellow/10 text-brand-yellow flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-person-walking-luggage"></i>
@@ -808,7 +813,7 @@
                 </div>
 
                 <!-- Group Card -->
-                <div class="bg-white rounded-[2rem] p-7 shadow-soft border border-gray-100 hover:border-brand-cyan/40 hover:shadow-float transition-all relative overflow-hidden group flex flex-col h-full">
+                <div data-aos="fade-up" data-aos-delay="150" class="bg-white rounded-[2rem] p-7 shadow-soft border border-gray-100 hover:border-brand-cyan/40 hover:shadow-float transition-all relative overflow-hidden group flex flex-col h-full">
                     <div class="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-brand-cyan/10 to-transparent rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
                     <div class="w-12 h-12 rounded-2xl bg-brand-cyan/10 text-brand-cyan flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-users"></i>
@@ -847,7 +852,7 @@
         <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
             
             <!-- Section Header -->
-            <div class="text-center max-w-3xl mx-auto mb-6">
+            <div data-aos="fade-up" class="text-center max-w-3xl mx-auto mb-6">
                 <div class="inline-flex items-center gap-2 font-bold uppercase text-xs tracking-widest text-brand-yellow mb-3 bg-white/70 backdrop-blur-md px-4 py-2 rounded-full border border-white shadow-sm">
                     #indiatrips
                 </div>
@@ -1041,7 +1046,7 @@
 
     <!-- Trust Corner (Testimonials) Relocated Below Hub -->
 <!-- Trust Corner (Testimonials) -->
-    <section class="py-16 relative overflow-hidden bg-[#fcfbf8] border-y border-gray-100">
+    <section data-aos="fade-up" class="py-16 relative overflow-hidden bg-[#fcfbf8] border-y border-gray-100">
         
         <!-- Background Elements -->
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
@@ -1257,7 +1262,7 @@
     </section>
 
 <!-- Explore The World (International Trips) -->
-    <section class="py-20 relative overflow-hidden bg-[#f6f9fc]">
+    <section data-aos="fade-up" class="py-20 relative overflow-hidden bg-[#f6f9fc]">
         <!-- 3D World Map Background -->
         <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden flex items-center justify-center">
             <img src="world_map.jpg" class="w-full h-full object-cover opacity-80 transform scale-105 blur-[4px]" style="transform-origin: center;" alt="3D World Map">
@@ -2199,6 +2204,10 @@
             if (when && when !== 'Any date' && when !== 'Enter date') params.set('when', when);
             window.location.href = 'search.html' + (params.toString() ? '?' + params.toString() : '');
         }
+    </script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
     </script>
 </body>
 </html>
