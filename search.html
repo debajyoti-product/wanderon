@@ -34,7 +34,7 @@
         }
     </script>
     <style>
-        html, body { overflow-x: hidden; }
+        html, body { overflow-x: clip; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -46,7 +46,7 @@
 <body class="bg-[#fafafa] text-gray-800 font-sans antialiased" x-data="searchPage()">
 
     <!-- Navbar (Exact same padding & layout as homepage) -->
-    <nav class="sticky top-0 w-full z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm" x-data="{ mobileMenu: false }">
+    <nav class="sticky top-0 w-full z-[60] bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm" x-data="{ mobileMenu: false }">
         <div class="max-w-7xl mx-auto px-4 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <a href="index.html" class="flex-shrink-0 flex items-center group">
