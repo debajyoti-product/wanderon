@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <section id="trips-hub" class="flex flex-col lg:flex-row w-full h-[800px] overflow-hidden bg-gray-900">
+        
+        <!-- DOMESTIC PANEL -->
+        <div id="panel-domestic" class="relative group cursor-pointer overflow-hidden transition-all duration-700 ease-in-out flex-[4]" onclick="expandPanel('domestic')">
+            <div id="dom-exp" class="absolute inset-0 w-full h-full overflow-y-auto overflow-x-hidden transition-opacity duration-700 opacity-100 pointer-events-auto bg-blue-100">
+                <div class="w-full lg:w-[80vw] h-[1500px] p-10">
+                    <h1 class="text-4xl font-bold">Domestic Content (Scrollable)</h1>
+                    <p>This is the huge domestic content...</p>
+                </div>
+            </div>
+            <div id="dom-col" class="absolute inset-0 w-full h-full overflow-hidden transition-opacity duration-700 opacity-0 pointer-events-none bg-blue-900">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <h2 class="text-white text-2xl lg:text-4xl font-bold uppercase tracking-widest lg:[writing-mode:vertical-rl] lg:rotate-180">Domestic</h2>
+                </div>
+            </div>
+        </div>
+        
+        <!-- INTL PANEL -->
+        <div id="panel-intl" class="relative group cursor-pointer overflow-hidden transition-all duration-700 ease-in-out flex-[1]" onclick="expandPanel('intl')">
+            <div id="intl-exp" class="absolute inset-0 w-full h-full overflow-y-auto overflow-x-hidden transition-opacity duration-700 opacity-0 pointer-events-none bg-green-100">
+                <div class="w-full lg:w-[80vw] h-[1500px] p-10">
+                    <h1 class="text-4xl font-bold">Intl Content (Scrollable)</h1>
+                    <p>This is the huge intl content...</p>
+                </div>
+            </div>
+            <div id="intl-col" class="absolute inset-0 w-full h-full overflow-hidden transition-opacity duration-700 opacity-100 pointer-events-auto bg-green-900">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <h2 class="text-white text-2xl lg:text-4xl font-bold uppercase tracking-widest lg:[writing-mode:vertical-rl] lg:rotate-180">International</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    function expandPanel(panelId) {
+        const pDom = document.getElementById('panel-domestic');
+        const pIntl = document.getElementById('panel-intl');
+        
+        const domExp = document.getElementById('dom-exp');
+        const domCol = document.getElementById('dom-col');
+        const intlExp = document.getElementById('intl-exp');
+        const intlCol = document.getElementById('intl-col');
+        
+        if (panelId === 'domestic') {
+            pDom.classList.replace('flex-[1]', 'flex-[4]') || pDom.classList.add('flex-[4]');
+            pDom.classList.remove('flex-[1]');
+            pIntl.classList.replace('flex-[4]', 'flex-[1]') || pIntl.classList.add('flex-[1]');
+            pIntl.classList.remove('flex-[4]');
+            
+            domExp.classList.replace('opacity-0', 'opacity-100');
+            domExp.classList.replace('pointer-events-none', 'pointer-events-auto');
+            domCol.classList.replace('opacity-100', 'opacity-0');
+            domCol.classList.replace('pointer-events-auto', 'pointer-events-none');
+            
+            intlExp.classList.replace('opacity-100', 'opacity-0');
+            intlExp.classList.replace('pointer-events-auto', 'pointer-events-none');
+            intlCol.classList.replace('opacity-0', 'opacity-100');
+            intlCol.classList.replace('pointer-events-none', 'pointer-events-auto');
+            
+        } else {
+            pDom.classList.replace('flex-[4]', 'flex-[1]') || pDom.classList.add('flex-[1]');
+            pDom.classList.remove('flex-[4]');
+            pIntl.classList.replace('flex-[1]', 'flex-[4]') || pIntl.classList.add('flex-[4]');
+            pIntl.classList.remove('flex-[1]');
+            
+            domExp.classList.replace('opacity-100', 'opacity-0');
+            domExp.classList.replace('pointer-events-auto', 'pointer-events-none');
+            domCol.classList.replace('opacity-0', 'opacity-100');
+            domCol.classList.replace('pointer-events-none', 'pointer-events-auto');
+            
+            intlExp.classList.replace('opacity-0', 'opacity-100');
+            intlExp.classList.replace('pointer-events-none', 'pointer-events-auto');
+            intlCol.classList.replace('opacity-100', 'opacity-0');
+            intlCol.classList.replace('pointer-events-auto', 'pointer-events-none');
+        }
+    }
+    </script>
+</body>
+</html>

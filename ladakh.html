@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ladakh Umling La Tour - WanderOn</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#00a3e0',
+                            darkcyan: '#008cc2',
+                            yellow: '#ffc107',
+                            dark: '#1e293b'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Alpine.js for interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <style>
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .hero-gradient { background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%); }
+    </style>
+</head>
+<body class="overflow-x-hidden bg-gray-50 text-gray-800 font-sans antialiased selection:bg-brand-yellow selection:text-brand-dark">
+
+    <!-- Navbar -->
+    <nav x-data="{ mobileMenu: false }" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex items-center cursor-pointer group">
+                    <img src="logo.png" alt="WanderOn" class="h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-105">
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-sm font-semibold text-gray-600 hover:text-brand-cyan transition-colors">Home</a>
+                    <a href="#" class="text-sm font-semibold text-gray-600 hover:text-brand-cyan transition-colors">Trips</a>
+                    <a href="#" class="text-sm font-semibold text-gray-600 hover:text-brand-cyan transition-colors">Community <span class="ml-1 text-[10px] bg-brand-yellow text-brand-dark px-2 py-0.5 rounded-full font-bold">VIBE CHECK</span></a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="#" class="hidden md:block text-sm font-semibold text-gray-600 hover:text-brand-cyan transition">Log In</a>
+                    <a href="#" class="bg-brand-dark text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-gray-800 transition shadow-md hover:shadow-lg">Submit Enquiry</a>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Mobile Menu Button -->
+        <button @click="mobileMenu = !mobileMenu" class="lg:hidden text-white p-2 z-50">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path x-show="!mobileMenu" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <path x-show="mobileMenu" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <!-- Mobile Drawer -->
+        <div x-show="mobileMenu" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 translate-x-full"
+             x-transition:enter-end="opacity-100 translate-x-0"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 translate-x-0"
+             x-transition:leave-end="opacity-0 translate-x-full"
+             class="fixed inset-0 z-40 bg-dark lg:hidden flex flex-col pt-24 px-6">
+            
+            <div class="flex flex-col gap-6 text-xl font-medium">
+                <a href="index.html" class="text-white">Home</a>
+                <a href="#" class="text-white">Trips</a>
+                <div class="h-px bg-white/20 my-4"></div>
+                <button class="px-6 py-3 rounded-full border border-white/30 text-white font-medium">Log In</button>
+                <button class="px-6 py-3 rounded-full bg-cyan text-white font-medium">Submit Enquiry</button>
+            </div>
+        </div>
+
+</nav>
+
+    <!-- Hero Gallery (Grid Collage) -->
+    <section class="pt-24 pb-4 px-4 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-3 md:gap-4 h-[340px] md:h-[460px] cursor-pointer">
+            <!-- Large Main Image (Left, spans 2 cols, 2 rows) -->
+            <div class="col-span-1 md:col-span-2 md:row-span-2 overflow-hidden relative group rounded-2xl md:rounded-[2rem]">
+                <img src="https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=1600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Ladakh Mountains">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+            </div>
+            <!-- Top Right 1 -->
+            <div class="hidden md:block col-span-1 row-span-1 overflow-hidden relative group rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Pangong Lake">
+            </div>
+            <!-- Top Right 2 -->
+            <div class="hidden md:block col-span-1 row-span-1 overflow-hidden relative group rounded-2xl md:rounded-tr-[2rem]">
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Nubra Sand Dunes">
+            </div>
+            <!-- Bottom Right 1 -->
+            <div class="hidden md:block col-span-1 row-span-1 overflow-hidden relative group rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1612438214708-f428a707dd4e?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Monastery">
+            </div>
+            <!-- Bottom Right 2 with 12+ Overlay -->
+            <div class="hidden md:block col-span-1 row-span-1 overflow-hidden relative group rounded-2xl md:rounded-br-[2rem]">
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Hanle Night Sky">
+                <div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                    <span class="text-white font-display font-bold text-2xl tracking-wide">12+</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Architecture -->
+    <main class="max-w-7xl mx-auto px-4 lg:px-8 py-8 flex flex-col lg:flex-row gap-12 relative" x-data="{ style: 'rented' }">
+        
+        
+        <!-- Left Column: Story & Details -->
+        <div class="w-full lg:w-[65%]">
+            
+            <!-- Breadcrumbs & Actions -->
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                <div class="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-widest">
+                    <a href="#" class="hover:text-brand-cyan">India</a>
+                    <span>/</span>
+                    <a href="#" class="hover:text-brand-cyan">Ladakh</a>
+                    <span>/</span>
+                    <span class="text-brand-cyan">Umling La Circuit</span>
+                </div>
+                <div class="flex items-center gap-4 text-sm font-bold text-gray-500">
+                    <button class="hover:text-brand-cyan transition-colors flex items-center gap-2"><i class="fa-solid fa-download"></i> Download Itinerary</button>
+                    <button class="hover:text-brand-cyan transition-colors flex items-center gap-2"><i class="fa-solid fa-share-nodes"></i> Share</button>
+                </div>
+            </div>
+
+            <h1 class="font-display font-extrabold text-[26px] md:text-[32px] text-brand-dark leading-tight mb-3 tracking-tight">
+                Ladakh & Umling La Tour: Classic Value Circuit
+            </h1>
+            
+            <p class="text-base text-gray-600 mb-8 leading-relaxed">
+                Conquer the world's highest motorable pass, sleep under a billion stars in Hanle, and traverse the enchanting high-altitude deserts of Ladakh. An epic 7-day adventure crafted for those who seek the raw beauty of the Himalayas.
+            </p>
+
+            <!-- Quick Stats Bar -->
+            <div class="flex flex-wrap gap-4 md:gap-8 bg-white p-6 rounded-3xl shadow-sm border border-gray-100 mb-12">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-cyan-50 flex items-center justify-center text-brand-cyan">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Duration</div>
+                        <div class="font-semibold text-gray-800 text-sm">6N / 7D</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Slots Filled</div>
+                        <div class="flex items-center gap-2">
+                            <div class="font-semibold text-gray-800 text-sm">85%</div>
+                            <div class="w-16 h-1.5 bg-gray-200 rounded-full overflow-hidden"><div class="w-[85%] h-full bg-orange-500 rounded-full"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-500">
+                        <i class="fa-solid fa-venus-mars"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Gender Ratio</div>
+                        <div class="font-semibold text-gray-800 text-sm">60:40 (M:F)</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-green-500">
+                        <i class="fa-solid fa-users-viewfinder"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Solo Travelers</div>
+                        <div class="font-semibold text-gray-800 text-sm">60%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Vibe / Highlights -->
+            <h2 class="font-display font-bold text-2xl text-brand-dark mb-6">The Highlights</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
+                <div class="flex items-start gap-4 p-5 bg-white rounded-2xl border border-gray-100 hover:shadow-md transition group">
+                    <div class="text-brand-cyan text-xl mt-0.5 group-hover:scale-125 transition-transform"><i class="fa-solid fa-flag-checkered"></i></div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-1">Umling La Pass</h4>
+                        <p class="text-sm text-gray-500">Stand at 19,024 ft on the highest motorable road in the world.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 p-5 bg-white rounded-2xl border border-gray-100 hover:shadow-md transition group">
+                    <div class="text-brand-cyan text-xl mt-0.5 group-hover:scale-125 transition-transform"><i class="fa-solid fa-star"></i></div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-1">Dark Sky Reserve</h4>
+                        <p class="text-sm text-gray-500">Stargazing in Hanle, India's first Dark Sky Reserve.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 p-5 bg-white rounded-2xl border border-gray-100 hover:shadow-md transition group">
+                    <div class="text-brand-cyan text-xl mt-0.5 group-hover:scale-125 transition-transform"><i class="fa-solid fa-water"></i></div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-1">Pangong Tso</h4>
+                        <p class="text-sm text-gray-500">Camp by the ever-changing blue hues of this iconic high-altitude lake.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 p-5 bg-white rounded-2xl border border-gray-100 hover:shadow-md transition group">
+                    <div class="text-brand-cyan text-xl mt-0.5 group-hover:scale-125 transition-transform"><i class="fa-solid fa-paw"></i></div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-1">Nubra Valley</h4>
+                        <p class="text-sm text-gray-500">Ride the rare double-humped Bactrian camels in the cold desert.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Itinerary (Vertical Timeline Accordion with Images) -->
+            <!-- Route & Logistics -->
+            <div class="bg-gray-50 border border-gray-100 rounded-3xl p-6 md:p-8 mb-12 flex flex-col md:flex-row gap-8 items-stretch">
+                <div class="flex-[0.8] flex flex-col">
+                    <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Logistics</div>
+                    <div class="flex flex-col justify-between flex-grow pb-1">
+                        <div class="flex items-center gap-3 font-semibold text-gray-800 text-sm">
+                            <div class="w-6 h-6 rounded-full bg-brand-cyan/20 flex items-center justify-center text-brand-cyan text-xs"><i class="fa-solid fa-plane-arrival"></i></div>
+                            <div><span class="text-gray-400 text-xs font-normal block">Pickup</span> Delhi</div>
+                        </div>
+                        <div class="w-px h-6 bg-gray-200 ml-3"></div>
+                        <div class="flex items-center gap-3 font-semibold text-gray-800 text-sm">
+                            <div class="w-6 h-6 rounded-full bg-brand-yellow/20 flex items-center justify-center text-brand-yellow text-xs"><i class="fa-solid fa-plane-departure"></i></div>
+                            <div><span class="text-gray-400 text-xs font-normal block">Drop</span> Srinagar</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-px bg-gray-200 hidden md:block"></div>
+                <div class="flex-[2] flex flex-col">
+                    <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Full Route</div>
+                    <!-- Typographic Reverse S-Curve -->
+                    <div class="flex flex-col justify-between flex-grow text-[11px] lg:text-[13px] font-bold text-gray-700 w-full mt-1">
+                        
+                        <!-- Row 1 (Left to Right) -->
+                        <div class="flex items-center justify-between">
+                            <span class="text-brand-dark">Delhi</span>
+                            <div class="flex-1 border-t-2 border-dashed border-brand-cyan/30 mx-2 lg:mx-4"></div>
+                            <span class="text-brand-dark">Manali</span>
+                            <div class="flex-1 border-t-2 border-dashed border-brand-cyan/30 mx-2 lg:mx-4"></div>
+                            <span class="text-brand-dark">Sarchu</span>
+                            <div class="flex-1 border-t-2 border-dashed border-brand-cyan/30 mx-2 lg:mx-4"></div>
+                            <span class="text-brand-dark">Tso Moriri</span>
+                        </div>
+                        
+                        <!-- Right U-Turn Connector -->
+                        <div class="flex justify-end pr-[30px] lg:pr-[40px] -my-1">
+                            <div class="h-4 border-r-2 border-dashed border-brand-cyan/30"></div>
+                        </div>
+                        
+                        <!-- Row 2 (Right to Left visually) -->
+                        <div class="flex items-center justify-between">
+                            <span class="text-brand-dark whitespace-nowrap">Nubra Valley</span>
+                            <i class="fa-solid fa-arrow-left-long text-brand-cyan/60 shrink-0 mx-2 lg:mx-4"></i>
+                            <span class="text-brand-dark">Pangong</span>
+                            <i class="fa-solid fa-arrow-left-long text-brand-cyan/60 shrink-0 mx-2 lg:mx-4"></i>
+                            <span class="text-brand-dark whitespace-nowrap">Umling La</span>
+                            <i class="fa-solid fa-arrow-left-long text-brand-cyan/60 shrink-0 mx-2 lg:mx-4"></i>
+                            <span class="text-brand-dark">Hanle</span>
+                        </div>
+                        
+                        <!-- Left U-Turn Connector -->
+                        <div class="flex justify-start pl-[20px] lg:pl-[30px] -my-1">
+                            <div class="h-4 border-l-2 border-dashed border-brand-cyan/30"></div>
+                        </div>
+                        
+                        <!-- Row 3 (Left to Right) -->
+                        <div class="flex items-center justify-between w-full">
+                            <span class="text-brand-dark">Leh</span>
+                            <div class="flex-1 border-t-2 border-dashed border-brand-cyan/30 mx-2 lg:mx-4"></div>
+                            <span class="text-brand-dark">Kargil</span>
+                            <div class="flex-1 border-t-2 border-dashed border-brand-cyan/30 mx-2 lg:mx-4"></div>
+                            <span class="text-brand-dark">Srinagar</span>
+                            <div class="flex-[0.5] lg:flex-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="font-display font-bold text-2xl text-brand-dark mb-8">Daily Itinerary</h2>
+            
+            <div class="relative border-l-2 border-gray-200 ml-4 mb-16 space-y-8 pb-4" x-data="{ openDay: 1 }">
+                
+                <!-- Day 1 -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-[11px] top-1 w-5 h-5 rounded-full border-4 border-white transition-colors duration-300" :class="openDay === 1 ? 'bg-brand-cyan' : 'bg-gray-300'"></div>
+                    
+                    <div class="cursor-pointer group" @click="openDay = openDay === 1 ? null : 1">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs font-bold uppercase tracking-widest transition-colors duration-300" :class="openDay === 1 ? 'text-brand-cyan' : 'text-gray-400'">Day 1</span>
+                            <h3 class="font-display font-bold text-lg text-gray-800 group-hover:text-brand-cyan transition">Arrival in Leh | Acclimatization</h3>
+                            <i class="fa-solid fa-chevron-down text-gray-400 text-sm ml-auto transition-transform duration-300" :class="openDay === 1 ? 'rotate-180' : ''"></i>
+                        </div>
+                    </div>
+                    
+                    <div x-show="openDay === 1" x-collapse class="mt-4">
+                        <div class="flex flex-col md:flex-row gap-6 items-start">
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-600 mb-5 leading-relaxed">
+                                    Arrive at Kushok Bakula Rimpochee Airport in Leh. You'll be transferred to your hotel. Since you are arriving at an altitude of ~11,500 ft, today is strictly for rest and acclimatization. In the evening, you can take a gentle stroll to the Leh Market and Shanti Stupa to catch a beautiful sunset.
+                                </p>
+                                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex gap-4 items-start shadow-sm hover:shadow-md transition">
+                                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-bed"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-bold text-gray-800 text-sm mb-1">Where you'll stay</h5>
+                                        <p class="text-xs text-gray-600">Standard / Premium Hotel in Leh (e.g., Hotel The Kaal or similar).</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-48 h-36 rounded-2xl overflow-hidden shrink-0 shadow-md relative group/img">
+                                <img src="https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-700" alt="Leh">
+                                <div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-1 rounded-md font-medium"><i class="fa-solid fa-location-dot mr-1 text-brand-cyan"></i>Leh City</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-[11px] top-1 w-5 h-5 rounded-full border-4 border-white transition-colors duration-300" :class="openDay === 2 ? 'bg-brand-cyan' : 'bg-gray-300'"></div>
+                    <div class="cursor-pointer group" @click="openDay = openDay === 2 ? null : 2">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs font-bold uppercase tracking-widest transition-colors duration-300" :class="openDay === 2 ? 'text-brand-cyan' : 'text-gray-400'">Day 2</span>
+                            <h3 class="font-display font-bold text-lg text-gray-800 group-hover:text-brand-cyan transition">Leh Local Sightseeing | Sham Valley</h3>
+                            <i class="fa-solid fa-chevron-down text-gray-400 text-sm ml-auto transition-transform duration-300" :class="openDay === 2 ? 'rotate-180' : ''"></i>
+                        </div>
+                    </div>
+                    <div x-show="openDay === 2" x-collapse class="mt-4" style="display: none;">
+                        <div class="flex flex-col md:flex-row gap-6 items-start">
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-600 mb-5 leading-relaxed">
+                                    Start your day with a hearty breakfast before heading out to explore the Sham Valley region. Visit the majestic Hall of Fame, experience the gravity-defying Magnetic Hill, and seek blessings at Gurudwara Pathar Sahib. Witness the stunning confluence of the Indus and Zanskar rivers at Sangam.
+                                </p>
+                                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex gap-4 items-start shadow-sm hover:shadow-md transition">
+                                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-bed"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-bold text-gray-800 text-sm mb-1">Where you'll stay</h5>
+                                        <p class="text-xs text-gray-600">Standard / Premium Hotel in Leh.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-48 h-36 rounded-2xl overflow-hidden shrink-0 shadow-md relative group/img">
+                                <img src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-700" alt="Sham Valley">
+                                <div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-1 rounded-md font-medium"><i class="fa-solid fa-location-dot mr-1 text-brand-cyan"></i>Sham Valley</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-[11px] top-1 w-5 h-5 rounded-full border-4 border-white transition-colors duration-300" :class="openDay === 3 ? 'bg-brand-cyan' : 'bg-gray-300'"></div>
+                    <div class="cursor-pointer group" @click="openDay = openDay === 3 ? null : 3">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs font-bold uppercase tracking-widest transition-colors duration-300" :class="openDay === 3 ? 'text-brand-cyan' : 'text-gray-400'">Day 3</span>
+                            <h3 class="font-display font-bold text-lg text-gray-800 group-hover:text-brand-cyan transition">Leh to Nubra Valley via Khardung La</h3>
+                            <i class="fa-solid fa-chevron-down text-gray-400 text-sm ml-auto transition-transform duration-300" :class="openDay === 3 ? 'rotate-180' : ''"></i>
+                        </div>
+                    </div>
+                    <div x-show="openDay === 3" x-collapse class="mt-4" style="display: none;">
+                        <div class="flex flex-col md:flex-row gap-6 items-start">
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-600 mb-5 leading-relaxed">
+                                    Today we drive to the breathtaking Nubra Valley. En route, we conquer Khardung La, one of the highest motorable passes in the world (17,582 ft). Descend into the desert valley of Nubra, visit the Diskit Monastery, and enjoy a ride on the rare double-humped Bactrian camels at Hunder sand dunes.
+                                </p>
+                                <div class="bg-amber-50/50 border border-amber-100 rounded-xl p-4 flex gap-4 items-start shadow-sm hover:shadow-md transition">
+                                    <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-tent"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-bold text-gray-800 text-sm mb-1">Where you'll stay</h5>
+                                        <p class="text-xs text-gray-600">Deluxe Swiss Tents in Nubra Valley. Enjoy dinner under the stars.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-48 h-36 rounded-2xl overflow-hidden shrink-0 shadow-md relative group/img">
+                                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-700" alt="Nubra">
+                                <div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-1 rounded-md font-medium"><i class="fa-solid fa-location-dot mr-1 text-brand-cyan"></i>Nubra Valley</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 4 -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-[11px] top-1 w-5 h-5 rounded-full border-4 border-white transition-colors duration-300" :class="openDay === 4 ? 'bg-brand-cyan' : 'bg-gray-300'"></div>
+                    <div class="cursor-pointer group" @click="openDay = openDay === 4 ? null : 4">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs font-bold uppercase tracking-widest transition-colors duration-300" :class="openDay === 4 ? 'text-brand-cyan' : 'text-gray-400'">Day 4</span>
+                            <h3 class="font-display font-bold text-lg text-gray-800 group-hover:text-brand-cyan transition">Nubra to Pangong Tso</h3>
+                            <i class="fa-solid fa-chevron-down text-gray-400 text-sm ml-auto transition-transform duration-300" :class="openDay === 4 ? 'rotate-180' : ''"></i>
+                        </div>
+                    </div>
+                    <div x-show="openDay === 4" x-collapse class="mt-4" style="display: none;">
+                        <div class="flex flex-col md:flex-row gap-6 items-start">
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-600 mb-5 leading-relaxed">
+                                    We take the offbeat and rugged Shyok River route to reach the magnificent Pangong Lake. Prepare to be mesmerized by the changing colors of the lake, nestled at 14,270 ft. Spend the evening walking by the shore and soaking in the surreal beauty.
+                                </p>
+                                <div class="bg-amber-50/50 border border-amber-100 rounded-xl p-4 flex gap-4 items-start shadow-sm hover:shadow-md transition">
+                                    <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-tent"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-bold text-gray-800 text-sm mb-1">Where you'll stay</h5>
+                                        <p class="text-xs text-gray-600">Lakeside Swiss Camps at Pangong Tso.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-48 h-36 rounded-2xl overflow-hidden shrink-0 shadow-md relative group/img">
+                                <img src="https://images.unsplash.com/photo-1612438214708-f428a707dd4e?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-700" alt="Pangong">
+                                <div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-1 rounded-md font-medium"><i class="fa-solid fa-location-dot mr-1 text-brand-cyan"></i>Pangong Tso</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Day 5 -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-[11px] top-1 w-5 h-5 rounded-full border-4 border-white transition-colors duration-300" :class="openDay === 5 ? 'bg-brand-cyan' : 'bg-gray-300'"></div>
+                    <div class="cursor-pointer group" @click="openDay = openDay === 5 ? null : 5">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs font-bold uppercase tracking-widest transition-colors duration-300" :class="openDay === 5 ? 'text-brand-cyan' : 'text-gray-400'">Day 5</span>
+                            <h3 class="font-display font-bold text-lg text-gray-800 group-hover:text-brand-cyan transition">Pangong to Hanle via Rezang La</h3>
+                            <i class="fa-solid fa-chevron-down text-gray-400 text-sm ml-auto transition-transform duration-300" :class="openDay === 5 ? 'rotate-180' : ''"></i>
+                        </div>
+                    </div>
+                    <div x-show="openDay === 5" x-collapse class="mt-4" style="display: none;">
+                        <div class="flex flex-col md:flex-row gap-6 items-start">
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-600 mb-5 leading-relaxed">
+                                    Wake up to a stunning sunrise over Pangong Lake. Today we drive along the lake towards the remote village of Hanle. En route, we visit the Rezang La War Memorial. Hanle is India's first Dark Sky Reserve, offering unparalleled stargazing opportunities.
+                                </p>
+                                <div class="bg-purple-50/50 border border-purple-100 rounded-xl p-4 flex gap-4 items-start shadow-sm hover:shadow-md transition">
+                                    <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-house-chimney"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-bold text-gray-800 text-sm mb-1">Where you'll stay</h5>
+                                        <p class="text-xs text-gray-600">Local Homestay / Guesthouse in Hanle. Authentic local hospitality.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-48 h-36 rounded-2xl overflow-hidden shrink-0 shadow-md relative group/img">
+                                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-700" alt="Hanle">
+                                <div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-1 rounded-md font-medium"><i class="fa-solid fa-location-dot mr-1 text-brand-cyan"></i>Hanle</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 6 -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-[11px] top-1 w-5 h-5 rounded-full border-4 border-white transition-colors duration-300" :class="openDay === 6 ? 'bg-brand-cyan' : 'bg-gray-300'"></div>
+                    <div class="cursor-pointer group" @click="openDay = openDay === 6 ? null : 6">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs font-bold uppercase tracking-widest transition-colors duration-300" :class="openDay === 6 ? 'text-brand-cyan' : 'text-gray-400'">Day 6</span>
+                            <h3 class="font-display font-bold text-lg text-gray-800 group-hover:text-brand-cyan transition">Hanle to Umling La to Leh</h3>
+                            <i class="fa-solid fa-chevron-down text-gray-400 text-sm ml-auto transition-transform duration-300" :class="openDay === 6 ? 'rotate-180' : ''"></i>
+                        </div>
+                    </div>
+                    <div x-show="openDay === 6" x-collapse class="mt-4" style="display: none;">
+                        <div class="flex flex-col md:flex-row gap-6 items-start">
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-600 mb-5 leading-relaxed">
+                                    The big day! We start early and drive to Umling La Pass, standing tall at an astonishing 19,024 ft, making it the highest motorable road globally. Celebrate this achievement, click pictures, and then begin the long drive back to Leh.
+                                </p>
+                                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex gap-4 items-start shadow-sm hover:shadow-md transition">
+                                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-bed"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-bold text-gray-800 text-sm mb-1">Where you'll stay</h5>
+                                        <p class="text-xs text-gray-600">Standard / Premium Hotel in Leh.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-48 h-36 rounded-2xl overflow-hidden shrink-0 shadow-md relative group/img">
+                                <img src="https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-700" alt="Umling La">
+                                <div class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-1 rounded-md font-medium"><i class="fa-solid fa-location-dot mr-1 text-brand-cyan"></i>Umling La</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 7 -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-[11px] top-1 w-5 h-5 rounded-full border-4 border-white transition-colors duration-300" :class="openDay === 7 ? 'bg-brand-cyan' : 'bg-gray-300'"></div>
+                    <div class="cursor-pointer group" @click="openDay = openDay === 7 ? null : 7">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs font-bold uppercase tracking-widest transition-colors duration-300" :class="openDay === 7 ? 'text-brand-cyan' : 'text-gray-400'">Day 7</span>
+                            <h3 class="font-display font-bold text-lg text-gray-800 group-hover:text-brand-cyan transition">Departure</h3>
+                            <i class="fa-solid fa-chevron-down text-gray-400 text-sm ml-auto transition-transform duration-300" :class="openDay === 7 ? 'rotate-180' : ''"></i>
+                        </div>
+                    </div>
+                    <div x-show="openDay === 7" x-collapse class="mt-4" style="display: none;">
+                        <p class="text-sm text-gray-600 mb-5 leading-relaxed">
+                            After breakfast, we drop you off at the Leh Airport. Fly out with epic memories, a camera full of breathtaking landscapes, and a heart full of joy.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Travel Styles & Inclusions -->
+            <h2 class="font-display font-bold text-2xl text-brand-dark mb-6">Choose Your Travel Style</h2>
+            <div class="mb-8">
+                <!-- Style Selector -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <!-- SUV -->
+                    <div @click="style = 'suv'" :class="style === 'suv' ? 'border-brand-cyan bg-cyan-50/30 shadow-md ring-1 ring-brand-cyan' : 'border-gray-200 bg-white hover:border-brand-cyan/50'" class="cursor-pointer border-2 rounded-[2rem] p-5 transition-all duration-300 relative overflow-hidden group">
+                        
+                        <div class="w-12 h-12 rounded-full bg-white border border-gray-100 shadow-sm flex items-center justify-center text-xl text-gray-400 mb-4 transition-colors group-hover:text-brand-cyan" :class="style === 'suv' ? '!text-brand-cyan' : ''"><i class="fa-solid fa-van-shuttle"></i></div>
+                        <h4 class="font-display font-bold text-lg text-gray-800 mb-1">SUV / Tempo</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed font-medium">Relax and let our expert drivers navigate the rugged terrain.</p>
+                    </div>
+                    <!-- Rented Bike -->
+                    <div @click="style = 'rented'" :class="style === 'rented' ? 'border-brand-cyan bg-cyan-50/30 shadow-md ring-1 ring-brand-cyan' : 'border-gray-200 bg-white hover:border-brand-cyan/50'" class="cursor-pointer border-2 rounded-[2rem] p-5 transition-all duration-300 relative overflow-hidden group">
+                        
+                        <div class="w-12 h-12 rounded-full bg-white border border-gray-100 shadow-sm flex items-center justify-center text-xl text-gray-400 mb-4 transition-colors group-hover:text-brand-cyan" :class="style === 'rented' ? '!text-brand-cyan' : ''"><i class="fa-solid fa-motorcycle"></i></div>
+                        <h4 class="font-display font-bold text-lg text-gray-800 mb-1">Rented Bike</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed font-medium">Solo or dual riding on fully serviced bikes.</p>
+                    </div>
+                    <!-- Own Bike -->
+                    <div @click="style = 'own'" :class="style === 'own' ? 'border-brand-cyan bg-cyan-50/30 shadow-md ring-1 ring-brand-cyan' : 'border-gray-200 bg-white hover:border-brand-cyan/50'" class="cursor-pointer border-2 rounded-[2rem] p-5 transition-all duration-300 relative overflow-hidden group">
+                        
+                        <div class="w-12 h-12 rounded-full bg-white border border-gray-100 shadow-sm flex items-center justify-center text-xl text-gray-400 mb-4 transition-colors group-hover:text-brand-cyan" :class="style === 'own' ? '!text-brand-cyan' : ''"><i class="fa-solid fa-key"></i></div>
+                        <h4 class="font-display font-bold text-lg text-gray-800 mb-1">Own Bike</h4>
+                        <p class="text-xs text-gray-500 leading-relaxed font-medium">Bring your own machine. We provide the backup and itinerary.</p>
+                    </div>
+                </div>
+                
+                <!-- Dynamic Content Area -->
+                <div class="bg-white border border-gray-200 shadow-sm rounded-[2rem] p-6 md:p-8 relative overflow-hidden">
+                    <div class="absolute -right-16 -top-16 text-gray-50 opacity-[0.4] text-[200px] pointer-events-none transition-all duration-500" :class="style === 'suv' ? 'block' : 'hidden'"><i class="fa-solid fa-van-shuttle"></i></div>
+                    <div class="absolute -right-16 -top-16 text-gray-50 opacity-[0.4] text-[200px] pointer-events-none transition-all duration-500" :class="style === 'rented' ? 'block' : 'hidden'"><i class="fa-solid fa-motorcycle"></i></div>
+                    <div class="absolute -right-16 -top-16 text-gray-50 opacity-[0.4] text-[200px] pointer-events-none transition-all duration-500" :class="style === 'own' ? 'block' : 'hidden'"><i class="fa-solid fa-key"></i></div>
+                    
+                    
+
+                    <!-- Features Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 relative z-10">
+                        
+                        <!-- Shared Inclusions (Left Column) -->
+                        <div>
+                            <h4 class="text-[13px] font-bold uppercase tracking-widest text-gray-500 mb-5 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-green-500"></div> General Inclusions</h4>
+                            <ul class="space-y-5">
+                                <li class="flex items-start gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-house-chimney text-green-500 text-sm"></i></div>
+                                    <div>
+                                        <div class="text-sm font-bold text-gray-800">All Accommodations</div>
+                                        <div class="text-xs text-gray-500 mt-1 leading-relaxed">Hotels in Leh, Camps in Nubra & Pangong, Homestay in Hanle.</div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-utensils text-green-500 text-sm"></i></div>
+                                    <div>
+                                        <div class="text-sm font-bold text-gray-800">Meals</div>
+                                        <div class="text-xs text-gray-500 mt-1 leading-relaxed">Breakfast & Dinner on all days at your respective stay.</div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-file-signature text-green-500 text-sm"></i></div>
+                                    <div>
+                                        <div class="text-sm font-bold text-gray-800">Permits & Fees</div>
+                                        <div class="text-xs text-gray-500 mt-1 leading-relaxed">Inner Line Permits & Environmental Fees included.</div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-file-medical text-green-500 text-sm"></i></div>
+                                    <div>
+                                        <div class="text-sm font-bold text-gray-800">Medical insurance coverage</div>
+                                        <div class="text-xs text-gray-500 mt-1 leading-relaxed">Valid strictly from base to base. Does not include any travel before arrival at the starting point or after departure from the ending point.</div>
+                                        <a href="#" class="inline-flex items-center gap-1 text-xs font-bold text-brand-cyan hover:text-brand-darkcyan mt-1.5 transition-colors group">View details <i class="fa-solid fa-chevron-right text-[9px] transition-transform group-hover:translate-x-0.5"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Style-Specific Rules & Exclusions (Right Column) -->
+                        <div>
+                            <h4 class="text-[13px] font-bold uppercase tracking-widest text-gray-500 mb-5 flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-cyan"></div> Style Specific Inclusions</h4>
+                            <ul class="space-y-5">
+                                
+                                <!-- Transit -->
+                                <li class="flex items-start gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-route text-blue-500 text-sm"></i></div>
+                                    <div>
+                                        <div class="text-sm font-bold text-gray-800">Transit & Route</div>
+                                        <div class="text-xs text-gray-500 mt-1 leading-relaxed" x-show="style === 'suv'">Travel comfortably in an SUV or Tempo Traveller for the entire circuit.</div>
+                                        <div class="text-xs text-gray-500 mt-1 leading-relaxed" x-show="style === 'rented'" style="display: none;">Bike provided from Leh to Leh. Standard fuel included.</div>
+                                        <div class="text-xs text-gray-500 mt-1 leading-relaxed" x-show="style === 'own'" style="display: none;">You must transport/ride your bike to Leh. Fuel is <span class="text-red-500 font-bold">excluded</span>.</div>
+                                    </div>
+                                </li>
+
+                                <!-- Security Deposit -->
+                                <li class="flex items-start gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-shield-halved text-orange-500 text-sm"></i></div>
+                                    <div>
+                                        <div class="text-sm font-bold text-gray-800">Security & Damage</div>
+                                        <div class="text-xs text-gray-500 mt-1 leading-relaxed" x-show="style === 'suv'">No security deposit or damage liability needed.</div>
+                                        <div class="text-xs text-gray-500 mt-1 leading-relaxed" x-show="style === 'rented'" style="display: none;"><span class="font-bold text-gray-700">₹5,000</span> refundable deposit required. Client pays for physical damage.</div>
+                                        <div class="text-xs text-gray-500 mt-1 leading-relaxed" x-show="style === 'own'" style="display: none;">No deposit, but all maintenance & damage fall on your own pocket.</div>
+                                    </div>
+                                </li>
+
+                                <!-- Gear -->
+                                <li class="flex items-start gap-4" x-show="style === 'rented' || style === 'own'" style="display: none;">
+                                    <div class="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center shrink-0 mt-0.5"><i class="fa-solid fa-helmet-safety text-purple-500 text-sm"></i></div>
+                                    <div>
+                                        <div class="text-sm font-bold text-gray-800">Gear & Mechanics</div>
+                                        <div class="text-xs text-gray-500 mt-1 leading-relaxed" x-show="style === 'rented'">Riding gear (helmet, knee pads, gloves) included. Dedicated mechanic with spares.</div>
+                                        <div class="text-xs text-gray-500 mt-1 leading-relaxed" x-show="style === 'own'">Bring your own gear. Covered under group mechanical assistance (standard tools).</div>
+                                    </div>
+                                </li>
+                                
+                                
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- General Exclusions Card -->
+            <div class="bg-red-50/50 border border-red-100 rounded-[2rem] p-6 md:p-8 mb-16 shadow-sm -mt-6">
+                <h3 class="font-display font-bold text-lg text-red-800 mb-6 flex items-center gap-2"><i class="fa-solid fa-circle-xmark text-red-500"></i> General Exclusions</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm text-gray-700 font-medium">
+                    <li class="flex items-start gap-3"><i class="fa-solid fa-minus text-red-400 mt-1"></i> Flights/Trains to and from Leh</li>
+                    <li class="flex items-start gap-3"><i class="fa-solid fa-minus text-red-400 mt-1"></i> Lunches during the entire trip</li>
+                    <li class="flex items-start gap-3"><i class="fa-solid fa-minus text-red-400 mt-1"></i> Personal expenses (laundry, snacks, bottled water)</li>
+                    <li class="flex items-start gap-3"><i class="fa-solid fa-minus text-red-400 mt-1"></i> Any medical emergency or evacuation costs</li>
+                    <li class="flex items-start gap-3"><i class="fa-solid fa-minus text-red-400 mt-1"></i> Any meals not explicitly mentioned in inclusions</li>
+                    <li class="flex items-start gap-3"><i class="fa-solid fa-minus text-red-400 mt-1"></i> Any permit fees for foreign nationals</li>
+                </ul>
+            </div>
+            
+            <!-- Things to Pack (Interactive category tabs) -->
+            <h2 class="font-display font-bold text-2xl text-brand-dark mb-6">Things to Pack</h2>
+            <div x-data="{ activeTab: 'must_carry' }" class="mb-16">
+                <!-- Tab Buttons -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <button @click="activeTab = 'must_carry'" :class="activeTab === 'must_carry' ? 'bg-brand-dark text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:border-brand-cyan'" class="px-5 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2"><i class="fa-solid fa-id-card"></i> Must Carry</button>
+                    <button @click="activeTab = 'gears'" :class="activeTab === 'gears' ? 'bg-brand-dark text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:border-brand-cyan'" class="px-5 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2"><i class="fa-solid fa-backpack"></i> Gears</button>
+                    <button @click="activeTab = 'clothes'" :class="activeTab === 'clothes' ? 'bg-brand-dark text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:border-brand-cyan'" class="px-5 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2"><i class="fa-solid fa-shirt"></i> Clothes</button>
+                    <button @click="activeTab = 'footwear'" :class="activeTab === 'footwear' ? 'bg-brand-dark text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:border-brand-cyan'" class="px-5 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2"><i class="fa-solid fa-boot"></i> Footwear</button>
+                    <button @click="activeTab = 'meds'" :class="activeTab === 'meds' ? 'bg-brand-dark text-white shadow-md' : 'bg-white text-gray-600 border border-gray-200 hover:border-brand-cyan'" class="px-5 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2"><i class="fa-solid fa-pills"></i> Medication</button>
+                </div>
+                
+                <!-- Tab Contents -->
+                <div class="bg-white border border-gray-100 rounded-3xl p-6 md:p-8 shadow-sm transition-all duration-300">
+                    <!-- Must Carry -->
+                    <div x-show="activeTab === 'must_carry'" class="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-8">
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Authentic Government ID Card</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Warm clothing (fleece, down jacket, cap)</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Sunscreen, lip balm, UV sunglasses</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Personal Medicines & Altitude meds</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Power Banks (No Electricity at Pangong)</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Post-paid SIM (BSNL/Jio works best)</div>
+                    </div>
+                    
+                    <!-- Gears -->
+                    <div x-show="activeTab === 'gears'" style="display: none;" class="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-8">
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> A rucksack bag (50-60L)</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Small day pack (20L)</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> 3-litre water bladder or reusable bottle</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> LED torch light or Headlamp</div>
+                    </div>
+                    
+                    <!-- Clothes -->
+                    <div x-show="activeTab === 'clothes'" style="display: none;" class="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-8">
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> 2 long sleeve & 2 short sleeve t-shirts</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> 1 fleece jacket & 1 heavy down jacket</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> At least 2 trek/cargo pants</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> 4 sets of undergarments & 2 pairs woolen socks</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> 1 pair of warm gloves & sun cap</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Rain jacket or poncho</div>
+                    </div>
+                    
+                    <!-- Footwear -->
+                    <div x-show="activeTab === 'footwear'" style="display: none;" class="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-8">
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Above-the-ankle waterproof hiking boots</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Flip flops or sandals for campsite</div>
+                    </div>
+                    
+                    <!-- Meds -->
+                    <div x-show="activeTab === 'meds'" style="display: none;" class="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-8">
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Diamox (for Altitude Sickness)</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Glucose powder / ORS</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Meds for headache, diarrhea, motion sickness</div>
+                        <div class="flex items-center gap-3 text-sm text-gray-700 font-medium"><i class="fa-regular fa-circle-check text-brand-cyan text-lg"></i> Dettol, Bandages, and Cotton (First aid)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Things to Know (Important Information) -->
+            <h2 class="font-display font-bold text-2xl text-brand-dark mb-6">Things to Know</h2>
+            <div class="bg-gradient-to-br from-[#1e293b] to-[#0f172a] rounded-[2rem] p-8 text-gray-300 mb-16 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.5)] border border-gray-800 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brand-cyan/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+                <div class="flex flex-col gap-6 relative z-10">
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-full bg-brand-yellow/10 flex items-center justify-center text-brand-yellow shrink-0"><i class="fa-solid fa-cloud-sun-rain"></i></div>
+                        <p class="text-sm leading-relaxed mt-1"><span class="text-white font-bold block mb-1">Itinerary Flexibility</span>Numerous factors such as weather, road conditions, and physical ability may cause itinerary changes. We reserve the right to change any schedule in the interest of safety and general wellbeing.</p>
+                    </div>
+                    <div class="w-full h-px bg-gray-800"></div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-400 shrink-0"><i class="fa-solid fa-heart-pulse"></i></div>
+                        <p class="text-sm leading-relaxed mt-1"><span class="text-white font-bold block mb-1">High Altitude Medical Advisory</span>You will be travelling to high-altitude cold deserts. Consult your personal doctor before travelling. WanderOn is not responsible for medical emergencies, though logistics support will be arranged if required (expenses borne by clients).</p>
+                    </div>
+                    <div class="w-full h-px bg-gray-800"></div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 shrink-0"><i class="fa-solid fa-id-card-clip"></i></div>
+                        <p class="text-sm leading-relaxed mt-1"><span class="text-white font-bold block mb-1">Age Limits</span>The age limit for group departures is 16 to 42 years due to the power-packed nature of the itinerary. Custom trips can be arranged for travelers outside this bracket.</p>
+                    </div>
+                    <div class="w-full h-px bg-gray-800"></div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-400 shrink-0"><i class="fa-solid fa-motorcycle"></i></div>
+                        <p class="text-sm leading-relaxed mt-1"><span class="text-white font-bold block mb-1">Bike Security & Sharing</span><span class="text-white font-semibold border-b border-brand-cyan pb-0.5">INR 5,000/-</span> needs to be submitted as security for the bike before the start of the trip. Any damage to the bike, except engine damage, has to be borne directly by the client. <span class="text-white font-semibold border-b border-brand-cyan pb-0.5">INR 3,000/-</span> extra per person for double sharing accommodation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ & Cancellation Policy -->
+            <div x-data="{ activePolicy: 'faq' }" class="mb-8">
+                <div class="flex border-b border-gray-200 mb-6 gap-2">
+                    <button @click="activePolicy = 'faq'" :class="activePolicy === 'faq' ? 'border-brand-dark text-brand-dark bg-gray-50 rounded-t-xl' : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50/50 rounded-t-xl'" class="py-3 px-6 font-display font-bold text-lg border-b-2 transition-all">FAQs</button>
+                    <button @click="activePolicy = 'cancel'" :class="activePolicy === 'cancel' ? 'border-brand-dark text-brand-dark bg-gray-50 rounded-t-xl' : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50/50 rounded-t-xl'" class="py-3 px-6 font-display font-bold text-lg border-b-2 transition-all">Cancellation Policy</button>
+                </div>
+                
+                <!-- FAQ Accordions -->
+                <div x-show="activePolicy === 'faq'" x-transition.opacity class="space-y-4">
+                    <div x-data="{ expanded: false }" class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm transition-all hover:shadow-md">
+                        <button @click="expanded = !expanded" class="w-full px-6 py-5 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none">
+                            What kind of bikes are provided for the self-ride option?
+                            <div class="w-8 h-8 rounded-full bg-brand-cyan/10 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-plus text-brand-cyan transition-transform" :class="expanded ? 'rotate-45' : ''"></i>
+                            </div>
+                        </button>
+                        <div x-show="expanded" x-collapse>
+                            <p class="px-6 pb-5 text-sm text-gray-600 leading-relaxed">We provide Royal Enfield Himalayan or standard 500cc/350cc bikes depending on availability and your preference. All bikes are thoroughly serviced and come with a dedicated mechanic and backup vehicle for the entire circuit.</p>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ expanded: false }" class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm transition-all hover:shadow-md">
+                        <button @click="expanded = !expanded" class="w-full px-6 py-5 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none">
+                            Is Acute Mountain Sickness (AMS) a serious risk?
+                            <div class="w-8 h-8 rounded-full bg-brand-cyan/10 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-plus text-brand-cyan transition-transform" :class="expanded ? 'rotate-45' : ''"></i>
+                            </div>
+                        </button>
+                        <div x-show="expanded" x-collapse>
+                            <p class="px-6 pb-5 text-sm text-gray-600 leading-relaxed">Yes, AMS is a common risk when traveling above 10,000 ft. We dedicate Day 1 entirely to acclimatization in Leh. We also carry oxygen cylinders in the backup vehicle. Hydration and prescribed Diamox (after consulting your doctor) are key to preventing AMS.</p>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ expanded: false }" class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm transition-all hover:shadow-md">
+                        <button @click="expanded = !expanded" class="w-full px-6 py-5 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none">
+                            Will there be phone network available?
+                            <div class="w-8 h-8 rounded-full bg-brand-cyan/10 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-plus text-brand-cyan transition-transform" :class="expanded ? 'rotate-45' : ''"></i>
+                            </div>
+                        </button>
+                        <div x-show="expanded" x-collapse>
+                            <p class="px-6 pb-5 text-sm text-gray-600 leading-relaxed">Prepaid SIM cards from outside Ladakh do not work. Post-paid BSNL and Jio work best in Leh and Nubra. In Pangong and Hanle, expect zero to very limited connectivity. Embrace the digital detox!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cancellation Policy -->
+                <div x-show="activePolicy === 'cancel'" style="display: none;" x-transition.opacity class="bg-gray-50 border border-gray-100 rounded-3xl p-8 text-sm text-gray-700 leading-relaxed shadow-inner">
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-4"><div class="w-2 h-2 rounded-full bg-brand-cyan"></div> <strong>30+ days prior:</strong> 100% refund of the booking amount.</li>
+                        <li class="flex items-center gap-4"><div class="w-2 h-2 rounded-full bg-brand-yellow"></div> <strong>15 to 30 days prior:</strong> 50% refund of the booking amount.</li>
+                        <li class="flex items-center gap-4"><div class="w-2 h-2 rounded-full bg-orange-400"></div> <strong>7 to 15 days prior:</strong> 25% refund of the booking amount.</li>
+                        <li class="flex items-center gap-4"><div class="w-2 h-2 rounded-full bg-red-500"></div> <strong>Less than 7 days prior:</strong> No refund will be provided.</li>
+                    </ul>
+                    <div class="mt-6 pt-4 border-t border-gray-200 text-xs text-gray-500">
+                        * Please note that any flights booked through us are subject to airline cancellation policies.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+<!-- Right Column: Sticky Booking Widget -->
+        <div class="w-full lg:w-[35%] relative">
+            <div class="sticky top-28 bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-100 p-6 md:p-8">
+                
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <div class="text-[11px] uppercase font-bold text-gray-400 tracking-wider mb-1">Starting from</div>
+                        <div class="font-display font-extrabold text-3xl text-brand-dark">₹24,999<span class="text-sm text-gray-400 font-normal">/per person</span></div>
+                    </div>
+                    <div class="bg-brand-yellow/10 text-brand-dark px-3 py-1 rounded-full text-xs font-bold">
+                        Best Value
+                    </div>
+                </div>
+
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2 block">Select Batch Date</label>
+                        <select class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-gray-700 outline-none focus:border-brand-cyan transition">
+                            <option>14 May - 20 May 2026</option>
+                            <option>21 May - 27 May 2026</option>
+                            <option>04 Jun - 10 Jun 2026</option>
+                            <option>18 Jun - 24 Jun 2026</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wide mr-2 block mb-2">Selected Package:</span>
+                        <div class="inline-block bg-cyan-50 text-brand-cyan px-4 py-1.5 rounded-full text-xs font-bold border border-cyan-100" x-text="style === 'suv' ? 'SUV / Tempo Traveller' : (style === 'rented' ? 'Self-Ride (Rented Bike)' : 'Self-Ride (Own Bike)')">Self-Ride (Rented Bike)</div>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Full Name" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-gray-700 outline-none focus:border-brand-cyan transition mb-3">
+                        <input type="tel" placeholder="Phone Number" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-gray-700 outline-none focus:border-brand-cyan transition mb-3">
+                        <input type="email" placeholder="Email Address" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold text-gray-700 outline-none focus:border-brand-cyan transition">
+                    </div>
+                </div>
+
+                <button class="w-full bg-brand-cyan text-white py-[14px] rounded-full font-display font-bold text-base shadow-lg shadow-cyan-500/30 hover:bg-brand-darkcyan transition hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 mb-6">
+                    <i class="fa-solid fa-phone-volume text-lg"></i> Get a Call Back
+                </button>
+                
+                <!-- Trust / Booking Value Props -->
+                <div class="space-y-3 pt-2 border-t border-gray-100">
+                    <div class="flex items-start gap-3">
+                        <div class="mt-0.5 text-brand-cyan text-sm"><i class="fa-solid fa-wallet"></i></div>
+                        <p class="text-xs text-gray-600 font-medium">Pay only 25% upfront, rest of it later.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="mt-0.5 text-brand-cyan text-sm"><i class="fa-solid fa-pen-to-square"></i></div>
+                        <p class="text-xs text-gray-600 font-medium">Easily modify/update your booking.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="mt-0.5 text-brand-cyan text-sm"><i class="fa-solid fa-arrow-rotate-left"></i></div>
+                        <p class="text-xs text-gray-600 font-medium">Cancel & get refund up to 16 days before.</p>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+
+    
+        <!-- Traveler Reviews Section (Spans Full Width Below Content) -->
+    </main>
+
+    <!-- Social Proof / Reviews (TourHero Inspiration) -->
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 mt-16 pt-12 border-t border-gray-100 mb-16">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="font-display font-bold text-3xl text-brand-dark">Traveler Reviews</h2>
+                    <div class="flex items-center gap-2 mt-2">
+                        <div class="flex text-brand-yellow text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <span class="text-sm font-bold text-gray-800">4.9/5</span>
+                        <span class="text-sm text-gray-500">(128 reviews for this trip)</span>
+                    </div>
+                </div>
+                <button class="hidden md:flex items-center gap-2 text-brand-cyan font-bold hover:text-brand-darkcyan transition">Read all reviews <i class="fa-solid fa-arrow-right text-sm"></i></button>
+            </div>
+            
+            <div class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-6 pb-4">
+                
+                <!-- Review 1 -->
+                <div class="snap-center shrink-0 w-[85vw] md:w-[350px] bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-brand-yellow text-[10px] mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="text-sm text-gray-600 leading-relaxed italic mb-4">
+                            "The Umling La pass was surreal. Our trip captain Rahul made sure everyone was acclimatized and safe. The Swiss tents at Pangong were surprisingly luxurious despite the cold. Best trip of my life!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop" class="w-full h-full object-cover"></div>
+                        <div>
+                            <div class="text-xs font-bold text-gray-800">Ayesha Verma</div>
+                            <div class="text-[10px] text-gray-400">Traveled in Aug 2025</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Review 2 -->
+                <div class="snap-center shrink-0 w-[85vw] md:w-[350px] bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-brand-yellow text-[10px] mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="text-sm text-gray-600 leading-relaxed italic mb-4">
+                            "Hanle stargazing is something I'll never forget. The entire circuit is extremely well planned. Food was great, considering the remoteness. Highly recommend renting the Himalayan!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=100&auto=format&fit=crop" class="w-full h-full object-cover"></div>
+                        <div>
+                            <div class="text-xs font-bold text-gray-800">Karan Singh</div>
+                            <div class="text-[10px] text-gray-400">Traveled in Jun 2025</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Review 3 -->
+                <div class="snap-center shrink-0 w-[85vw] md:w-[350px] bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-brand-yellow text-[10px] mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="text-sm text-gray-600 leading-relaxed italic mb-4">
+                            "I was worried about AMS, but WanderOn provided oxygen cylinders in the tempo traveller which was a lifesaver at Khardung La. The stays were incredibly clean and scenic."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=100&auto=format&fit=crop" class="w-full h-full object-cover"></div>
+                        <div>
+                            <div class="text-xs font-bold text-gray-800">Priya Desai</div>
+                            <div class="text-[10px] text-gray-400">Traveled in Sep 2025</div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+    <section class="max-w-7xl mx-auto px-4 lg:px-8 pt-12 border-t border-gray-100 pb-20">
+        <div class="flex flex-col gap-4 mb-8">
+            <h2 class="font-display font-extrabold text-3xl md:text-4xl text-brand-dark">Similar Trips</h2>
+            
+            <!-- Category Pills -->
+            <div class="hidden md:flex flex-wrap gap-3">
+                <a href="#" class="px-5 py-2 rounded-full bg-brand-cyan text-white text-sm font-bold shadow-md shadow-cyan-500/20 hover:-translate-y-0.5 transition-transform">Super Saver</a>
+                <a href="#" class="px-5 py-2 rounded-full bg-white border border-gray-200 text-gray-600 text-sm font-bold hover:border-brand-cyan hover:text-brand-cyan hover:-translate-y-0.5 transition-all">Best Sellers</a>
+                <a href="#" class="px-5 py-2 rounded-full bg-white border border-gray-200 text-gray-600 text-sm font-bold hover:border-brand-cyan hover:text-brand-cyan hover:-translate-y-0.5 transition-all">Exclusive</a>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Card 1 -->
+            <a href="#" class="block h-full cursor-pointer focus:outline-none hover:-translate-y-1 transition-transform group">
+                <div class="bg-white rounded-[2rem] p-3 shadow-soft group-hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col h-full">
+                    <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                        <img src="https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Ladakh">
+                        <!-- FOMO Tag -->
+                        <div class="absolute top-3 left-3 bg-red-500 text-white px-3 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider shadow-md animate-pulse">
+                            🔥 Selling Fast
+                        </div>
+                    </div>
+                    <div class="px-3 pb-2 flex flex-col flex-grow">
+                        <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                            <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar-check text-brand-cyan"></i> 15 May</span>
+                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                            <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 6N / 7D</span>
+                        </div>
+                        <h3 class="font-display font-semibold text-base text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                            Leh & Pangong Highlights
+                        </h3>
+                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                            <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                <i class="fa-solid fa-location-dot text-brand-yellow"></i> Leh Airport
+                            </span>
+                            <div class="text-right">
+                                <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">₹21,500</span>
+                                <span class="text-brand-cyan font-bold text-base leading-none">₹18,500 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Card 2 -->
+            <a href="#" class="block h-full cursor-pointer focus:outline-none hover:-translate-y-1 transition-transform group">
+                <div class="bg-white rounded-[2rem] p-3 shadow-soft group-hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col h-full">
+                    <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                        <img src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Spiti">
+                    </div>
+                    <div class="px-3 pb-2 flex flex-col flex-grow">
+                        <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                            <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar-check text-brand-cyan"></i> 20 May</span>
+                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                            <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 8N / 9D</span>
+                        </div>
+                        <h3 class="font-display font-semibold text-base text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                            Spiti Circuit Winter Expedition
+                        </h3>
+                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                            <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                <i class="fa-solid fa-location-dot text-brand-yellow"></i> Chandigarh
+                            </span>
+                            <div class="text-right">
+                                <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">₹25,000</span>
+                                <span class="text-brand-cyan font-bold text-base leading-none">₹22,000 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Card 3 -->
+            <a href="#" class="block h-full cursor-pointer focus:outline-none hover:-translate-y-1 transition-transform group">
+                <div class="bg-white rounded-[2rem] p-3 shadow-soft group-hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col h-full">
+                    <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Kashmir">
+                    </div>
+                    <div class="px-3 pb-2 flex flex-col flex-grow">
+                        <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                            <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar-check text-brand-cyan"></i> 02 Jun</span>
+                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                            <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 5N / 6D</span>
+                        </div>
+                        <h3 class="font-display font-semibold text-base text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                            Paradise on Earth Tour
+                        </h3>
+                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                            <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                <i class="fa-solid fa-location-dot text-brand-yellow"></i> Srinagar
+                            </span>
+                            <div class="text-right">
+                                <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">₹19,500</span>
+                                <span class="text-brand-cyan font-bold text-base leading-none">₹16,500 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Card 4 -->
+            <a href="#" class="block h-full cursor-pointer focus:outline-none hover:-translate-y-1 transition-transform group">
+                <div class="bg-white rounded-[2rem] p-3 shadow-soft group-hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col h-full">
+                    <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                        <img src="https://images.unsplash.com/photo-1612438214708-f428a707dd4e?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Meghalaya">
+                    </div>
+                    <div class="px-3 pb-2 flex flex-col flex-grow">
+                        <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                            <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar-check text-brand-cyan"></i> 12 Jun</span>
+                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                            <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 7N / 8D</span>
+                        </div>
+                        <h3 class="font-display font-semibold text-base text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                            Chasing Waterfalls
+                        </h3>
+                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                            <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                <i class="fa-solid fa-location-dot text-brand-yellow"></i> Guwahati
+                            </span>
+                            <div class="text-right">
+                                <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">₹25,000</span>
+                                <span class="text-brand-cyan font-bold text-base leading-none">₹21,000 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Mobile Pills (shown below grid on small screens) -->
+        <div class="flex md:hidden gap-3 mt-6 overflow-x-auto pb-2 snap-x">
+            <button class="shrink-0 px-5 py-2 rounded-full bg-brand-cyan text-white text-sm font-bold shadow-md shadow-cyan-500/20 snap-start">Super Saver</button>
+            <button class="shrink-0 px-5 py-2 rounded-full bg-white border border-gray-200 text-gray-600 text-sm font-bold snap-start">Best Sellers</button>
+            <button class="shrink-0 px-5 py-2 rounded-full bg-white border border-gray-200 text-gray-600 text-sm font-bold snap-start">Exclusive</button>
+        </div>
+    </section>
+
+    <!-- Footer placeholder -->
+    <footer class="bg-brand-dark text-white py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="font-display font-bold text-2xl mb-4">Ready to conquer the highest passes?</h2>
+            <p class="text-gray-400 mb-8">Join thousands of travelers who have explored Ladakh with us.</p>
+            <p class="text-xs text-gray-600">&copy; 2026 WanderOn. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

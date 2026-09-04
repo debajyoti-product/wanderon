@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WanderOn | Not Your Average Travel Group</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Lilita+One&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cyan: '#00a3e0',
+                            darkcyan: '#007eb0',
+                            yellow: '#ffc107',
+                            slate: '#1e293b',
+                            dark: '#0f172a',
+                            cream: '#fcfbf8',
+                            sand: '#f5f0e6',
+                            sky: '#f0f9ff',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(0,0,0,0.05)',
+                        'float': '0 30px 60px -20px rgba(0, 163, 224, 0.15)',
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                    },
+                    animation: {
+                        'marquee': 'marquee 30s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 8s ease-in-out infinite 2s',
+                        'drift': 'drift 40s linear infinite',
+                        'wind': 'wind 8s ease-in-out infinite',
+                        'fly': 'fly 8s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        drift: {
+                            '0%': { transform: 'translateX(-5%)' },
+                            '100%': { transform: 'translateX(100%)' },
+                        },
+                        wind: {
+                            '0%, 100%': { transform: 'translateX(0) scaleX(1)', opacity: '0.4' },
+                            '50%': { transform: 'translateX(20px) scaleX(1.1)', opacity: '0.7' },
+                        },
+                        fly: {
+                            '0%': { left: '-10%', opacity: '0', transform: 'translateY(0) rotate(5deg)' },
+                            '10%': { opacity: '1', transform: 'translateY(-5px) rotate(5deg)' },
+                            '50%': { transform: 'translateY(5px) rotate(0deg)' },
+                            '90%': { opacity: '1', transform: 'translateY(-5px) rotate(5deg)' },
+                            '100%': { left: '110%', opacity: '0', transform: 'translateY(0) rotate(5deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            background-color: #fcfbf8; 
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+        
+        /* Elegant Arch */
+        .arch-mask {
+            border-top-left-radius: 999px;
+            border-top-right-radius: 999px;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Glassmorphism for floating travel elements */
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+
+        .card-transition {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .trip-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -15px rgba(0, 163, 224, 0.15);
+        }
+    </style>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<style>html, body {
+            overflow-x: hidden; overflow-x: hidden; }</style>
+</head>
+<body class="bg-brand-cream text-brand-slate font-sans antialiased">
+
+    <!-- Static Top Announcement Banner -->
+    <div class="bg-brand-sky text-brand-darkcyan border-b border-blue-100 py-2.5 px-4 text-center z-50 relative text-xs md:text-sm font-semibold tracking-wide">
+        <span>WE'VE JUST RAISED $5.7M TO MAKE TRAVEL SEAMLESS</span>
+    </div>
+
+    <!-- Soft Navigation -->
+    <nav x-data="{ mobileMenu: false }" class="sticky top-0 w-full z-40 transition-all duration-300 bg-brand-cream/90 backdrop-blur-md border-b border-gray-200" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer group">
+                    <img src="logo.png" alt="WanderOn" class="h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-105">
+                </a>
+                
+                <div class="hidden lg:flex space-x-8 items-center font-display font-medium text-sm text-gray-600">
+                    <a href="#" class="hover:text-brand-cyan transition-colors">Trips</a>
+                    <a href="#" class="hover:text-brand-cyan transition-colors">Corporate</a>
+                    <a href="#" class="hover:text-brand-cyan transition-colors">Blogs</a>
+                    <a href="#" class="hover:text-brand-cyan transition-colors">About</a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-6 font-display font-semibold text-sm">
+                    <a href="#" class="text-gray-600 hover:text-brand-cyan transition-colors">Log In</a>
+                    <button onclick="document.getElementById('enquiry-modal').classList.remove('hidden')" class="bg-brand-dark text-white px-6 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:bg-brand-cyan hover:-translate-y-0.5 transition-all">Submit Enquiry</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Calm & Airy Hero -->
+    <div class="relative flex items-center pt-8 pb-4 lg:pt-10 lg:pb-6 overflow-hidden">
+        
+        <!-- Abstract Travel Background Elements (Calm) -->
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-40">
+            <!-- Flowing Wind/Air -->
+            <svg class="absolute top-16 left-0 w-full h-56 text-cyan-50 animate-wind" viewBox="0 0 1000 200" fill="none" preserveAspectRatio="none">
+                <path d="M-100 100 C 200 50, 400 150, 700 100 C 900 66, 1100 100, 1200 100" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                <path d="M-50 140 C 250 180, 450 80, 750 140 C 950 180, 1150 140, 1250 140" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <!-- Minimal Mountain Outline -->
+            <svg class="absolute bottom-0 right-0 w-2/3 h-56 text-gray-100" viewBox="0 0 500 150" fill="currentColor" preserveAspectRatio="none">
+                <path d="M500,150 L500,120 L400,40 L320,90 L200,10 L100,80 L0,150 Z" />
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+            
+            <!-- Left: Typography & Search with Floating Travel Icons -->
+            <div class="order-2 lg:order-1 pt-6 lg:pt-0 relative">
+                <!-- Floating travel icons without tag text -->
+                <div class="absolute -top-5 left-6 z-20 animate-float pointer-events-none text-4xl drop-shadow-md">🌴</div>
+                <div class="absolute -top-3 right-12 z-20 animate-float-delayed pointer-events-none text-3xl drop-shadow-md" style="animation-delay: 1.2s;">✈️</div>
+                <div class="absolute top-24 -left-6 z-20 animate-float pointer-events-none text-4xl drop-shadow-md" style="animation-delay: 2s;">🏔️</div>
+                <div class="absolute top-24 right-4 z-20 animate-float-delayed pointer-events-none text-3xl drop-shadow-md" style="animation-delay: 2.8s;">🤝</div>
+
+                <h1 class="font-display font-semibold text-5xl md:text-7xl leading-[1.05] tracking-tight text-brand-dark mb-8 relative z-10">
+                    See the world <br>
+                    <span class="text-brand-cyan relative inline-block mt-2">
+                        Meet your people
+                        <span class="inline-block text-3xl animate-float-delayed ml-2">✨</span>
+                    </span>
+                </h1>
+                
+                <!-- Elegant Search Box (15% height reduction) -->
+                <div class="bg-white rounded-[2rem] md:rounded-full p-1.5 flex flex-col md:flex-row gap-1 w-full mt-12 max-w-4xl relative z-30 shadow-soft border border-gray-100" id="hero-search-bar">
+                    
+                    <!-- WHERE TO -->
+                    <div class="flex-1 px-5 py-2 hover:bg-gray-50 rounded-full transition cursor-pointer group relative" onclick="openHeroModal('whereModal')">
+                        <div class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5 group-hover:text-brand-cyan transition-colors">Where to</div>
+                        <div class="font-semibold text-brand-dark text-sm flex items-center gap-2" id="where-value">
+                            Anywhere
+                        </div>
+                    </div>
+                    
+                    <div class="w-px bg-gray-100 my-1.5 hidden md:block"></div>
+                    
+                    <!-- WHEN -->
+                    <div class="flex-1 px-5 py-2 hover:bg-gray-50 rounded-full transition cursor-pointer group relative" onclick="openHeroModal('whenModal')">
+                        <div class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5 group-hover:text-brand-cyan transition-colors">When</div>
+                        <div class="font-semibold text-gray-800 text-sm flex items-center gap-2" id="when-value">
+                            Any date
+                        </div>
+                    </div>
+
+                    <button onclick="performSearch()" class="bg-brand-cyan text-white px-8 py-2 md:ml-2 rounded-full font-display font-bold text-sm hover:bg-brand-darkcyan hover:shadow-lg hover:shadow-cyan-500/30 transition-all flex items-center justify-center gap-2 active:scale-95 mt-2 md:mt-0">
+                        Search <i class="fa-solid fa-arrow-right text-xs hidden lg:block"></i>
+                    </button>
+                </div>
+
+                <!-- Modals Container (Fixed to viewport) -->
+                
+                <!-- Where Modal -->
+                <div id="whereModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center opacity-0 transition-opacity duration-300" onclick="closeHeroModals()">
+                    <div class="absolute inset-0 bg-brand-dark/40 backdrop-blur-md"></div>
+                    <div class="relative bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 w-[90vw] max-w-md scale-95 transition-transform duration-300 modal-content" onclick="event.stopPropagation()">
+                        <button class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-50 text-gray-400 hover:text-gray-700 hover:bg-gray-200 transition-colors" onclick="closeHeroModals()">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <div class="font-bold text-lg text-gray-800 mb-5">Popular Destinations</div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex items-center gap-3 p-3 border border-gray-100 hover:border-brand-cyan/30 hover:bg-brand-cyan/5 rounded-2xl cursor-pointer transition" onclick="selectWhere('India')">
+                                <img src="https://flagcdn.com/in.svg" class="w-8 h-8 object-cover rounded-full shadow-sm border border-gray-100" alt="India"> 
+                                <span class="text-sm font-semibold text-gray-700">India</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 border border-gray-100 hover:border-brand-cyan/30 hover:bg-brand-cyan/5 rounded-2xl cursor-pointer transition" onclick="selectWhere('Bali')">
+                                <img src="https://flagcdn.com/id.svg" class="w-8 h-8 object-cover rounded-full shadow-sm border border-gray-100" alt="Bali"> 
+                                <span class="text-sm font-semibold text-gray-700">Bali</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 border border-gray-100 hover:border-brand-cyan/30 hover:bg-brand-cyan/5 rounded-2xl cursor-pointer transition" onclick="selectWhere('Dubai')">
+                                <img src="https://flagcdn.com/ae.svg" class="w-8 h-8 object-cover rounded-full shadow-sm border border-gray-100" alt="Dubai"> 
+                                <span class="text-sm font-semibold text-gray-700">Dubai</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 border border-gray-100 hover:border-brand-cyan/30 hover:bg-brand-cyan/5 rounded-2xl cursor-pointer transition" onclick="selectWhere('Europe')">
+                                <img src="https://flagcdn.com/eu.svg" class="w-8 h-8 object-cover rounded-full shadow-sm border border-gray-100" alt="Europe"> 
+                                <span class="text-sm font-semibold text-gray-700">Europe</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 border border-gray-100 hover:border-brand-cyan/30 hover:bg-brand-cyan/5 rounded-2xl cursor-pointer transition" onclick="selectWhere('Thailand')">
+                                <img src="https://flagcdn.com/th.svg" class="w-8 h-8 object-cover rounded-full shadow-sm border border-gray-100" alt="Thailand"> 
+                                <span class="text-sm font-semibold text-gray-700">Thailand</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 border border-gray-100 hover:border-brand-cyan/30 hover:bg-brand-cyan/5 rounded-2xl cursor-pointer transition" onclick="selectWhere('Vietnam')">
+                                <img src="https://flagcdn.com/vn.svg" class="w-8 h-8 object-cover rounded-full shadow-sm border border-gray-100" alt="Vietnam"> 
+                                <span class="text-sm font-semibold text-gray-700">Vietnam</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- When Modal -->
+                <div id="whenModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center opacity-0 transition-opacity duration-300" onclick="closeHeroModals()">
+                    <div class="absolute inset-0 bg-brand-dark/40 backdrop-blur-md"></div>
+                    <div class="relative bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 w-[95vw] md:w-[700px] max-w-4xl scale-95 transition-transform duration-300 modal-content" onclick="event.stopPropagation()">
+                        <button class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-50 text-gray-400 hover:text-gray-700 hover:bg-gray-200 transition-colors" onclick="closeHeroModals()">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <div class="font-bold text-lg text-gray-800 mb-6 text-center">Select Dates</div>
+                        
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <!-- Month 1 -->
+                            <div class="flex-1">
+                                <div class="font-bold text-[15px] text-gray-800 text-center mb-4">September 2026</div>
+                                <div class="grid grid-cols-7 gap-1 text-center text-[11px] font-bold text-gray-400 mb-2 uppercase tracking-wide">
+                                    <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+                                </div>
+                                <div class="grid grid-cols-7 gap-y-1 gap-x-1 text-center text-sm font-medium text-gray-700">
+                                    <div class="p-2 text-transparent">.</div><div class="p-2 text-transparent">.</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 1')">1</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 2')">2</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 3')">3</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 4')">4</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 5')">5</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 6')">6</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 7')">7</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 8')">8</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 9')">9</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 10')">10</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 11')">11</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 12')">12</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 13')">13</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 14')">14</div>
+                                    <div class="p-2 bg-red-50 text-red-500 font-bold hover:bg-red-500 hover:text-white rounded-full cursor-pointer transition relative" title="Holiday" onclick="selectWhen('Sep 15')">15<span class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-red-500 rounded-full"></span></div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 16')">16</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 17')">17</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 18')">18</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 19')">19</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 20')">20</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 21')">21</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 22')">22</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 23')">23</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 24')">24</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 25')">25</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 26')">26</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 27')">27</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 28')">28</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 29')">29</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Sep 30')">30</div>
+                                </div>
+                            </div>
+                            <!-- Month 2 -->
+                            <div class="flex-1 hidden md:block">
+                                <div class="font-bold text-[15px] text-gray-800 text-center mb-4">October 2026</div>
+                                <div class="grid grid-cols-7 gap-1 text-center text-[11px] font-bold text-gray-400 mb-2 uppercase tracking-wide">
+                                    <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+                                </div>
+                                <div class="grid grid-cols-7 gap-y-1 gap-x-1 text-center text-sm font-medium text-gray-700">
+                                    <div class="p-2 text-transparent">.</div><div class="p-2 text-transparent">.</div><div class="p-2 text-transparent">.</div><div class="p-2 text-transparent">.</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 1')">1</div>
+                                    <div class="p-2 bg-blue-100 text-red-600 font-bold hover:bg-blue-200 rounded-l-full cursor-pointer transition relative" title="Gandhi Jayanti (Holiday)" onclick="selectWhen('Oct 2')">2<span class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-red-500 rounded-full"></span></div>
+                                    <div class="p-2 bg-blue-100 text-blue-900 font-semibold hover:bg-blue-200 rounded-r-full cursor-pointer transition" onclick="selectWhen('Oct 3')">3</div>
+                                    <div class="p-2 bg-blue-100 text-blue-900 font-semibold hover:bg-blue-200 rounded-l-full cursor-pointer transition" onclick="selectWhen('Oct 4')">4</div>
+                                    <div class="p-2 bg-blue-100 text-red-600 font-bold hover:bg-blue-200 rounded-r-full cursor-pointer transition relative" title="Holiday" onclick="selectWhen('Oct 5')">5<span class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-red-500 rounded-full"></span></div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 6')">6</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 7')">7</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 8')">8</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 9')">9</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 10')">10</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 11')">11</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 12')">12</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 13')">13</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 14')">14</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 15')">15</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 16')">16</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 17')">17</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 18')">18</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 19')">19</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 20')">20</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 21')">21</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 22')">22</div>
+                                    <div class="p-2 bg-red-50 text-red-500 font-bold hover:bg-red-500 hover:text-white rounded-full cursor-pointer transition relative" title="Dussehra" onclick="selectWhen('Oct 23')">23<span class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-red-500 rounded-full"></span></div>
+                                    <div class="p-2 bg-red-50 text-red-500 font-bold hover:bg-red-500 hover:text-white rounded-full cursor-pointer transition relative" title="Holiday" onclick="selectWhen('Oct 24')">24<span class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-red-500 rounded-full"></span></div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 25')">25</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 26')">26</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 27')">27</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 28')">28</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 29')">29</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 30')">30</div>
+                                    <div class="p-2 hover:bg-brand-cyan hover:text-white rounded-full cursor-pointer transition" onclick="selectWhen('Oct 31')">31</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-5 border-t border-gray-100 flex justify-between items-center text-xs text-gray-500 font-medium">
+                            <div class="flex flex-wrap items-center gap-5">
+                                <div class="flex items-center gap-1.5"><div class="w-1.5 h-1.5 rounded-full bg-red-500"></div> Public Holiday</div>
+                                <div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded bg-blue-100 border border-blue-200"></div> Long Weekend</div>
+                            </div>
+                            <button class="text-brand-cyan font-bold hover:underline" onclick="selectWhen('Flexible Dates')">I'm flexible</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Rating & Review Count Pills -->
+                <div class="mt-5 flex flex-wrap items-center gap-2.5 relative z-20">
+                    <!-- Google -->
+                    <a href="https://www.google.com/search?q=wanderon+reviews" target="_blank" rel="noopener noreferrer" class="bg-white/90 backdrop-blur-sm border border-gray-200/80 rounded-full px-3.5 py-1.5 shadow-sm inline-flex items-center gap-2 hover:shadow-md hover:border-gray-300 hover:-translate-y-0.5 transition-all cursor-pointer group">
+                        <i class="fa-brands fa-google text-[#4285F4] text-xs group-hover:scale-110 transition-transform"></i>
+                        <span class="font-display font-bold text-xs text-brand-dark">4.9</span>
+                        <div class="flex items-center text-amber-400 text-[10px]">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-[11px] font-medium text-gray-500">(15,468)</span>
+                    </a>
+
+                    <!-- TripAdvisor -->
+                    <a href="https://www.tripadvisor.in/Attraction_Review-g304551-d15013133-Reviews-WanderOn-New_Delhi_National_Capital_Territory_of_Delhi.html" target="_blank" rel="noopener noreferrer" class="bg-white/90 backdrop-blur-sm border border-gray-200/80 rounded-full px-3.5 py-1.5 shadow-sm inline-flex items-center gap-2 hover:shadow-md hover:border-gray-300 hover:-translate-y-0.5 transition-all cursor-pointer group">
+                        <svg class="w-4 h-4 text-[#00AA6C] fill-current group-hover:scale-110 transition-transform flex-shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.006 4.295c-2.67 0-5.338.784-7.645 2.353H0l1.963 2.135a5.997 5.997 0 0 0 4.04 10.43 5.976 5.976 0 0 0 4.075-1.6L12 19.705l1.922-2.09a5.972 5.972 0 0 0 4.072 1.598 6 6 0 0 0 6-5.998 5.982 5.982 0 0 0-1.957-4.432L24 6.648h-4.35a13.573 13.573 0 0 0-7.644-2.353zM12 6.255c1.531 0 3.063.303 4.504.903C13.943 8.138 12 10.43 12 13.1c0-2.671-1.942-4.962-4.504-5.942A11.72 11.72 0 0 1 12 6.256zM6.002 9.157a4.059 4.059 0 1 1 0 8.118 4.059 4.059 0 0 1 0-8.118zm11.992.002a4.057 4.057 0 1 1 .003 8.115 4.057 4.057 0 0 1-.003-8.115zm-11.992 1.93a2.128 2.128 0 0 0 0 4.256 2.128 2.128 0 0 0 0-4.256zm11.992 0a2.128 2.128 0 0 0 0 4.256 2.128 2.128 0 0 0 0-4.256z"/>
+                        </svg>
+                        <span class="font-display font-bold text-xs text-brand-dark">5.0</span>
+                        <div class="flex items-center text-emerald-500 text-[10px]">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-[11px] font-medium text-gray-500">(4,200+)</span>
+                    </a>
+
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/wanderontravelcommunity/reviews" target="_blank" rel="noopener noreferrer" class="bg-white/90 backdrop-blur-sm border border-gray-200/80 rounded-full px-3.5 py-1.5 shadow-sm inline-flex items-center gap-2 hover:shadow-md hover:border-gray-300 hover:-translate-y-0.5 transition-all cursor-pointer group">
+                        <i class="fa-brands fa-facebook text-[#1877F2] text-xs group-hover:scale-110 transition-transform"></i>
+                        <span class="font-display font-bold text-xs text-brand-dark">4.9</span>
+                        <div class="flex items-center text-amber-400 text-[10px]">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-[11px] font-medium text-gray-500">(1,018)</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Right: Elegant Image Composition (aligned right & frosted frame, 15% wider on left) -->
+            <div class="order-1 lg:order-2 relative w-full flex justify-end items-center">
+                <!-- Frosted Glass Frame -->
+                <div class="p-2.5 bg-white/40 backdrop-blur-md rounded-[2.5rem] shadow-glass border border-white/60 w-full max-w-[565px] ml-auto">
+                    <!-- Main Image -->
+                    <div class="relative w-full h-[280px] sm:h-[360px] lg:h-[540px] rounded-[2rem] overflow-hidden group shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-1000" alt="Group Trip">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/20"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Trust Builder (Calm & Airy Block) -->
+    <section class="py-16 bg-brand-sky relative overflow-hidden">
+        <!-- Minimal abstract clouds -->
+        <div class="absolute inset-0 pointer-events-none opacity-40">
+            <svg class="absolute top-10 left-10 w-32 text-white animate-drift" style="animation-duration: 60s;" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.5 19c2.485 0 4.5-2.015 4.5-4.5S19.985 10 17.5 10c-.17 0-.336.015-.5.044C16.357 7.151 13.896 5 11 5 7.686 5 5 7.686 5 11c0 .28.026.554.075.82C2.793 12.392 1 14.49 1 17c0 2.761 2.239 5 5 5h11.5z"/>
+            </svg>
+            <svg class="absolute bottom-20 left-1/3 w-40 text-white animate-drift" style="animation-duration: 80s; animation-delay: -20s;" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.5 19c2.485 0 4.5-2.015 4.5-4.5S19.985 10 17.5 10c-.17 0-.336.015-.5.044C16.357 7.151 13.896 5 11 5 7.686 5 5 7.686 5 11c0 .28.026.554.075.82C2.793 12.392 1 14.49 1 17c0 2.761 2.239 5 5 5h11.5z"/>
+            </svg>
+        </div>
+
+        <!-- Curved Flight Path -->
+        <div class="absolute inset-0 pointer-events-none z-0 hidden md:block">
+            <svg class="w-full h-full" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
+                <!-- Dotted path (shifted another 10% higher) -->
+                <path id="flight-path" d="M -100 270 C 300 70, 600 370, 1000 170 S 1300 70, 1540 170" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8, 12" opacity="0.4" />
+                
+                <!-- SVG Airplane moving along the path -->
+                <g class="text-brand-cyan" fill="currentColor">
+                    <g transform="scale(1.2) rotate(45)">
+                        <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" transform="translate(-12, -12)" />
+                    </g>
+                    <animateMotion dur="15s" repeatCount="indefinite" rotate="auto">
+                        <mpath href="#flight-path" />
+                    </animateMotion>
+                </g>
+            </svg>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-9">
+                <h2 class="font-display font-semibold text-[31px] md:text-[41px] leading-tight text-brand-dark">
+                    Book a trip & pack your bags<br><span class="text-brand-cyan">We handle everything else</span>
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white/80 backdrop-blur-sm border border-white rounded-[2rem] p-8 shadow-soft card-transition relative group hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-blue-50 text-brand-cyan rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform shadow-sm border border-blue-100">
+                        <i class="fa-solid fa-handshake-slash"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-3 text-brand-dark">Zero Middlemen</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">We own the entire operation from ground to summit. No shady third parties, no broken promises—just pure WanderOn quality.</p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="bg-white/80 backdrop-blur-sm border border-white rounded-[2rem] p-8 shadow-soft card-transition relative group hover:-translate-y-2 lg:translate-y-4">
+                    <div class="w-14 h-14 bg-teal-50 text-teal-500 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-transform shadow-sm border border-teal-100">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                
+                    <h3 class="font-display font-bold text-xl mb-3 text-brand-dark">Radar-Level Security</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Our ground team monitors every single trip in real-time. Sudden weather shift? Road closure? We pivot before you even notice.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white/80 backdrop-blur-sm border border-white rounded-[2rem] p-8 shadow-soft card-transition relative group hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-yellow-50 text-brand-yellow rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform shadow-sm border border-yellow-100">
+                        <i class="fa-solid fa-people-arrows"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-3 text-brand-dark">The Vibe Check</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">We don't just fill seats. Our multi-step filtering pairs you with like-minded travelers who match your exact energy and age group.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white/80 backdrop-blur-sm border border-white rounded-[2rem] p-8 shadow-soft card-transition relative group hover:-translate-y-2 lg:translate-y-4">
+                    <div class="w-14 h-14 bg-pink-50 text-pink-500 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-transform shadow-sm border border-pink-100">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl mb-3 text-brand-dark">End-to-End Comfort</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Handpicked stays, veteran drivers, and hype-man trip leaders. You literally just have to show up—we've handled everything else.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Community Trips Section -->
+    <section class="py-16 bg-white relative border-t border-gray-100 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            
+            <!-- Header -->
+            <div class="mb-[18px]">
+                <h2 class="font-display font-semibold text-[31px] md:text-[41px] text-brand-dark tracking-tight">
+                    Upcoming Community Trips
+                </h2>
+            </div>
+
+            <!-- Month Filters & View All -->
+            <div class="flex items-center justify-between gap-4 pb-3 mb-[21px] border-b border-gray-100">
+                <div class="flex items-center gap-3 overflow-x-auto hide-scrollbar scroll-smooth flex-1">
+                    <button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-brand-cyan/10 text-brand-cyan font-bold text-sm border border-brand-cyan transition-transform hover:scale-105">SEP '26</button>
+                    <button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-white border border-gray-200 text-gray-500 font-bold text-sm hover:border-brand-cyan hover:text-brand-cyan transition-all">OCT '26</button>
+                    <button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-white border border-gray-200 text-gray-500 font-bold text-sm hover:border-brand-cyan hover:text-brand-cyan transition-all">NOV '26</button>
+                    <button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-white border border-gray-200 text-gray-500 font-bold text-sm hover:border-brand-cyan hover:text-brand-cyan transition-all">DEC '26</button>
+                    <button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-white border border-gray-200 text-gray-500 font-bold text-sm hover:border-brand-cyan hover:text-brand-cyan transition-all">JAN '27</button>
+                    <button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-white border border-gray-200 text-gray-500 font-bold text-sm hover:border-brand-cyan hover:text-brand-cyan transition-all">FEB '27</button>
+                    <button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-white border border-gray-200 text-gray-500 font-bold text-sm hover:border-brand-cyan hover:text-brand-cyan transition-all">MAR '27</button>
+                    <button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-white border border-gray-200 text-gray-500 font-bold text-sm hover:border-brand-cyan hover:text-brand-cyan transition-all">APR '27</button>
+                </div>
+                <a href="#" class="flex-shrink-0 inline-flex items-center gap-1.5 text-brand-cyan font-bold hover:text-brand-darkcyan transition-colors whitespace-nowrap text-sm pl-2">
+                    View all <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            <!-- Horizontal Scrollable Cards -->
+            <div class="flex overflow-x-auto gap-6 pb-10 -mx-4 px-4 lg:-mx-8 lg:px-8 hide-scrollbar snap-x snap-mandatory items-stretch">
+                
+                <!-- Card 1 -->
+                <div class="flex-shrink-0 w-[85vw] sm:w-[320px] md:w-[360px] snap-center group cursor-pointer">
+                    <a href="ladakh.html" target="_blank" class="block h-full cursor-pointer focus:outline-none hover:-translate-y-1 transition-transform">
+                    <div class="bg-white rounded-[2rem] p-3 shadow-soft group-hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col h-full">
+                        
+                        <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Thailand">
+                            
+                            <!-- FOMO Tag -->
+                            <div class="absolute top-3 left-3 bg-red-500 text-white px-3 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider shadow-md animate-pulse">
+                                🔥 90% Full
+                            </div>
+                        </div>
+
+                        <div class="px-3 pb-2 flex flex-col flex-grow">
+                            <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar-check text-brand-cyan"></i> 24 Sept</span>
+                                <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 6N / 7D</span>
+                            </div>
+
+                            <h3 class="font-display font-semibold text-lg text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                                Neon Lights, Full Moons, and Island Hopping in Thailand
+                            </h3>
+
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                                <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                    <i class="fa-solid fa-location-dot text-brand-yellow"></i> Phuket Airport
+                                </span>
+                                <div class="text-right">
+                                    <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">₹45,999</span>
+                                    <span class="text-brand-cyan font-bold text-lg leading-none">₹41,999 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="flex-shrink-0 w-[85vw] sm:w-[320px] md:w-[360px] snap-center group cursor-pointer">
+                    <a href="ladakh.html" target="_blank" class="block h-full cursor-pointer focus:outline-none hover:-translate-y-1 transition-transform">
+                    <div class="bg-white rounded-[2rem] p-3 shadow-soft group-hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col h-full">
+                        
+                        <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Ladakh">
+                        </div>
+
+                        <div class="px-3 pb-2 flex flex-col flex-grow">
+                            <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar-check text-brand-cyan"></i> 26 Sept</span>
+                                <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 6N / 7D</span>
+                            </div>
+
+                            <h3 class="font-display font-semibold text-lg text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                                High-Altitude Passes, Monasteries, and Raw Vistas in Ladakh
+                            </h3>
+
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                                <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                    <i class="fa-solid fa-location-dot text-brand-yellow"></i> Leh
+                                </span>
+                                <div class="text-right">
+                                    <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">₹46,999</span>
+                                    <span class="text-brand-cyan font-bold text-lg leading-none">₹38,999 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="flex-shrink-0 w-[85vw] sm:w-[320px] md:w-[360px] snap-center group cursor-pointer">
+                    <a href="ladakh.html" target="_blank" class="block h-full cursor-pointer focus:outline-none hover:-translate-y-1 transition-transform">
+                    <div class="bg-white rounded-[2rem] p-3 shadow-soft group-hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col h-full">
+                        
+                        <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Ziro">
+                            
+                            <!-- FOMO Tag -->
+                            <div class="absolute top-3 left-3 bg-indigo-500 text-white px-3 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider shadow-md">
+                                ✨ High Demand
+                            </div>
+                        </div>
+
+                        <div class="px-3 pb-2 flex flex-col flex-grow">
+                            <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar-check text-brand-cyan"></i> 24 Sept</span>
+                                <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 4N / 5D</span>
+                            </div>
+
+                            <h3 class="font-display font-semibold text-lg text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                                Indie Music, Tribal Culture, and Lush Valleys at Ziro Festival
+                            </h3>
+
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                                <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                    <i class="fa-solid fa-location-dot text-brand-yellow"></i> Ziro Valley
+                                </span>
+                                <div class="text-right">
+                                    <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">₹28,999</span>
+                                    <span class="text-brand-cyan font-bold text-lg leading-none">₹24,999 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="flex-shrink-0 w-[85vw] sm:w-[320px] md:w-[360px] snap-center group cursor-pointer">
+                    <a href="ladakh.html" target="_blank" class="block h-full cursor-pointer focus:outline-none hover:-translate-y-1 transition-transform">
+                    <div class="bg-white rounded-[2rem] p-3 shadow-soft group-hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col h-full">
+                        
+                        <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="McLeod Ganj">
+                        </div>
+
+                        <div class="px-3 pb-2 flex flex-col flex-grow">
+                            <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar-check text-brand-cyan"></i> 25 Sept</span>
+                                <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 2N / 3D</span>
+                            </div>
+
+                            <h3 class="font-display font-semibold text-lg text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                                Pine Forests, Tibetan Vibes, and Mountain Sunrises in McLeod Ganj
+                            </h3>
+
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                                <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                    <i class="fa-solid fa-location-dot text-brand-yellow"></i> Delhi
+                                </span>
+                                <div class="text-right">
+                                    <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">₹10,499</span>
+                                    <span class="text-brand-cyan font-bold text-lg leading-none">₹7,999 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                
+                <!-- Card 5 -->
+                <div class="flex-shrink-0 w-[85vw] sm:w-[320px] md:w-[360px] snap-center group cursor-pointer">
+                    <a href="ladakh.html" target="_blank" class="block h-full cursor-pointer focus:outline-none hover:-translate-y-1 transition-transform">
+                    <div class="bg-white rounded-[2rem] p-3 shadow-soft group-hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col h-full">
+                        
+                        <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1612438214708-f428a707dd4e?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Tirthan">
+                            
+                            <!-- FOMO Tag -->
+                            <div class="absolute top-3 left-3 bg-red-600 text-white px-3 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider shadow-md animate-pulse">
+                                🚨 Last 2 Seats
+                            </div>
+                        </div>
+
+                        <div class="px-3 pb-2 flex flex-col flex-grow">
+                            <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar-check text-brand-cyan"></i> 12 Sept</span>
+                                <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 4N / 5D</span>
+                            </div>
+
+                            <h3 class="font-display font-semibold text-lg text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                                Riverside Stays, Bonfires, and Epic Road Trips in Himachal
+                            </h3>
+
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                                <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                    <i class="fa-solid fa-location-dot text-brand-yellow"></i> Delhi/Chandigarh
+                                </span>
+                                <div class="text-right">
+                                    <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">₹19,499</span>
+                                    <span class="text-brand-cyan font-bold text-lg leading-none">₹17,499 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+    
+
+
+    <!-- WanderOn Across The World (Stats Bar & CTAs) -->
+    <div class="py-[60px] bg-[#faf9f6] relative z-30 border-y border-gray-100 overflow-hidden">
+        
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 flex flex-col lg:flex-row gap-12 lg:items-center justify-between">
+            
+            <!-- Left Side: Stats & Title -->
+            <div class="w-full lg:w-auto flex-shrink-0 relative z-10">
+                <!-- Header with Brush Stroke Below -->
+                <div class="inline-flex flex-col items-start mb-6">
+                    <span class="font-display font-bold uppercase text-xs tracking-widest text-gray-500">
+                        WanderOn Across The World
+                    </span>
+                    <!-- Light Blue Brush Stroke -->
+                    <svg class="w-44 h-2.5 mt-1 text-sky-300" viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 7.5C35 4 110 3 195 5.5C198 5.6 198 7.5 194 7.8C145 11 65 10.5 5 9C2 8.9 1.5 7.7 3 7.5Z" fill="currentColor" fill-opacity="0.85"/>
+                        <path d="M15 4.5C65 2.5 140 2.8 185 5C188 5.2 185 6.5 180 6.6C130 7.8 55 7.2 12 5.8C9 5.7 10 4.7 15 4.5Z" fill="#38bdf8" fill-opacity="0.6"/>
+                        <path d="M30 8.5C70 7.2 130 7.5 170 8.8C173 8.9 170 9.8 165 9.9C125 10.5 70 10.2 28 9.4C25 9.3 27 8.6 30 8.5Z" fill="#00a3e0" fill-opacity="0.4"/>
+                    </svg>
+                </div>
+                
+                <!-- Vertically Stacked Pills (Reduced width by 20%) -->
+                <div class="flex flex-col items-start gap-3.5 w-full max-w-[308px] relative z-10">
+                    <!-- Pill 1: Happy Travelers -->
+                    <div class="flex items-center justify-between w-full bg-white border border-gray-100 rounded-full pl-5 pr-1.5 py-1.5 shadow-sm hover:shadow-md hover:border-brand-cyan/30 transition-all group cursor-default">
+                        <div class="text-left">
+                            <div class="font-display font-bold text-xl text-brand-dark leading-none mb-1">100,000+</div>
+                            <div class="text-[9px] text-gray-500 font-bold uppercase tracking-wider">Happy Travelers</div>
+                        </div>
+                        <div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-sky-50/50 flex items-center justify-center p-0.5 group-hover:scale-[1.12] transition-transform duration-300 shadow-sm border border-white">
+                            <img src="3d_people.jpg" class="w-full h-full object-cover rounded-full" alt="People">
+                        </div>
+                    </div>
+
+                    <!-- Pill 2: Destinations -->
+                    <div class="flex items-center justify-between w-full bg-white border border-gray-100 rounded-full pl-5 pr-1.5 py-1.5 shadow-sm hover:shadow-md hover:border-brand-yellow/30 transition-all group cursor-default">
+                        <div class="text-left">
+                            <div class="font-display font-bold text-xl text-brand-dark leading-none mb-1">40+</div>
+                            <div class="text-[9px] text-gray-500 font-bold uppercase tracking-wider">Destinations</div>
+                        </div>
+                        <div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-yellow-50/50 flex items-center justify-center p-0.5 group-hover:scale-[1.12] transition-transform duration-300 shadow-sm border border-white">
+                            <img src="3d_earth.jpg" class="w-full h-full object-cover rounded-full" alt="Earth">
+                        </div>
+                    </div>
+
+                    <!-- Pill 3: Trips Served -->
+                    <div class="flex items-center justify-between w-full bg-white border border-gray-100 rounded-full pl-5 pr-1.5 py-1.5 shadow-sm hover:shadow-md hover:border-teal-500/30 transition-all group cursor-default">
+                        <div class="text-left">
+                            <div class="font-display font-bold text-xl text-brand-dark leading-none mb-1">20,000+</div>
+                            <div class="text-[9px] text-gray-500 font-bold uppercase tracking-wider">Trips Served</div>
+                        </div>
+                        <div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-teal-50/50 flex items-center justify-center p-0.5 group-hover:scale-[1.12] transition-transform duration-300 shadow-sm border border-white">
+                            <img src="3d_plane.jpg" class="w-full h-full object-cover rounded-full" alt="Plane">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Solo vs Group Cards (Right Aligned) -->
+            <div class="w-full max-w-[720px] lg:ml-auto grid grid-cols-1 sm:grid-cols-2 gap-5 relative z-10">
+                
+                <!-- Solo Card -->
+                <div class="bg-white rounded-[2rem] p-7 shadow-soft border border-gray-100 hover:border-brand-yellow/40 hover:shadow-float transition-all relative overflow-hidden group flex flex-col h-full">
+                    <div class="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-brand-yellow/10 to-transparent rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+                    <div class="w-12 h-12 rounded-2xl bg-brand-yellow/10 text-brand-yellow flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-person-walking-luggage"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-[22px] text-brand-dark mb-3 leading-tight">Looking to travel solo?</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-8 flex-grow">
+                        Don't worry, our community is here with you. Join thousands of solo travelers who found their tribe.
+                    </p>
+                    <button onclick="document.getElementById('enquiry-modal').classList.remove('hidden')" class="w-full bg-white border border-brand-cyan text-brand-dark hover:bg-brand-cyan hover:text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center mt-auto text-sm">
+                        Contact Us
+                    </button>
+                </div>
+
+                <!-- Group Card -->
+                <div class="bg-white rounded-[2rem] p-7 shadow-soft border border-gray-100 hover:border-brand-cyan/40 hover:shadow-float transition-all relative overflow-hidden group flex flex-col h-full">
+                    <div class="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-brand-cyan/10 to-transparent rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+                    <div class="w-12 h-12 rounded-2xl bg-brand-cyan/10 text-brand-cyan flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-[22px] text-brand-dark mb-3 leading-tight">Want to book a group trip?</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                        Great, bring your own tribe & get discounts on every booking. The more, the merrier!
+                    </p>
+                    
+                    <button onclick="document.getElementById('discount-modal').classList.remove('hidden')" class="text-brand-cyan font-bold text-sm hover:text-brand-dark transition-colors flex items-center gap-1.5 mb-8 text-left w-fit group/link">
+                        <i class="fa-solid fa-tags"></i> View discount tiers
+                    </button>
+                    
+                    <button onclick="document.getElementById('enquiry-modal').classList.remove('hidden')" class="w-full bg-white border border-brand-cyan text-brand-dark hover:bg-brand-cyan hover:text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center mt-auto text-sm">
+                        Contact Us
+                    </button>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+
+    <!-- Discover Incredible India (Destinations, Activities, Packages) -->
+    <section class="py-20 relative overflow-hidden bg-[#faf9f6]">
+        <!-- 3D India Map Background -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden flex items-center justify-center">
+            <img src="india_map.jpg" class="w-full h-full object-cover opacity-90 transform scale-105 blur-[4px]" style="transform-origin: center right;" alt="3D India Map">
+            <!-- Add a soft radial overlay to blend the map slightly -->
+            <div class="absolute inset-0 bg-gradient-to-b from-[#faf9f6]/30 via-transparent to-[#faf9f6]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-6">
+                <div class="inline-flex items-center gap-2 font-bold uppercase text-xs tracking-widest text-brand-yellow mb-3 bg-white/70 backdrop-blur-md px-4 py-2 rounded-full border border-white shadow-sm">
+                    #indiatrips
+                </div>
+                <h2 class="font-display font-semibold text-[41px] md:text-[51px] text-brand-dark tracking-tight mb-2">
+                    Discover Incredible India
+                </h2>
+            </div>
+
+            <!-- Interactive Filter Tabs -->
+            <div class="flex flex-wrap justify-center items-center gap-4 mb-6">
+                <div class="bg-white/80 backdrop-blur-md p-1.5 rounded-full shadow-soft border border-white flex items-center">
+                    <button id="btn-destinations" onclick="switchTab('destinations')" class="px-8 py-3 rounded-full bg-brand-cyan text-white font-bold text-sm shadow-md transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-map-location-dot"></i> Destinations
+                    </button>
+                    <button id="btn-packages" onclick="switchTab('packages')" class="px-8 py-3 rounded-full text-gray-500 font-bold text-sm hover:text-brand-dark hover:bg-white/60 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-box-open"></i> Packages
+                    </button>
+                </div>
+            </div>
+
+            <!-- 1. DESTINATIONS (Majestic Arches) -->
+            <div id="content-destinations" class="mb-8 transition-opacity duration-300">
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <!-- Kerala -->
+                    <div class="group cursor-pointer relative h-[200px] md:h-[200px] md:h-[300px] rounded-t-full rounded-b-3xl overflow-hidden shadow-soft hover:shadow-float transition-all duration-500 border-[6px] border-white/90">
+                        <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Kerala">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 w-full p-4 md:p-6 text-center translate-y-4 group-hover:translate-y-0 transition-transform duration-500 flex flex-col items-center">
+                            <h4 class="font-display font-bold text-3xl text-white mb-2">Kerala</h4>
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-300 flex flex-col items-center gap-1">
+                                <p class="text-white/90 font-medium text-xs">12 Packages</p>
+                                <p class="text-brand-yellow font-bold text-sm">₹16,500 Onwards <i class="fa-solid fa-arrow-right ml-1"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Rajasthan -->
+                    <div class="group cursor-pointer relative h-[200px] md:h-[200px] md:h-[300px] rounded-t-full rounded-b-3xl overflow-hidden shadow-soft hover:shadow-float transition-all duration-500 border-[6px] border-white/90">
+                        <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Rajasthan">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 w-full p-4 md:p-6 text-center translate-y-4 group-hover:translate-y-0 transition-transform duration-500 flex flex-col items-center">
+                            <h4 class="font-display font-bold text-3xl text-white mb-2">Rajasthan</h4>
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-300 flex flex-col items-center gap-1">
+                                <p class="text-white/90 font-medium text-xs">8 Packages</p>
+                                <p class="text-brand-yellow font-bold text-sm">₹12,999 Onwards <i class="fa-solid fa-arrow-right ml-1"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Kashmir -->
+                    <div class="group cursor-pointer relative h-[200px] md:h-[200px] md:h-[300px] rounded-t-full rounded-b-3xl overflow-hidden shadow-soft hover:shadow-float transition-all duration-500 border-[6px] border-white/90">
+                        <img src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Kashmir">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 w-full p-4 md:p-6 text-center translate-y-4 group-hover:translate-y-0 transition-transform duration-500 flex flex-col items-center">
+                            <h4 class="font-display font-bold text-3xl text-white mb-2">Kashmir</h4>
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-300 flex flex-col items-center gap-1">
+                                <p class="text-white/90 font-medium text-xs">15 Packages</p>
+                                <p class="text-brand-yellow font-bold text-sm">₹21,500 Onwards <i class="fa-solid fa-arrow-right ml-1"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Himachal -->
+                    <div class="group cursor-pointer relative h-[200px] md:h-[200px] md:h-[300px] rounded-t-full rounded-b-3xl overflow-hidden shadow-soft hover:shadow-float transition-all duration-500 border-[6px] border-white/90">
+                        <img src="https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Himachal">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 w-full p-4 md:p-6 text-center translate-y-4 group-hover:translate-y-0 transition-transform duration-500 flex flex-col items-center">
+                            <h4 class="font-display font-bold text-3xl text-white mb-2">Himachal</h4>
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-300 flex flex-col items-center gap-1">
+                                <p class="text-white/90 font-medium text-xs">22 Packages</p>
+                                <p class="text-brand-yellow font-bold text-sm">₹9,999 Onwards <i class="fa-solid fa-arrow-right ml-1"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. FEATURED PACKAGES -->
+            <div id="content-packages" class="mb-8 hidden transition-opacity duration-300">
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Package 1 -->
+                    <div class="bg-white/90 backdrop-blur rounded-[2rem] p-3 shadow-soft group-hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col group cursor-pointer h-full">
+                        <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Kashmir">
+                            <div class="absolute top-3 left-3 bg-red-500 text-white px-3 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider shadow-md animate-pulse">
+                                ?? Selling Fast
+                            </div>
+                        </div>
+                        <div class="px-3 pb-2 flex flex-col flex-grow">
+                            <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 5N / 6D</span>
+                            </div>
+                            <h3 class="font-display font-semibold text-base text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                                Shikaras, Valleys, and Alpine Lakes in Kashmir
+                            </h3>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                                <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                    <i class="fa-solid fa-location-dot text-brand-yellow"></i> Srinagar
+                                </span>
+                                <div class="text-right">
+                                    <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">₹25,999</span>
+                                    <span class="text-brand-cyan font-bold text-base leading-none">₹21,999 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Package 2 -->
+                    <div class="bg-white/90 backdrop-blur rounded-[2rem] p-3 shadow-soft group-hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col group cursor-pointer h-full">
+                        <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Meghalaya">
+                        </div>
+                        <div class="px-3 pb-2 flex flex-col flex-grow">
+                            <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 6N / 7D</span>
+                            </div>
+                            <h3 class="font-display font-semibold text-base text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                                Living Root Bridges and Crystal Rivers in Meghalaya
+                            </h3>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                                <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                    <i class="fa-solid fa-location-dot text-brand-yellow"></i> Guwahati
+                                </span>
+                                <div class="text-right">
+                                    <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">₹30,999</span>
+                                    <span class="text-brand-cyan font-bold text-base leading-none">₹26,999 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Package 3 -->
+                    <div class="bg-white/90 backdrop-blur rounded-[2rem] p-3 shadow-soft group-hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col group cursor-pointer h-full">
+                        <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Kerala">
+                        </div>
+                        <div class="px-3 pb-2 flex flex-col flex-grow">
+                            <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 5N / 6D</span>
+                            </div>
+                            <h3 class="font-display font-semibold text-base text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                                Backwaters, Tea Gardens, and Spices in Kerala
+                            </h3>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                                <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                    <i class="fa-solid fa-location-dot text-brand-yellow"></i> Kochi
+                                </span>
+                                <div class="text-right">
+                                    <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">₹22,999</span>
+                                    <span class="text-brand-cyan font-bold text-base leading-none">₹19,999 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Explore CTA -->
+            <div class="mt-10 text-center relative z-20">
+                <a href="https://wanderon.in/india-trips" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-white border-2 border-brand-cyan text-brand-dark hover:bg-brand-cyan hover:text-white px-14 py-4 rounded-full font-display font-bold text-sm transition-all shadow-sm">Explore</a>
+            </div>
+
+        </div>
+
+        <!-- Inline Script for Tabs -->
+        <script>
+            function switchTab(tabId) {
+                // Hide all contents
+                document.getElementById('content-destinations').classList.add('hidden');
+                document.getElementById('content-packages').classList.add('hidden');
+                
+                // Show selected content
+                document.getElementById('content-' + tabId).classList.remove('hidden');
+                
+                // Reset all buttons
+                const btnClassesReset = "px-8 py-3 rounded-full text-gray-500 font-bold text-sm hover:text-brand-dark hover:bg-white/60 transition-all flex items-center gap-2";
+                document.getElementById('btn-destinations').className = btnClassesReset;
+                document.getElementById('btn-packages').className = btnClassesReset;
+                
+                // Activate selected button
+                const btnClassesActive = "px-8 py-3 rounded-full bg-brand-cyan text-white font-bold text-sm shadow-md transition-all flex items-center gap-2";
+                document.getElementById('btn-' + tabId).className = btnClassesActive;
+            }
+        </script>
+    </section>
+
+    
+
+
+
+    <!-- Trust Corner (Testimonials) Relocated Below Hub -->
+<!-- Trust Corner (Testimonials) -->
+    <section class="py-16 relative overflow-hidden bg-[#fcfbf8] border-y border-gray-100">
+        
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-yellow/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-12 -right-12 w-80 h-80 bg-brand-cyan/10 rounded-full blur-3xl"></div>
+            <!-- Decorative SVG Quote Mark -->
+            <svg class="absolute top-20 right-20 w-64 h-64 text-brand-yellow/5 transform rotate-12" fill="currentColor" viewBox="0 0 32 32">
+                <path d="M10 8c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8v-8h-8zm18 0c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8v-8h-8z"></path>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+            
+            <!-- Header with Brush Stroke Below (Left Aligned) -->
+            <div class="inline-flex flex-col items-start mb-6">
+                <span class="font-display font-bold uppercase text-[14px] tracking-widest text-gray-500">
+                    Stories from our Tribe
+                </span>
+                <!-- Light Blue Brush Stroke -->
+                <svg class="w-44 h-2.5 mt-1 text-sky-300" viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 7.5C35 4 110 3 195 5.5C198 5.6 198 7.5 194 7.8C145 11 65 10.5 5 9C2 8.9 1.5 7.7 3 7.5Z" fill="currentColor" fill-opacity="0.85"/>
+                    <path d="M15 4.5C65 2.5 140 2.8 185 5C188 5.2 185 6.5 180 6.6C130 7.8 55 7.2 12 5.8C9 5.7 10 4.7 15 4.5Z" fill="#38bdf8" fill-opacity="0.6"/>
+                    <path d="M30 8.5C70 7.2 130 7.5 170 8.8C173 8.9 170 9.8 165 9.9C125 10.5 70 10.2 28 9.4C25 9.3 27 8.6 30 8.5Z" fill="#00a3e0" fill-opacity="0.4"/>
+                </svg>
+            </div>
+
+            <!-- Video Testimonials Row (5 Videos, height reduced by 20% to 370px) -->
+            <div class="mb-11">
+                <div class="flex overflow-x-auto gap-4 pb-4 -mx-4 px-4 lg:-mx-0 lg:px-0 hide-scrollbar snap-x snap-mandatory">
+                    
+                    <!-- Video 1 -->
+                    <div class="flex-shrink-0 w-[220px] sm:w-[230px] h-[370px] snap-start relative rounded-2xl overflow-hidden shadow-soft hover:shadow-float transition-all duration-500 group cursor-pointer border border-gray-100 bg-black">
+                        <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" alt="Meghalaya Adventures Video">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/50 group-hover:scale-110 group-hover:bg-brand-cyan transition-all duration-300 shadow-glass">
+                                <i class="fa-solid fa-play text-sm ml-0.5"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full p-4">
+                            <h4 class="font-bold text-white text-sm leading-tight mb-0.5">Meghalaya Adventures</h4>
+                            <p class="text-white/80 text-[11px] font-medium">Rohan & Friends</p>
+                        </div>
+                    </div>
+
+                    <!-- Video 2 -->
+                    <div class="flex-shrink-0 w-[220px] sm:w-[230px] h-[370px] snap-start relative rounded-2xl overflow-hidden shadow-soft hover:shadow-float transition-all duration-500 group cursor-pointer border border-gray-100 bg-black">
+                        <img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" alt="Solo in Spiti Valley Video">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/50 group-hover:scale-110 group-hover:bg-brand-yellow transition-all duration-300 shadow-glass">
+                                <i class="fa-solid fa-play text-sm ml-0.5 text-brand-dark group-hover:text-white"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full p-4">
+                            <h4 class="font-bold text-white text-sm leading-tight mb-0.5">Solo in Spiti Valley</h4>
+                            <p class="text-white/80 text-[11px] font-medium">Priya Patel</p>
+                        </div>
+                    </div>
+
+                    <!-- Video 3 -->
+                    <div class="flex-shrink-0 w-[220px] sm:w-[230px] h-[370px] snap-start relative rounded-2xl overflow-hidden shadow-soft hover:shadow-float transition-all duration-500 group cursor-pointer border border-gray-100 bg-black">
+                        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" alt="Kerala Backwaters Video">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/50 group-hover:scale-110 group-hover:bg-green-500 transition-all duration-300 shadow-glass">
+                                <i class="fa-solid fa-play text-sm ml-0.5"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full p-4">
+                            <h4 class="font-bold text-white text-sm leading-tight mb-0.5">Kerala Backwaters</h4>
+                            <p class="text-white/80 text-[11px] font-medium">Neha Kapoor</p>
+                        </div>
+                    </div>
+
+                    <!-- Video 4 -->
+                    <div class="flex-shrink-0 w-[220px] sm:w-[230px] h-[370px] snap-start relative rounded-2xl overflow-hidden shadow-soft hover:shadow-float transition-all duration-500 group cursor-pointer border border-gray-100 bg-black">
+                        <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" alt="Scuba in Andamans Video">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/50 group-hover:scale-110 group-hover:bg-purple-500 transition-all duration-300 shadow-glass">
+                                <i class="fa-solid fa-play text-sm ml-0.5"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full p-4">
+                            <h4 class="font-bold text-white text-sm leading-tight mb-0.5">Scuba in Andamans</h4>
+                            <p class="text-white/80 text-[11px] font-medium">Arjun & Team</p>
+                        </div>
+                    </div>
+
+                    <!-- Video 5 -->
+                    <div class="flex-shrink-0 w-[220px] sm:w-[230px] h-[370px] snap-start relative rounded-2xl overflow-hidden shadow-soft hover:shadow-float transition-all duration-500 group cursor-pointer border border-gray-100 bg-black">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" alt="Bali Beach Clubs Video">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/50 group-hover:scale-110 group-hover:bg-pink-500 transition-all duration-300 shadow-glass">
+                                <i class="fa-solid fa-play text-sm ml-0.5"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full p-4">
+                            <h4 class="font-bold text-white text-sm leading-tight mb-0.5">Bali Beach Clubs</h4>
+                            <p class="text-white/80 text-[11px] font-medium">WanderOn Girls</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Text & Photo Cards (Reduced size by 10%, review text reduced by 10%, images horizontally scrollable) -->
+            <div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+                    
+                    <!-- Card 1 -->
+                    <div class="bg-white rounded-3xl p-5 shadow-soft hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col h-full">
+                        <div class="flex gap-1 text-brand-yellow text-xs mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <!-- Review Text (reduced by 10% to text-[14.5px]) -->
+                        <p class="text-gray-700 text-[14.5px] leading-relaxed mb-4 font-medium italic flex-grow">
+                            "I was so anxious about traveling solo for the first time, but WanderOn made it incredibly easy. The group instantly felt like family. The Spiti Valley trip was flawlessly executed!"
+                        </p>
+                        
+                        <!-- Horizontally Scrollable Trip Photos -->
+                        <div class="mb-4">
+                            <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1 snap-x -mx-1 px-1">
+                                <img src="https://images.unsplash.com/photo-1526761122248-c31c93f8b2b9?q=80&w=400&auto=format&fit=crop" class="flex-shrink-0 w-28 h-20 object-cover rounded-xl snap-start hover:opacity-90 transition-opacity border border-gray-100" alt="Spiti Landscape">
+                                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=400&auto=format&fit=crop" class="flex-shrink-0 w-28 h-20 object-cover rounded-xl snap-start hover:opacity-90 transition-opacity border border-gray-100" alt="Mountain View">
+                                <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=80&w=400&auto=format&fit=crop" class="flex-shrink-0 w-28 h-20 object-cover rounded-xl snap-start hover:opacity-90 transition-opacity border border-gray-100" alt="Trekker">
+                                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=400&auto=format&fit=crop" class="flex-shrink-0 w-28 h-20 object-cover rounded-xl snap-start hover:opacity-90 transition-opacity border border-gray-100" alt="Road Trip">
+                            </div>
+                        </div>
+
+                        <!-- Author -->
+                        <div class="flex items-center gap-3 mt-auto border-t border-gray-100 pt-4">
+                            <div class="w-9 h-9 rounded-full bg-gray-200 overflow-hidden flex-shrink-0 border border-brand-yellow/30">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop" class="w-full h-full object-cover" alt="Aanya Sharma">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-dark text-xs sm:text-sm">Aanya Sharma</h4>
+                                <p class="text-[11px] text-gray-400">Spiti Valley Circuit</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-brand-dark rounded-3xl p-5 shadow-soft hover:shadow-float transition-all duration-500 relative overflow-hidden flex flex-col h-full">
+                        <div class="absolute top-0 right-0 w-28 h-28 bg-brand-cyan/20 rounded-bl-full pointer-events-none"></div>
+                        <div class="flex gap-1 text-brand-yellow text-xs mb-3 relative z-10">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <!-- Review Text (reduced by 10% to text-[16px]) -->
+                        <p class="text-white text-[16px] leading-relaxed mb-4 font-display font-medium relative z-10 flex-grow">
+                            "Everything from the local stays to the hidden cafes was curated perfectly. Didn't have to plan a single thing. I literally just packed my bags and showed up!"
+                        </p>
+                        
+                        <!-- Horizontally Scrollable Trip Photos -->
+                        <div class="mb-4 relative z-10">
+                            <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1 snap-x -mx-1 px-1">
+                                <img src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?q=80&w=400&auto=format&fit=crop" class="flex-shrink-0 w-28 h-20 object-cover rounded-xl snap-start hover:opacity-90 transition-opacity border border-white/10" alt="Kasol Trek">
+                                <img src="https://images.unsplash.com/photo-1528543606781-2f6e6857f318?q=80&w=400&auto=format&fit=crop" class="flex-shrink-0 w-28 h-20 object-cover rounded-xl snap-start hover:opacity-90 transition-opacity border border-white/10" alt="Mountain Trail">
+                                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=400&auto=format&fit=crop" class="flex-shrink-0 w-28 h-20 object-cover rounded-xl snap-start hover:opacity-90 transition-opacity border border-white/10" alt="Camper Van">
+                            </div>
+                        </div>
+
+                        <!-- Author -->
+                        <div class="flex items-center gap-3 mt-auto border-t border-white/10 pt-4 relative z-10">
+                            <div class="w-9 h-9 rounded-full bg-gray-600 overflow-hidden flex-shrink-0 border border-brand-cyan/40">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" class="w-full h-full object-cover" alt="Vikram Singh">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-xs sm:text-sm">Vikram Singh</h4>
+                                <p class="text-[11px] text-brand-cyan">Kasol & Kheerganga</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-white rounded-3xl p-5 shadow-soft hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col h-full">
+                        <div class="flex gap-1 text-brand-yellow text-xs mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <!-- Review Text (reduced by 10% to text-[14.5px]) -->
+                        <p class="text-gray-700 text-[14.5px] leading-relaxed mb-4 font-medium italic flex-grow">
+                            "The captains were the heart of our trip! They kept the energy high, ensured everyone was comfortable, and took the best group pictures. Best Europe trip ever."
+                        </p>
+                        
+                        <!-- Horizontally Scrollable Trip Photos -->
+                        <div class="mb-4">
+                            <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1 snap-x -mx-1 px-1">
+                                <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?q=80&w=400&auto=format&fit=crop" class="flex-shrink-0 w-28 h-20 object-cover rounded-xl snap-start hover:opacity-90 transition-opacity border border-gray-100" alt="Paris Moment">
+                                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=400&auto=format&fit=crop" class="flex-shrink-0 w-28 h-20 object-cover rounded-xl snap-start hover:opacity-90 transition-opacity border border-gray-100" alt="Venice Canals">
+                                <img src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?q=80&w=400&auto=format&fit=crop" class="flex-shrink-0 w-28 h-20 object-cover rounded-xl snap-start hover:opacity-90 transition-opacity border border-gray-100" alt="Cappadocia Balloons">
+                                <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?q=80&w=400&auto=format&fit=crop" class="flex-shrink-0 w-28 h-20 object-cover rounded-xl snap-start hover:opacity-90 transition-opacity border border-gray-100" alt="Group of Friends">
+                            </div>
+                        </div>
+
+                        <!-- Author -->
+                        <div class="flex items-center gap-3 mt-auto border-t border-gray-100 pt-4">
+                            <div class="w-9 h-9 rounded-full bg-gray-200 overflow-hidden flex-shrink-0 border border-brand-cyan/30">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" class="w-full h-full object-cover" alt="Sneha Rao">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-dark text-xs sm:text-sm">Sneha Rao</h4>
+                                <p class="text-[11px] text-gray-400">Europe Backpacking</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+<!-- Explore The World (International Trips) -->
+    <section class="py-20 relative overflow-hidden bg-[#f6f9fc]">
+        <!-- 3D World Map Background -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden flex items-center justify-center">
+            <img src="world_map.jpg" class="w-full h-full object-cover opacity-80 transform scale-105 blur-[4px]" style="transform-origin: center;" alt="3D World Map">
+            <!-- Add a soft radial overlay to blend the map slightly -->
+            <div class="absolute inset-0 bg-gradient-to-b from-[#f6f9fc]/40 via-transparent to-[#f6f9fc]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-7">
+                <div class="inline-flex items-center gap-2 font-bold uppercase text-xs tracking-widest text-brand-cyan mb-3 bg-white/70 backdrop-blur-md px-4 py-2 rounded-full border border-white shadow-sm">
+                    #internationaltrips
+                </div>
+                <h2 class="font-display font-semibold text-[41px] md:text-[51px] text-brand-dark tracking-tight mb-2">
+                    Explore The World
+                </h2>
+            </div>
+
+            <!-- Interactive Filter Tabs -->
+            <div class="flex flex-wrap justify-center items-center gap-4 mb-6">
+                <div class="bg-white/80 backdrop-blur-md p-1.5 rounded-full shadow-soft border border-white flex items-center">
+                    <button id="btn-intl-destinations" onclick="switchTabIntl('destinations')" class="px-8 py-3 rounded-full bg-brand-cyan text-white font-bold text-sm shadow-md transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-earth-americas"></i> Destinations
+                    </button>
+                    <button id="btn-intl-packages" onclick="switchTabIntl('packages')" class="px-8 py-3 rounded-full text-gray-500 font-bold text-sm hover:text-brand-dark hover:bg-white/60 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-suitcase-rolling"></i> Packages
+                    </button>
+                </div>
+            </div>
+
+            <!-- 1. DESTINATIONS (Majestic Arches) -->
+            <div id="content-intl-destinations" class="mb-8 transition-opacity duration-300">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <!-- Europe -->
+                    <div class="group cursor-pointer relative h-[200px] md:h-[200px] md:h-[300px] rounded-[2.5rem] overflow-hidden shadow-glass hover:shadow-float transition-all duration-500 border border-white/60 bg-white/20 backdrop-blur-sm">
+                        <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Europe">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 w-full p-4 md:p-6 text-center translate-y-4 group-hover:translate-y-0 transition-transform duration-500 flex flex-col items-center">
+                            <h4 class="font-display font-bold text-3xl text-white mb-2">Europe</h4>
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-300 flex flex-col items-center gap-1">
+                                <p class="text-white/90 font-medium text-xs">18 Packages</p>
+                                <p class="text-brand-cyan font-bold text-sm">€900 Onwards <i class="fa-solid fa-arrow-right ml-1"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bali -->
+                    <div class="group cursor-pointer relative h-[200px] md:h-[200px] md:h-[300px] rounded-[2.5rem] overflow-hidden shadow-glass hover:shadow-float transition-all duration-500 border border-white/60 bg-white/20 backdrop-blur-sm">
+                        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Bali">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 w-full p-4 md:p-6 text-center translate-y-4 group-hover:translate-y-0 transition-transform duration-500 flex flex-col items-center">
+                            <h4 class="font-display font-bold text-3xl text-white mb-2">Bali</h4>
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-300 flex flex-col items-center gap-1">
+                                <p class="text-white/90 font-medium text-xs">14 Packages</p>
+                                <p class="text-brand-cyan font-bold text-sm">?32,999 Onwards <i class="fa-solid fa-arrow-right ml-1"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Thailand -->
+                    <div class="group cursor-pointer relative h-[200px] md:h-[200px] md:h-[300px] rounded-[2.5rem] overflow-hidden shadow-glass hover:shadow-float transition-all duration-500 border border-white/60 bg-white/20 backdrop-blur-sm">
+                        <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Thailand">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 w-full p-4 md:p-6 text-center translate-y-4 group-hover:translate-y-0 transition-transform duration-500 flex flex-col items-center">
+                            <h4 class="font-display font-bold text-3xl text-white mb-2">Thailand</h4>
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-300 flex flex-col items-center gap-1">
+                                <p class="text-white/90 font-medium text-xs">20 Packages</p>
+                                <p class="text-brand-cyan font-bold text-sm">฿11,500 Onwards <i class="fa-solid fa-arrow-right ml-1"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Japan -->
+                    <div class="group cursor-pointer relative h-[200px] md:h-[200px] md:h-[300px] rounded-[2.5rem] overflow-hidden shadow-glass hover:shadow-float transition-all duration-500 border border-white/60 bg-white/20 backdrop-blur-sm">
+                        <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Japan">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 w-full p-4 md:p-6 text-center translate-y-4 group-hover:translate-y-0 transition-transform duration-500 flex flex-col items-center">
+                            <h4 class="font-display font-bold text-3xl text-white mb-2">Japan</h4>
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-300 flex flex-col items-center gap-1">
+                                <p class="text-white/90 font-medium text-xs">8 Packages</p>
+                                <p class="text-brand-cyan font-bold text-sm">¥?95,000 Onwards <i class="fa-solid fa-arrow-right ml-1"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. FEATURED PACKAGES -->
+            <div id="content-intl-packages" class="mb-8 hidden transition-opacity duration-300">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Package 1 -->
+                    <div class="bg-white/60 backdrop-blur-md rounded-3xl p-4 shadow-glass hover:shadow-float transition-all duration-500 border border-white/50 flex flex-col group cursor-pointer h-full hover:bg-white/80">
+                        <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Thailand">
+                            <div class="absolute top-3 left-3 bg-red-500 text-white px-3 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider shadow-md animate-pulse">
+                                ?? Selling Fast
+                            </div>
+                        </div>
+                        <div class="px-3 pb-2 flex flex-col flex-grow">
+                            <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 6N / 7D</span>
+                            </div>
+                            <h3 class="font-display font-semibold text-base text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                                Neon Lights, Full Moons, and Island Hopping in Thailand
+                            </h3>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                                <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                    <i class="fa-solid fa-location-dot text-brand-cyan"></i> Phuket
+                                </span>
+                                <div class="text-right">
+                                    <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">฿18,500</span>
+                                    <span class="text-brand-cyan font-bold text-base leading-none">฿16,900 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Package 2 -->
+                    <div class="bg-white/60 backdrop-blur-md rounded-3xl p-4 shadow-glass hover:shadow-float transition-all duration-500 border border-white/50 flex flex-col group cursor-pointer h-full hover:bg-white/80">
+                        <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Japan">
+                        </div>
+                        <div class="px-3 pb-2 flex flex-col flex-grow">
+                            <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 7N / 8D</span>
+                            </div>
+                            <h3 class="font-display font-semibold text-base text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                                Cherry Blossoms, Bullet Trains, and Sushi in Japan
+                            </h3>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                                <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                    <i class="fa-solid fa-location-dot text-brand-cyan"></i> Tokyo
+                                </span>
+                                <div class="text-right">
+                                    <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">¥195,000</span>
+                                    <span class="text-brand-cyan font-bold text-base leading-none">¥175,000 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Package 3 -->
+                    <div class="bg-white/60 backdrop-blur-md rounded-3xl p-4 shadow-glass hover:shadow-float transition-all duration-500 border border-white/50 flex flex-col group cursor-pointer h-full hover:bg-white/80">
+                        <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Bali">
+                        </div>
+                        <div class="px-3 pb-2 flex flex-col flex-grow">
+                            <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                                <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> 5N / 6D</span>
+                            </div>
+                            <h3 class="font-display font-semibold text-base text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors">
+                                Volcanoes, Beach Clubs, and Temple Trails in Bali
+                            </h3>
+                            <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                                <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                    <i class="fa-solid fa-location-dot text-brand-cyan"></i> Ubud
+                                </span>
+                                <div class="text-right">
+                                    <span class="block text-[11px] text-gray-400 line-through leading-none mb-1">?38,999</span>
+                                    <span class="text-brand-cyan font-bold text-base leading-none">?33,999 <span class="text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5">Onwards</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Explore CTA -->
+            <div class="mt-10 text-center relative z-20">
+                <a href="https://wanderon.in/international-trips" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-white border-2 border-brand-cyan text-brand-dark hover:bg-brand-cyan hover:text-white px-14 py-4 rounded-full font-display font-bold text-sm transition-all shadow-sm">Explore</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- App Download Banner (Soft & Clean) -->
+    
+    
+    <!-- Dual Vibe Sections: Events & Romantic -->
+    <style>
+        @keyframes floatIcon {
+            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
+        }
+        .anim-float-1 { animation: floatIcon 6s infinite ease-in-out; }
+        .anim-float-2 { animation: floatIcon 8s infinite ease-in-out 2s; }
+        .anim-float-3 { animation: floatIcon 7s infinite ease-in-out 4s; }
+        .anim-float-4 { animation: floatIcon 9s infinite ease-in-out 1s; }
+    </style>
+    <section class="py-16 lg:py-24 relative overflow-hidden bg-white">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                
+                <!-- LEFT: Hyped Events & Festivals -->
+                <div class="bg-purple-50/50 border border-purple-100 rounded-[2.5rem] p-5 md:p-8 lg:p-12 relative overflow-hidden group/container shadow-soft">
+                    <!-- Soft purple/pink gradient -->
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-purple-200/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 group-hover/container:bg-pink-200/40 transition-colors duration-1000"></div>
+                    
+                    <!-- Floating Animations -->
+                    <div class="absolute top-0 left-0 w-full h-64 overflow-hidden pointer-events-none z-0">
+                        <div class="absolute left-[15%] top-[60%] text-3xl text-purple-400/40 anim-float-1">🎵</div>
+                        <div class="absolute left-[75%] top-[70%] text-4xl text-pink-400/30 anim-float-2">🎶</div>
+                        <div class="absolute left-[40%] top-[50%] text-2xl text-purple-300/50 anim-float-3">🙌</div>
+                        <div class="absolute left-[85%] top-[40%] text-3xl text-pink-300/40 anim-float-4">✨</div>
+                    </div>
+                    
+                    <div class="relative z-10 mb-10 flex justify-between items-end w-full">
+                        <div>
+                            <h2 class="text-[26px] md:text-[35px] lg:text-[48px] tracking-wide mb-2" style="font-family: 'Lilita One', sans-serif; color: black; line-height: 1.1;">
+                                Events &amp; Festivals
+                            </h2>
+                            <p class="text-gray-500 max-w-sm">From jungle techno to massive mainstages, experience the world's most electrifying parties.</p>
+                        </div>
+                        <a href="#" class="text-purple-600 hover:text-purple-500 font-bold text-sm whitespace-nowrap mb-1">View All &rarr;</a>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 relative z-10">
+                        
+                        <!-- Event 1: Tomorrowland -->
+                        <div class="group relative overflow-hidden rounded-3xl aspect-[4/5] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+                            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Tomorrowland">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent group-hover:from-purple-900/90 transition-colors duration-500"></div>
+                            <div class="absolute bottom-0 left-0 w-full p-5 text-white">
+                                <h4 class="font-bold text-2xl mb-1 drop-shadow-sm">Tomorrowland</h4>
+                                <p class="text-xs text-gray-200 flex items-center gap-1 mb-3">
+                                    <svg class="w-3 h-3 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                                    Boom, Belgium
+                                </p>
+                                <div class="flex items-center justify-between">
+                                    <div class="font-bold text-purple-300 text-lg drop-shadow-sm">₹1,45,000 <span class="text-[10px] text-gray-300 font-normal uppercase tracking-wide">onwards</span></div>
+                                    <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur flex items-center justify-center group-hover:bg-purple-500 transition-colors">
+                                        <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Event 2: Zamna -->
+                        <div class="group relative overflow-hidden rounded-3xl aspect-[4/5] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+                            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Zamna Fest">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent group-hover:from-pink-900/90 transition-colors duration-500"></div>
+                            <div class="absolute bottom-0 left-0 w-full p-5 text-white">
+                                <h4 class="font-bold text-2xl mb-1 drop-shadow-sm">Zamna Fest</h4>
+                                <p class="text-xs text-gray-200 flex items-center gap-1 mb-3">
+                                    <svg class="w-3 h-3 text-pink-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                                    Tulum, Mexico
+                                </p>
+                                <div class="flex items-center justify-between">
+                                    <div class="font-bold text-pink-300 text-lg drop-shadow-sm">₹1,85,000 <span class="text-[10px] text-gray-300 font-normal uppercase tracking-wide">onwards</span></div>
+                                    <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur flex items-center justify-center group-hover:bg-pink-500 transition-colors">
+                                        <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Event 3: Full Moon -->
+                        <div class="group relative overflow-hidden rounded-3xl aspect-[4/5] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+                            <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Full Moon Party">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent group-hover:from-blue-900/90 transition-colors duration-500"></div>
+                            <div class="absolute bottom-0 left-0 w-full p-5 text-white">
+                                <h4 class="font-bold text-2xl mb-1 drop-shadow-sm">Full Moon</h4>
+                                <p class="text-xs text-gray-200 flex items-center gap-1 mb-3">
+                                    <svg class="w-3 h-3 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                                    Koh Phangan
+                                </p>
+                                <div class="flex items-center justify-between">
+                                    <div class="font-bold text-blue-300 text-lg drop-shadow-sm">₹45,000 <span class="text-[10px] text-gray-300 font-normal uppercase tracking-wide">onwards</span></div>
+                                    <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur flex items-center justify-center group-hover:bg-blue-500 transition-colors">
+                                        <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Event 4: F1 -->
+                        <div class="group relative overflow-hidden rounded-3xl aspect-[4/5] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+                            <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="F1 Grand Prix">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent group-hover:from-red-900/90 transition-colors duration-500"></div>
+                            <div class="absolute bottom-0 left-0 w-full p-5 text-white">
+                                <h4 class="font-bold text-2xl mb-1 drop-shadow-sm">F1 Grand Prix</h4>
+                                <p class="text-xs text-gray-200 flex items-center gap-1 mb-3">
+                                    <svg class="w-3 h-3 text-red-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                                    Singapore
+                                </p>
+                                <div class="flex items-center justify-between">
+                                    <div class="font-bold text-red-300 text-lg drop-shadow-sm">₹1,10,000 <span class="text-[10px] text-gray-300 font-normal uppercase tracking-wide">onwards</span></div>
+                                    <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur flex items-center justify-center group-hover:bg-red-500 transition-colors">
+                                        <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- RIGHT: Romantic Getaways -->
+                <div class="bg-rose-50/50 border border-rose-100 rounded-[2.5rem] p-5 md:p-8 lg:p-12 relative overflow-hidden group/container shadow-soft">
+                    <!-- Soft warm gradient -->
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-rose-200/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 group-hover/container:bg-orange-200/40 transition-colors duration-1000"></div>
+                    
+                    <!-- Floating Animations -->
+                    <div class="absolute top-0 left-0 w-full h-64 overflow-hidden pointer-events-none z-0">
+                        <div class="absolute left-[15%] top-[60%] text-2xl text-rose-400/40 anim-float-1">🤍</div>
+                        <div class="absolute left-[75%] top-[70%] text-4xl text-red-400/20 anim-float-2">👩‍❤️‍👨</div>
+                        <div class="absolute left-[40%] top-[50%] text-2xl text-rose-300/50 anim-float-3">✨</div>
+                        <div class="absolute left-[85%] top-[40%] text-3xl text-pink-400/30 anim-float-4">💕</div>
+                    </div>
+                    
+                    <div class="relative z-10 mb-10 flex justify-between items-end w-full">
+                        <div>
+                            <h2 class="text-[26px] md:text-[35px] lg:text-[46px] tracking-tight mb-2" style="font-family: 'Playfair Display', serif; font-style: italic; font-weight: 700; color: black; line-height: 1.1;">
+                                Romantic Escapes
+                            </h2>
+                            <p class="text-gray-500 max-w-sm">Beautiful, serene destinations designed for couples to relax, connect, and create memories.</p>
+                        </div>
+                        <a href="#" class="text-rose-500 hover:text-rose-400 font-bold text-sm whitespace-nowrap mb-1">View All &rarr;</a>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 relative z-10">
+                        
+                        <!-- Getaway 1: Santorini -->
+                        <div class="group relative overflow-hidden rounded-3xl aspect-[4/5] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+                            <img src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Santorini">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:opacity-90 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-0 left-0 w-full p-5 text-white">
+                                <h4 class="font-bold text-2xl mb-1 drop-shadow-sm">Santorini</h4>
+                                <p class="text-xs text-gray-200 flex items-center gap-1 mb-3">
+                                    <svg class="w-3 h-3 text-rose-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                                    Greece
+                                </p>
+                                <div class="flex items-center justify-between">
+                                    <div class="font-bold text-rose-300 text-lg drop-shadow-sm">₹1,20,000 <span class="text-[10px] text-gray-300 font-normal uppercase tracking-wide">onwards</span></div>
+                                    <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur flex items-center justify-center group-hover:bg-rose-500 transition-colors">
+                                        <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Getaway 2: Maldives -->
+                        <div class="group relative overflow-hidden rounded-3xl aspect-[4/5] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+                            <img src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Maldives">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:opacity-90 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-0 left-0 w-full p-5 text-white">
+                                <h4 class="font-bold text-2xl mb-1 drop-shadow-sm">Maldives</h4>
+                                <p class="text-xs text-gray-200 flex items-center gap-1 mb-3">
+                                    <svg class="w-3 h-3 text-rose-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                                    Indian Ocean
+                                </p>
+                                <div class="flex items-center justify-between">
+                                    <div class="font-bold text-rose-300 text-lg drop-shadow-sm">₹85,000 <span class="text-[10px] text-gray-300 font-normal uppercase tracking-wide">onwards</span></div>
+                                    <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur flex items-center justify-center group-hover:bg-rose-500 transition-colors">
+                                        <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Getaway 3: Amalfi -->
+                        <div class="group relative overflow-hidden rounded-3xl aspect-[4/5] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+                            <img src="https://images.unsplash.com/photo-1499678329028-101435549a4e?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Amalfi Coast">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:opacity-90 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-0 left-0 w-full p-5 text-white">
+                                <h4 class="font-bold text-2xl mb-1 drop-shadow-sm">Amalfi Coast</h4>
+                                <p class="text-xs text-gray-200 flex items-center gap-1 mb-3">
+                                    <svg class="w-3 h-3 text-rose-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                                    Italy
+                                </p>
+                                <div class="flex items-center justify-between">
+                                    <div class="font-bold text-rose-300 text-lg drop-shadow-sm">₹1,40,000 <span class="text-[10px] text-gray-300 font-normal uppercase tracking-wide">onwards</span></div>
+                                    <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur flex items-center justify-center group-hover:bg-rose-500 transition-colors">
+                                        <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Getaway 4: Bali -->
+                        <div class="group relative overflow-hidden rounded-3xl aspect-[4/5] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+                            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Bali">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:opacity-90 transition-opacity duration-500"></div>
+                            <div class="absolute bottom-0 left-0 w-full p-5 text-white">
+                                <h4 class="font-bold text-2xl mb-1 drop-shadow-sm">Bali</h4>
+                                <p class="text-xs text-gray-200 flex items-center gap-1 mb-3">
+                                    <svg class="w-3 h-3 text-rose-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                                    Indonesia
+                                </p>
+                                <div class="flex items-center justify-between">
+                                    <div class="font-bold text-rose-300 text-lg drop-shadow-sm">₹55,000 <span class="text-[10px] text-gray-300 font-normal uppercase tracking-wide">onwards</span></div>
+                                    <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur flex items-center justify-center group-hover:bg-rose-500 transition-colors">
+                                        <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    
+    <!-- In the News Section -->
+    <section class="py-16 md:py-24 bg-gray-50/50 relative z-10 -mt-8 md:-mt-10">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="font-display font-bold text-3xl md:text-4xl text-brand-dark">Latest news on us</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+                <!-- Article 1 -->
+                <a href="https://www.republicworld.com/initiatives/why-wanderon-is-becoming-a-leading-group-tour-company-for-young-indian-travellers-2026-06-19-129097" target="_blank" class="bg-white rounded-[2rem] p-8 md:p-10 border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-cyan/20 hover:-translate-y-1 transition-all duration-300 group flex flex-col">
+                    <div class="mb-6 flex items-center justify-between">
+                        <div class="font-display font-black text-xl tracking-tight text-red-600 flex items-center gap-2">
+                            <i class="fa-regular fa-newspaper"></i> <span class="text-black font-bold text-lg">REPUBLIC</span>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-brand-cyan group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl md:text-2xl text-gray-800 leading-snug mb-8 group-hover:text-brand-cyan transition-colors">Why WanderOn is becoming a leading group tour company for young Indian travellers</h3>
+                    <div class="mt-auto inline-flex items-center gap-2 text-sm font-bold text-brand-cyan uppercase tracking-wide">Read Article <i class="fa-solid fa-arrow-right text-[10px] transition-transform group-hover:translate-x-1"></i></div>
+                </a>
+
+                <!-- Article 2 -->
+                <a href="https://www.moneycontrol.com/news/business/startup/wanderon-raises-rs-54-crore-in-series-a-fund-raise-led-by-dsg-consumer-partners-caaf-13782121.html" target="_blank" class="bg-white rounded-[2rem] p-8 md:p-10 border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-cyan/20 hover:-translate-y-1 transition-all duration-300 group flex flex-col">
+                    <div class="mb-6 flex items-center justify-between">
+                        <div class="font-display font-black text-xl tracking-tighter text-[#00a651] flex items-center gap-1.5">
+                            <i class="fa-solid fa-chart-line"></i> moneycontrol
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-brand-cyan group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-display font-bold text-xl md:text-2xl text-gray-800 leading-snug mb-8 group-hover:text-brand-cyan transition-colors">WanderOn raises Rs 54 crore in Series A fund raise led by DSG Consumer Partners, CAAF</h3>
+                    <div class="mt-auto inline-flex items-center gap-2 text-sm font-bold text-brand-cyan uppercase tracking-wide">Read Article <i class="fa-solid fa-arrow-right text-[10px] transition-transform group-hover:translate-x-1"></i></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    
+    <!-- Creative FAQ Explorer Section -->
+    <section class="py-20 md:py-32 bg-white relative overflow-hidden" x-data="{ faqCategory: 'getting_started' }">
+        <!-- Ambient Backgrounds -->
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-cyan/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-yellow-100/30 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+                
+                <!-- Left Column: Header, Tabs & CTA -->
+                <div class="w-full lg:w-1/3 lg:sticky lg:top-32">
+                    <h2 class="font-display font-bold text-4xl md:text-5xl text-brand-dark mb-10 leading-tight">Frequently Asked Questions</h2>
+                    
+                    <!-- Tabs -->
+                    <div class="flex flex-col gap-3 mb-10">
+                        <button @click="faqCategory = 'getting_started'" 
+                                :class="faqCategory === 'getting_started' ? 'bg-brand-dark text-white shadow-lg shadow-brand-dark/20' : 'bg-gray-50 text-gray-600 hover:bg-gray-100'" 
+                                class="w-full px-6 py-4 rounded-2xl font-bold text-left transition-all duration-300 flex items-center gap-4">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors" :class="faqCategory === 'getting_started' ? 'bg-white/20 text-brand-cyan' : 'bg-gray-200 text-gray-400'"><i class="fa-solid fa-rocket text-sm"></i></div>
+                            Getting Started
+                        </button>
+
+                        <button @click="faqCategory = 'trips'" 
+                                :class="faqCategory === 'trips' ? 'bg-brand-dark text-white shadow-lg shadow-brand-dark/20' : 'bg-gray-50 text-gray-600 hover:bg-gray-100'" 
+                                class="w-full px-6 py-4 rounded-2xl font-bold text-left transition-all duration-300 flex items-center gap-4">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors" :class="faqCategory === 'trips' ? 'bg-white/20 text-yellow-400' : 'bg-gray-200 text-gray-400'"><i class="fa-solid fa-map-location-dot text-sm"></i></div>
+                            Trips & Itineraries
+                        </button>
+
+                        <button @click="faqCategory = 'payments'" 
+                                :class="faqCategory === 'payments' ? 'bg-brand-dark text-white shadow-lg shadow-brand-dark/20' : 'bg-gray-50 text-gray-600 hover:bg-gray-100'" 
+                                class="w-full px-6 py-4 rounded-2xl font-bold text-left transition-all duration-300 flex items-center gap-4">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors" :class="faqCategory === 'payments' ? 'bg-white/20 text-green-400' : 'bg-gray-200 text-gray-400'"><i class="fa-solid fa-credit-card text-sm"></i></div>
+                            Payments & Policies
+                        </button>
+                    </div>
+
+                    <a href="#" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white border-2 border-brand-cyan text-brand-cyan rounded-full font-bold hover:bg-brand-cyan hover:text-white transition-all shadow-sm group w-full lg:w-auto">
+                        View all FAQs <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Right Column: Q&A Grid -->
+                <div class="w-full lg:w-2/3">
+                    
+                    <!-- Getting Started Content -->
+                    <div x-show="faqCategory === 'getting_started'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-8 md:pb-0">
+                        <div class="bg-white border border-gray-100 p-8 rounded-[2rem] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                            <div class="w-10 h-10 bg-brand-cyan/10 rounded-full flex items-center justify-center text-brand-cyan text-lg mb-5"><i class="fa-solid fa-user-group"></i></div>
+                            <h4 class="font-display font-bold text-lg text-brand-dark mb-3">Do I need to come with a group?</h4>
+                            <p class="text-gray-600 leading-relaxed text-sm font-medium">Not at all! Over 60% of our community joins solo and leaves with a squad of lifelong friends.</p>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-100 p-8 rounded-[2rem] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm md:translate-y-12">
+                            <div class="w-10 h-10 bg-brand-cyan/10 rounded-full flex items-center justify-center text-brand-cyan text-lg mb-5"><i class="fa-regular fa-face-smile-wink"></i></div>
+                            <h4 class="font-display font-bold text-lg text-brand-dark mb-3">Who usually travels with WanderOn?</h4>
+                            <p class="text-gray-600 leading-relaxed text-sm font-medium">Our trips are curated for young travelers aged 18-35. Expect a high-energy, like-minded community!</p>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-100 p-8 rounded-[2rem] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                            <div class="w-10 h-10 bg-brand-cyan/10 rounded-full flex items-center justify-center text-brand-cyan text-lg mb-5"><i class="fa-solid fa-users-viewfinder"></i></div>
+                            <h4 class="font-display font-bold text-lg text-brand-dark mb-3">What's the average group size?</h4>
+                            <p class="text-gray-600 leading-relaxed text-sm font-medium">We keep it intimate and fun—usually between 12 to 20 travelers plus our seasoned trip captains.</p>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-100 p-8 rounded-[2rem] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm md:translate-y-12">
+                            <div class="w-10 h-10 bg-brand-cyan/10 rounded-full flex items-center justify-center text-brand-cyan text-lg mb-5"><i class="fa-regular fa-circle-question"></i></div>
+                            <h4 class="font-display font-bold text-lg text-brand-dark mb-3">New to group travel?</h4>
+                            <p class="text-gray-600 leading-relaxed text-sm font-medium">Don't worry! Read our beginner's guide on what to expect, how to pack, and getting ready for the adventure.</p>
+                        </div>
+                    </div>
+
+                    <!-- Trips & Itineraries Content -->
+                    <div x-show="faqCategory === 'trips'" style="display: none;" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-8 md:pb-0">
+                        <div class="bg-white border border-gray-100 p-8 rounded-[2rem] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                            <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-500 text-lg mb-5"><i class="fa-solid fa-route"></i></div>
+                            <h4 class="font-display font-bold text-lg text-brand-dark mb-3">Are the itineraries flexible?</h4>
+                            <p class="text-gray-600 leading-relaxed text-sm font-medium">While we stick to a well-planned schedule to ensure you don't miss out, you always have free time to explore at your own pace.</p>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-100 p-8 rounded-[2rem] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm md:translate-y-12">
+                            <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-500 text-lg mb-5"><i class="fa-solid fa-mountain"></i></div>
+                            <h4 class="font-display font-bold text-lg text-brand-dark mb-3">How difficult are the treks?</h4>
+                            <p class="text-gray-600 leading-relaxed text-sm font-medium">We have trips for all levels! Each itinerary clearly labels the physical requirement, from chill getaways to extreme adventures.</p>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-100 p-8 rounded-[2rem] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                            <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-500 text-lg mb-5"><i class="fa-solid fa-pen-to-square"></i></div>
+                            <h4 class="font-display font-bold text-lg text-brand-dark mb-3">Can I customize a trip?</h4>
+                            <p class="text-gray-600 leading-relaxed text-sm font-medium">Absolutely! For private groups of 6 or more, we offer fully customized itineraries. Just hit us up!</p>
+                        </div>
+
+                        <div class="bg-white border border-gray-100 p-8 rounded-[2rem] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm md:translate-y-12">
+                            <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-500 text-lg mb-5"><i class="fa-solid fa-bed"></i></div>
+                            <h4 class="font-display font-bold text-lg text-brand-dark mb-3">What about stays & food?</h4>
+                            <p class="text-gray-600 leading-relaxed text-sm font-medium">We partner with top-rated hotels, boutique stays, and camps. Daily breakfast and dinner are always on us.</p>
+                        </div>
+                    </div>
+
+                    <!-- Payments Content -->
+                    <div x-show="faqCategory === 'payments'" style="display: none;" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-8 md:pb-0">
+                        <div class="bg-white border border-gray-100 p-8 rounded-[2rem] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-500 text-lg mb-5"><i class="fa-solid fa-wallet"></i></div>
+                            <h4 class="font-display font-bold text-lg text-brand-dark mb-3">Can I pay in EMIs?</h4>
+                            <p class="text-gray-600 leading-relaxed text-sm font-medium">Yes! You can secure your slot by paying just 25% upfront and the rest in convenient installments closer to the trip date.</p>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-100 p-8 rounded-[2rem] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm md:translate-y-12">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-500 text-lg mb-5"><i class="fa-solid fa-rotate-left"></i></div>
+                            <h4 class="font-display font-bold text-lg text-brand-dark mb-3">What is the cancellation policy?</h4>
+                            <p class="text-gray-600 leading-relaxed text-sm font-medium">We offer flexible cancellations. Cancel up to 15 days before departure for a hassle-free refund or free date change.</p>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-100 p-8 rounded-[2rem] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-500 text-lg mb-5"><i class="fa-solid fa-magnifying-glass-dollar"></i></div>
+                            <h4 class="font-display font-bold text-lg text-brand-dark mb-3">Are there any hidden charges?</h4>
+                            <p class="text-gray-600 leading-relaxed text-sm font-medium">None. Our pricing is 100% transparent. Inclusions and exclusions are strictly detailed for every single itinerary.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Playful Footer (Clean & Modern) -->
+    <footer class="bg-white text-brand-dark py-12 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8">
+                <div class="md:col-span-5">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-8 h-8 bg-brand-cyan rounded-full flex items-center justify-center text-white font-display font-bold text-lg shadow-sm">W</div>
+                        <span class="font-display font-bold text-xl tracking-tight">WanderOn</span>
+                    </div>
+                    <p class="text-gray-500 mb-8 max-w-sm leading-relaxed">Thoughtfully curated group travel for 18-35s. Stop waiting for your friends, start exploring.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-50 text-gray-600 flex items-center justify-center hover:bg-brand-cyan hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-50 text-gray-600 flex items-center justify-center hover:bg-brand-cyan hover:text-white transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-50 text-gray-600 flex items-center justify-center hover:bg-brand-cyan hover:text-white transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-2">
+                    <h4 class="font-bold text-sm mb-6 text-gray-900">Trips</h4>
+                    <ul class="space-y-4 text-gray-500 text-sm">
+                        <li><a href="#" class="hover:text-brand-cyan transition">Backpacking</a></li>
+                        <li><a href="#" class="hover:text-brand-cyan transition">Weekend</a></li>
+                        <li><a href="#" class="hover:text-brand-cyan transition">Global</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:col-span-5">
+                    <h4 class="font-bold text-sm mb-4 text-gray-900">The Group Chat</h4>
+                    <p class="text-gray-500 text-sm mb-6">Join 50,000+ travelers getting first dibs on flash sales and new drops.</p>
+                    <div class="flex border border-gray-200 rounded-full overflow-hidden focus-within:border-brand-cyan focus-within:shadow-soft transition-all">
+                        <input type="email" placeholder="Email address" class="bg-transparent px-6 py-3 w-full focus:outline-none text-sm placeholder-gray-400">
+                        <button class="bg-gray-50 text-brand-dark px-6 text-sm font-bold hover:bg-gray-100 transition-colors border-l border-gray-200">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-100 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                <p>&copy; 2026 WanderOn. All vibes reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-brand-dark transition">Privacy</a>
+                    <a href="#" class="hover:text-brand-dark transition">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Soft navbar blur effect on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-soft');
+                nav.classList.replace('bg-brand-cream/90', 'bg-white/95');
+            } else {
+                nav.classList.remove('shadow-soft');
+                nav.classList.replace('bg-white/95', 'bg-brand-cream/90');
+            }
+        });
+    
+        // Switch Tabs for International Trips
+        function switchTabIntl(tabName) {
+            const tabs = ['destinations', 'packages'];
+            
+            tabs.forEach(tab => {
+                const content = document.getElementById('content-intl-' + tab);
+                const btn = document.getElementById('btn-intl-' + tab);
+                
+                if (tab === tabName) {
+                    content.classList.remove('hidden');
+                    
+                    // Remove all inactive styles, add active styles
+                    btn.className = "px-8 py-3 rounded-full bg-brand-cyan text-white font-bold text-sm shadow-md transition-all flex items-center gap-2";
+                } else {
+                    content.classList.add('hidden');
+                    
+                    // Add inactive styles
+                    btn.className = "px-8 py-3 rounded-full text-gray-500 font-bold text-sm hover:text-brand-dark hover:bg-white/60 transition-all flex items-center gap-2";
+                }
+            });
+        }
+
+    </script>
+
+    <!-- Enquiry Modal -->
+    <div id="enquiry-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-brand-dark/60 backdrop-blur-sm transition-opacity" onclick="document.getElementById('enquiry-modal').classList.add('hidden')"></div>
+        
+        <!-- Modal Content -->
+        <div class="bg-white rounded-[2rem] w-full max-w-md relative z-10 shadow-2xl overflow-hidden transform transition-all scale-100">
+            <!-- Close Button -->
+            <button onclick="document.getElementById('enquiry-modal').classList.add('hidden')" class="absolute top-4 right-4 w-10 h-10 bg-gray-50 hover:bg-gray-100 text-gray-500 rounded-full flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="p-8">
+                <div class="mb-6">
+                    <div class="w-12 h-12 bg-brand-cyan/10 text-brand-cyan rounded-2xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl text-brand-dark mb-1">Let's Plan Your Trip</h3>
+                    <p class="text-gray-500 text-sm">Drop your details and our travel experts will reach out!</p>
+                </div>
+
+                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Enquiry submitted! We will contact you soon.'); document.getElementById('enquiry-modal').classList.add('hidden');">
+                    <!-- Name & Phone -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 ml-1">Full Name</label>
+                            <input type="text" required placeholder="John Doe" class="w-full bg-gray-50 border border-gray-200 text-brand-dark text-sm rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 ml-1">Phone Number</label>
+                            <input type="tel" required placeholder="+91 98765 43210" class="w-full bg-gray-50 border border-gray-200 text-brand-dark text-sm rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Destination -->
+                    <div>
+                        <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 ml-1">Destination</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                            <input list="destinations" required placeholder="Search or type..." class="w-full bg-gray-50 border border-gray-200 text-brand-dark text-sm rounded-xl pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-all">
+                            <datalist id="destinations">
+                                <option value="Spiti Valley"></option>
+                                <option value="Ladakh"></option>
+                                <option value="Kerala"></option>
+                                <option value="Kashmir"></option>
+                                <option value="Meghalaya"></option>
+                                <option value="Bali"></option>
+                                <option value="Vietnam"></option>
+                                <option value="Dubai"></option>
+                                <option value="Thailand"></option>
+                                <option value="Europe"></option>
+                            </datalist>
+                        </div>
+                    </div>
+
+                    <!-- Travelers & Month -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="relative">
+                            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 ml-1">Travelers</label>
+                            <select required class="w-full bg-gray-50 border border-gray-200 text-brand-dark text-sm rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-all appearance-none cursor-pointer">
+                                <option value="" disabled selected>Select</option>
+                                <option value="1">1 (Solo)</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5+">5+</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-4 top-9 text-gray-400 text-xs pointer-events-none"></i>
+                        </div>
+                        <div class="relative">
+                            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 ml-1">Travel Month</label>
+                            <select required class="w-full bg-gray-50 border border-gray-200 text-brand-dark text-sm rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-all appearance-none cursor-pointer">
+                                <option value="" disabled selected>Select</option>
+                                <option value="Jan">January</option>
+                                <option value="Feb">February</option>
+                                <option value="Mar">March</option>
+                                <option value="Apr">April</option>
+                                <option value="May">May</option>
+                                <option value="Jun">June</option>
+                                <option value="Jul">July</option>
+                                <option value="Aug">August</option>
+                                <option value="Sep">September</option>
+                                <option value="Oct">October</option>
+                                <option value="Nov">November</option>
+                                <option value="Dec">December</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-4 top-9 text-gray-400 text-xs pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="pt-2">
+                        <button type="submit" class="w-full bg-brand-dark text-white hover:bg-brand-cyan rounded-xl py-3.5 font-display font-bold text-sm tracking-wide shadow-md hover:shadow-xl hover:shadow-cyan-500/25 transition-all flex items-center justify-center gap-2 group">
+                            Get a call back
+                            <i class="fa-solid fa-arrow-right-long transition-transform group-hover:translate-x-1"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Group Discount Modal -->
+    <div id="discount-modal" class="hidden fixed inset-0 z-[110] flex items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-brand-dark/70 backdrop-blur-sm transition-opacity" onclick="document.getElementById('discount-modal').classList.add('hidden')"></div>
+        
+        <!-- Modal Content -->
+        <div class="bg-white rounded-[2rem] w-full max-w-sm relative z-10 shadow-2xl overflow-hidden transform transition-all scale-100">
+            <!-- Close Button -->
+            <button onclick="document.getElementById('discount-modal').classList.add('hidden')" class="absolute top-4 right-4 w-10 h-10 bg-gray-50 hover:bg-gray-100 text-gray-500 rounded-full flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="p-8">
+                <div class="mb-6">
+                    <div class="w-12 h-12 bg-brand-cyan/10 text-brand-cyan rounded-2xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-tags"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl text-brand-dark mb-1">Group Discounts</h3>
+                    <p class="text-gray-500 text-sm">More people, more fun, bigger savings for everyone!</p>
+                </div>
+                
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-4 rounded-xl bg-gray-50 border border-gray-100 hover:border-brand-cyan/30 transition-colors">
+                        <span class="font-bold text-sm text-gray-700 flex items-center gap-2"><i class="fa-solid fa-user-group text-brand-cyan/60"></i>Upto 4 members</span>
+                        <span class="font-bold text-brand-cyan bg-brand-cyan/10 px-3 py-1 rounded-full text-xs">2% OFF each</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 rounded-xl bg-gray-50 border border-gray-100 hover:border-brand-cyan/30 transition-colors">
+                        <span class="font-bold text-sm text-gray-700 flex items-center gap-2"><i class="fa-solid fa-users text-brand-cyan/70"></i>Upto 6 members</span>
+                        <span class="font-bold text-brand-cyan bg-brand-cyan/10 px-3 py-1 rounded-full text-xs">5% OFF each</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 rounded-xl bg-gray-50 border border-gray-100 hover:border-brand-cyan/30 transition-colors">
+                        <span class="font-bold text-sm text-gray-700 flex items-center gap-2"><i class="fa-solid fa-users-viewfinder text-brand-cyan/80"></i>Upto 10 members</span>
+                        <span class="font-bold text-brand-cyan bg-brand-cyan/10 px-3 py-1 rounded-full text-xs">8% OFF each</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 rounded-xl bg-brand-cyan/5 border border-brand-cyan/20 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-brand-cyan/5 to-transparent pointer-events-none"></div>
+                        <span class="font-bold text-sm text-brand-dark relative z-10 flex items-center gap-2"><i class="fa-solid fa-users-rectangle text-brand-cyan"></i>> 10 members</span>
+                        <span class="font-bold text-white bg-brand-cyan px-3 py-1 rounded-full text-xs shadow-sm shadow-cyan-500/30 relative z-10">10% OFF each</span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Custom Panel Toggle Logic -->
+    <script>
+    function expandPanel(panelId) {
+        const pDom = document.getElementById('panel-domestic');
+        const pIntl = document.getElementById('panel-intl');
+        
+        const domExp = document.getElementById('dom-exp');
+        const domCol = document.getElementById('dom-col');
+        const intlExp = document.getElementById('intl-exp');
+        const intlCol = document.getElementById('intl-col');
+        
+        if (panelId === 'domestic') {
+            pDom.classList.replace('flex-[1]', 'flex-[9]') || pDom.classList.add('flex-[9]');
+            pDom.classList.remove('flex-[1]');
+            pIntl.classList.replace('flex-[9]', 'flex-[1]') || pIntl.classList.add('flex-[1]');
+            pIntl.classList.remove('flex-[9]');
+            
+            domExp.classList.replace('opacity-0', 'opacity-100');
+            domExp.classList.replace('pointer-events-none', 'pointer-events-auto');
+            domCol.classList.replace('opacity-100', 'opacity-0');
+            domCol.classList.replace('pointer-events-auto', 'pointer-events-none');
+            
+            intlExp.classList.replace('opacity-100', 'opacity-0');
+            intlExp.classList.replace('pointer-events-auto', 'pointer-events-none');
+            intlCol.classList.replace('opacity-0', 'opacity-100');
+            intlCol.classList.replace('pointer-events-none', 'pointer-events-auto');
+            
+        } else {
+            pDom.classList.replace('flex-[9]', 'flex-[1]') || pDom.classList.add('flex-[1]');
+            pDom.classList.remove('flex-[9]');
+            pIntl.classList.replace('flex-[1]', 'flex-[9]') || pIntl.classList.add('flex-[9]');
+            pIntl.classList.remove('flex-[1]');
+            
+            domExp.classList.replace('opacity-100', 'opacity-0');
+            domExp.classList.replace('pointer-events-auto', 'pointer-events-none');
+            domCol.classList.replace('opacity-0', 'opacity-100');
+            domCol.classList.replace('pointer-events-none', 'pointer-events-auto');
+            
+            intlExp.classList.replace('opacity-0', 'opacity-100');
+            intlExp.classList.replace('pointer-events-none', 'pointer-events-auto');
+            intlCol.classList.replace('opacity-100', 'opacity-0');
+            intlCol.classList.replace('pointer-events-auto', 'pointer-events-none');
+        }
+    }
+    </script>
+
+
+<script>
+    function openHeroModal(id) {
+        const modal = document.getElementById(id);
+        const content = modal.querySelector('.modal-content');
+        
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        // Force reflow
+        void modal.offsetWidth;
+        
+        modal.classList.remove('opacity-0');
+        content.classList.remove('scale-95');
+        content.classList.add('scale-100');
+    }
+
+    function closeHeroModals() {
+        const modals = ['whereModal', 'whenModal'];
+        modals.forEach(id => {
+            const modal = document.getElementById(id);
+            if (modal && !modal.classList.contains('hidden')) {
+                const content = modal.querySelector('.modal-content');
+                modal.classList.add('opacity-0');
+                content.classList.remove('scale-100');
+                content.classList.add('scale-95');
+                
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 300); // Matches duration-300
+            }
+        });
+    }
+
+    function selectWhere(place) {
+        document.getElementById('where-value').innerText = place;
+        closeHeroModals();
+    }
+    
+    function selectWhen(dateText) {
+        document.getElementById('when-value').innerText = dateText;
+        closeHeroModals();
+    }
+
+
+        function performSearch() {
+            const where = document.getElementById('where-value').innerText.trim();
+            const when = document.getElementById('when-value').innerText.trim();
+            const params = new URLSearchParams();
+            if (where && where !== 'Anywhere') params.set('where', where);
+            if (when && when !== 'Any date') params.set('when', when);
+            window.location.href = 'search.html' + (params.toString() ? '?' + params.toString() : '');
+        }
+    </script>
+</body>
+</html>

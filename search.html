@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Ladakh Trips | WanderOn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cyan: '#00a3e0',
+                            darkcyan: '#007eb0',
+                            yellow: '#ffc107',
+                            slate: '#1e293b',
+                            dark: '#0f172a',
+                            cream: '#fcfbf8',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(0,0,0,0.05)',
+                        'float': '0 30px 60px -20px rgba(0, 163, 224, 0.15)',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body { overflow-x: hidden; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .animate-ticker { animation: ticker 40s linear infinite; }
+        .animate-ticker:hover { animation-play-state: paused; }
+    </style>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-[#fafafa] text-gray-800 font-sans antialiased" x-data="searchPage()">
+
+    <!-- Navbar (Exact same padding & layout as homepage) -->
+    <nav class="sticky top-0 w-full z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm" x-data="{ mobileMenu: false }">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="flex-shrink-0 flex items-center group">
+                    <img src="logo.png" alt="WanderOn" class="h-14 md:h-16 w-auto object-contain group-hover:scale-105 transition-transform">
+                </a>
+                <div class="hidden lg:flex space-x-8 items-center font-display font-medium text-sm text-gray-600">
+                    <a href="#" class="hover:text-brand-cyan transition-colors">Trips</a>
+                    <a href="#" class="hover:text-brand-cyan transition-colors">Corporate</a>
+                    <a href="#" class="hover:text-brand-cyan transition-colors">Blogs</a>
+                    <a href="#" class="hover:text-brand-cyan transition-colors">About</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-6 font-display font-semibold text-sm">
+                    <a href="#" class="text-gray-600 hover:text-brand-cyan transition-colors">Log In</a>
+                    <a href="#" class="bg-brand-dark text-white px-6 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:bg-brand-cyan hover:-translate-y-0.5 transition-all">Submit Enquiry</a>
+                </div>
+                <button @click="mobileMenu = !mobileMenu" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100">
+                    <i class="fa-solid fa-bars text-lg text-gray-700"></i>
+                </button>
+            </div>
+        </div>
+        <div x-show="mobileMenu" x-transition class="lg:hidden bg-white border-t border-gray-100 shadow-lg" style="display:none;">
+            <div class="px-6 py-6 space-y-4 font-display font-semibold text-sm">
+                <a href="#" class="block text-gray-700 hover:text-brand-cyan py-2">Trips</a>
+                <a href="#" class="block text-gray-700 hover:text-brand-cyan py-2">Corporate</a>
+                <a href="#" class="block text-gray-700 hover:text-brand-cyan py-2">Blogs</a>
+                <a href="#" class="block text-gray-700 hover:text-brand-cyan py-2">About</a>
+                <hr class="border-gray-100">
+                <a href="#" class="block text-gray-700 hover:text-brand-cyan py-2">Log In</a>
+                <a href="#" class="block w-full text-center bg-brand-dark text-white px-6 py-3 rounded-full">Submit Enquiry</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Header with Art Banner (End-to-End, Light Blur, Centered Search) -->
+    <section class="relative w-full overflow-hidden flex items-center justify-center min-h-[200px] md:min-h-[250px] shadow-sm mb-2 md:mb-4">
+        <!-- Art Background -->
+        <img src="travelers_art.jpg" alt="Travelers enjoying the scenic view" class="absolute inset-0 w-full h-full object-cover object-[center_35%] z-0">
+        <!-- Light Blur & Subtle Tint Overlay above banner art, below search -->
+        <div class="absolute inset-0 bg-black/15 backdrop-blur-sm z-0 pointer-events-none"></div>
+        
+        <!-- Search Bar Container (Centered) -->
+        <div class="relative z-10 px-4 py-6 md:py-8 w-full max-w-7xl mx-auto flex justify-center items-center">
+            <div class="bg-white/95 backdrop-blur-md rounded-[2rem] md:rounded-full p-1.5 flex flex-col md:flex-row gap-1 w-full max-w-[690px] shadow-2xl border border-white/60">
+                <!-- Where to -->
+                <div class="flex-1 px-4 py-2 hover:bg-gray-50 rounded-full transition cursor-pointer group">
+                    <div class="text-[9px] font-bold text-brand-cyan uppercase tracking-widest leading-none mb-1">Where to</div>
+                    <div class="font-semibold text-brand-dark text-sm flex items-center gap-2 leading-none">
+                        <i class="fa-solid fa-location-dot text-brand-cyan text-xs"></i> Ladakh
+                    </div>
+                </div>
+                <div class="w-px bg-gray-200 my-1.5 hidden md:block"></div>
+                <!-- When -->
+                <div class="flex-1 px-4 py-2 hover:bg-gray-50 rounded-full transition cursor-pointer group">
+                    <div class="text-[9px] font-bold text-brand-cyan uppercase tracking-widest leading-none mb-1">When</div>
+                    <div class="font-semibold text-gray-800 text-sm flex items-center gap-2 leading-none">
+                        <i class="fa-regular fa-calendar text-brand-cyan text-xs"></i> Any date
+                    </div>
+                </div>
+                <!-- Update CTA -->
+                <button class="bg-brand-cyan text-white px-7 py-2 md:ml-1 rounded-full font-display font-bold text-sm hover:bg-brand-darkcyan hover:shadow-lg hover:shadow-cyan-500/30 transition-all flex items-center justify-center gap-2 active:scale-95 mt-1 md:mt-0">
+                    Update <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content (Exact same max-w-7xl mx-auto px-4 lg:px-8 as homepage) -->
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 py-8 md:py-10">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-10 items-start">
+
+            <!-- LEFT: Filters Card (Card with header 'Filters' styled same as Sort) -->
+            <aside class="hidden lg:block w-[260px] flex-shrink-0">
+                <div class="sticky top-28 bg-white rounded-[2rem] p-6 shadow-soft border border-gray-100">
+                    <!-- Filters Card Header (Same style as Sort label) -->
+                    <div class="flex items-center justify-between pb-4 mb-5 border-b border-gray-100">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-brand-cyan text-xs"></i>
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Filters</span>
+                        </div>
+                        <button @click="clearFilters()" x-show="filters.duration.length || filters.month.length" class="text-brand-cyan text-xs font-bold hover:underline transition-all">Clear</button>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Budget -->
+                        <div>
+                            <h3 class="font-display font-bold text-sm text-brand-dark mb-3 tracking-wide">Budget</h3>
+                            <style>
+                                .range-slider { position: relative; height: 4px; border-radius: 4px; background: #e5e7eb; }
+                                .range-slider input[type="range"] { position: absolute; width: 100%; -webkit-appearance: none; appearance: none; background: transparent; pointer-events: none; height: 100%; top: 0; margin: 0; outline: none; }
+                                .range-slider input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; pointer-events: all; width: 16px; height: 16px; background: #00a3e0; border-radius: 50%; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.3); margin-top: -6px; border: 2px solid #fff; }
+                                .range-slider input[type="range"]::-moz-range-thumb { pointer-events: all; width: 16px; height: 16px; background: #00a3e0; border-radius: 50%; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.3); border: 2px solid #fff; }
+                                .range-slider-track { position: absolute; height: 100%; background: #00a3e0; border-radius: 4px; z-index: 1; pointer-events: none; }
+                            </style>
+                            <div class="mb-4 mt-2 px-1 relative">
+                                <div class="range-slider">
+                                    <div class="range-slider-track" :style="`left: ${(minBudget/50000)*100}%; right: ${100 - (maxBudget/50000)*100}%`"></div>
+                                    <input type="range" min="0" max="50000" step="500" x-model.number="minBudget" @input="minBudget = Math.min(minBudget, maxBudget - 500)" class="z-20">
+                                    <input type="range" min="0" max="50000" step="500" x-model.number="maxBudget" @input="maxBudget = Math.max(maxBudget, minBudget + 500)" class="z-20">
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="relative flex-1">
+                                    <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-semibold">₹</span>
+                                    <input type="number" x-model.number="minBudget" class="w-full bg-gray-50 border border-gray-200 rounded-xl py-1.5 pl-6 pr-2 text-xs font-bold text-gray-700 focus:outline-none focus:border-brand-cyan transition-colors" @change="minBudget = Math.min(Math.max(0, minBudget), maxBudget - 500)">
+                                </div>
+                                <span class="text-gray-400 text-xs">-</span>
+                                <div class="relative flex-1">
+                                    <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-semibold">₹</span>
+                                    <input type="number" x-model.number="maxBudget" class="w-full bg-gray-50 border border-gray-200 rounded-xl py-1.5 pl-6 pr-2 text-xs font-bold text-gray-700 focus:outline-none focus:border-brand-cyan transition-colors" @change="maxBudget = Math.max(Math.min(50000, maxBudget), minBudget + 500)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Duration (Added 1-3 Days) -->
+                        <div>
+                            <h3 class="font-display font-bold text-sm text-brand-dark mb-3 tracking-wide">Duration</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <template x-for="d in ['1-3', '3-5', '5-7', '7+']">
+                                    <button @click="toggleFilter('duration', d)" :class="filters.duration.includes(d) ? 'bg-brand-cyan text-white border-brand-cyan shadow-sm' : 'bg-gray-50 text-gray-600 border-gray-200 hover:border-brand-cyan hover:bg-white'" class="px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all" x-text="d + ' Days'"></button>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Month -->
+                        <div>
+                            <h3 class="font-display font-bold text-sm text-brand-dark mb-3 tracking-wide">Month</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <template x-for="m in ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb']">
+                                    <button @click="toggleFilter('month', m)" :class="filters.month.includes(m) ? 'bg-brand-cyan text-white border-brand-cyan shadow-sm' : 'bg-gray-50 text-gray-600 border-gray-200 hover:border-brand-cyan hover:bg-white'" class="px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all" x-text="m"></button>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reset Trigger -->
+                    <div class="mt-6 pt-4 border-t border-gray-100">
+                        <button @click="clearFilters()" class="w-full text-center text-xs font-semibold text-gray-400 hover:text-brand-cyan transition-colors">
+                            Reset all filters
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- RIGHT: Results Header Bar & Trip Cards Grid -->
+            <div class="flex-1 min-w-0 w-full">
+
+                <!-- Top Bar: Results Text on Left (in place of sort) + Sort Dropdown & Sold Out Toggle on Right -->
+                <div class="hidden lg:flex flex-wrap items-center justify-between gap-4 mb-7 bg-white/70 backdrop-blur-sm p-4 rounded-2xl border border-gray-100 relative z-50">
+                    <!-- Left: Results text in place of sort -->
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-cyan"></span>
+                        <p class="text-sm font-semibold text-gray-600">
+                            Showing <span class="font-bold text-brand-dark" x-text="visibleCards.length">6</span> trips in <span class="font-bold text-brand-cyan">Ladakh</span>
+                        </p>
+                    </div>
+
+                    <!-- Right: Sort dropdown beside sold out toggle -->
+                    <div class="flex items-center gap-5">
+                        <!-- Sort Dropdown -->
+                        <div class="flex items-center gap-2" x-data="{ sortOpen: false }" @click.outside="sortOpen = false">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Sort</span>
+                            <div class="relative">
+                                <button @click="sortOpen = !sortOpen" class="flex items-center gap-2 bg-white border border-gray-200 hover:border-brand-cyan px-4 py-2 rounded-full text-xs font-bold text-gray-700 shadow-sm transition-all focus:outline-none relative z-10">
+                                    <span x-text="sortOptions.find(o => o.value === sortBy)?.label || 'Popular'"></span>
+                                    <i class="fa-solid fa-chevron-down text-[10px] text-gray-400 transition-transform duration-200" :class="sortOpen ? 'rotate-180' : ''"></i>
+                                </button>
+                                <!-- Dropdown Menu -->
+                                <div x-show="sortOpen" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-100" class="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-[100]" style="display:none;">
+                                    <template x-for="s in sortOptions" :key="s.value">
+                                        <button @click="sortBy = s.value; sortOpen = false" class="w-full text-left px-4 py-2.5 text-xs font-bold transition-colors flex items-center justify-between" :class="sortBy === s.value ? 'text-brand-cyan bg-brand-cyan/5 font-extrabold' : 'text-gray-700 hover:bg-gray-50 hover:text-brand-cyan'">
+                                            <span x-text="s.label"></span>
+                                            <i x-show="sortBy === s.value" class="fa-solid fa-check text-[10px] text-brand-cyan"></i>
+                                        </button>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-px h-5 bg-gray-200"></div>
+
+                        <!-- Exclude Sold Out Toggle -->
+                        <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                            <span class="text-xs font-bold text-gray-500">Exclude sold out</span>
+                            <div class="relative">
+                                <input type="checkbox" x-model="excludeSoldOut" class="sr-only peer">
+                                <div class="w-9 h-5 bg-gray-200 rounded-full peer-checked:bg-brand-cyan transition-colors"></div>
+                                <div class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow-sm transition-transform peer-checked:translate-x-4"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Mobile Filter/Sort Bar -->
+                <div class="lg:hidden flex flex-col gap-3 mb-6">
+                    <div class="flex items-center justify-between px-1">
+                        <p class="text-sm font-semibold text-gray-600">
+                            Showing <span class="font-bold text-brand-dark" x-text="visibleCards.length">6</span> trips in <span class="font-bold text-brand-cyan">Ladakh</span>
+                        </p>
+                    </div>
+                    <div class="flex gap-3">
+                        <button @click="showMobileFilter = true" class="flex-1 flex items-center justify-center gap-2 py-3 bg-white border border-gray-200 rounded-2xl text-sm font-bold text-gray-700 hover:border-brand-cyan transition-colors shadow-sm">
+                            <i class="fa-solid fa-sliders text-brand-cyan"></i> Filters
+                        </button>
+                        <button @click="showMobileSort = !showMobileSort" class="flex-1 flex items-center justify-center gap-2 py-3 bg-white border border-gray-200 rounded-2xl text-sm font-bold text-gray-700 hover:border-brand-cyan transition-colors shadow-sm">
+                            <i class="fa-solid fa-arrow-down-wide-short text-brand-cyan"></i> Sort: <span class="text-brand-cyan truncate max-w-[80px]" x-text="sortOptions.find(o => o.value === sortBy)?.label"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Sort Dropdown -->
+                <div x-show="showMobileSort" class="lg:hidden mb-6 bg-white border border-gray-200 rounded-2xl p-4 space-y-2 shadow-lg" style="display:none;">
+                    <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Select Sorting</div>
+                    <template x-for="s in sortOptions">
+                        <button @click="sortBy = s.value; showMobileSort = false" :class="sortBy === s.value ? 'bg-brand-cyan text-white' : 'bg-gray-50 text-gray-700'" class="block w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold transition-all" x-text="s.label"></button>
+                    </template>
+                    <div class="pt-2 border-t border-gray-100">
+                        <label class="flex items-center justify-between px-2 py-2 cursor-pointer">
+                            <span class="text-sm font-bold text-gray-700">Exclude sold out</span>
+                            <div class="relative">
+                                <input type="checkbox" x-model="excludeSoldOut" class="sr-only peer">
+                                <div class="w-9 h-5 bg-gray-200 rounded-full peer-checked:bg-brand-cyan transition-colors"></div>
+                                <div class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow-sm transition-transform peer-checked:translate-x-4"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Trip Cards Grid (Wider cards: 2 columns on tablet/desktop, 1 column on mobile) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+                    <template x-for="card in visibleCards" :key="card.id">
+                        <div class="group cursor-pointer">
+                            <a :href="card.href" class="block h-full focus:outline-none hover:-translate-y-1 transition-transform duration-300">
+                                <div class="bg-white rounded-[2rem] p-3.5 shadow-soft group-hover:shadow-float transition-all duration-500 border border-gray-100 flex flex-col h-full">
+                                    <!-- Image + FOMO Tag -->
+                                    <div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden mb-3.5">
+                                        <img :src="card.image" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" :alt="card.title">
+                                        <div x-show="card.tag" class="absolute top-3.5 left-3.5 px-3 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider shadow-md text-white" :class="card.tagClass" x-text="card.tag"></div>
+                                        <div x-show="card.soldOut" class="absolute inset-0 bg-black/55 flex items-center justify-center backdrop-blur-[2px]">
+                                            <span class="bg-white text-gray-800 font-display font-bold text-sm px-6 py-2.5 rounded-full shadow-lg">Sold Out</span>
+                                        </div>
+                                    </div>
+                                    <!-- Content Area -->
+                                    <div class="px-3 pb-2 flex flex-col flex-grow">
+                                        <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5">
+                                            <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar-check text-brand-cyan"></i> <span x-text="card.date"></span></span>
+                                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                                            <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-brand-cyan"></i> <span x-text="card.duration"></span></span>
+                                        </div>
+                                        <h3 class="font-display font-semibold text-lg text-brand-dark leading-snug mb-3 group-hover:text-brand-cyan transition-colors" x-text="card.title"></h3>
+                                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-end justify-between">
+                                            <span class="flex items-center gap-1.5 text-sm font-medium text-gray-500 pb-1">
+                                                <i class="fa-solid fa-location-dot text-brand-yellow"></i> <span x-text="card.location"></span>
+                                            </span>
+                                            <div class="text-right">
+                                                <span x-show="card.oldPrice" class="block text-[11px] text-gray-400 line-through leading-none mb-1" x-text="card.oldPrice"></span>
+                                                <span class="text-brand-cyan font-bold text-lg leading-none" x-html="card.price + ' <span class=\'text-[10px] font-medium text-gray-500 uppercase tracking-wide ml-0.5\'>Onwards</span>'"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- No Results State -->
+                <div x-show="visibleCards.length === 0" class="text-center py-20 bg-white rounded-[2rem] border border-gray-100 shadow-soft mt-4">
+                    <div class="text-6xl mb-4">🏔️</div>
+                    <h3 class="font-display font-bold text-2xl text-brand-dark mb-2">No trips match your filters</h3>
+                    <p class="text-gray-500 mb-6 text-sm">Try relaxing your duration or month filter to see available departures.</p>
+                    <button @click="clearFilters()" class="bg-brand-cyan text-white px-8 py-3 rounded-full font-bold text-sm hover:bg-brand-darkcyan transition-all shadow-md">Clear all filters</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Filter Bottom Sheet -->
+    <div x-show="showMobileFilter" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" class="fixed inset-0 z-50 lg:hidden" style="display:none;">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" @click="showMobileFilter = false"></div>
+        <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[2rem] p-6 max-h-[80vh] overflow-y-auto shadow-2xl">
+            <div class="flex items-center justify-between mb-6 pb-3 border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-brand-cyan text-sm"></i>
+                    <h3 class="font-display font-bold text-lg text-brand-dark">Filters</h3>
+                </div>
+                <button @click="showMobileFilter = false" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-6">
+                <!-- Budget -->
+                <div>
+                    <h3 class="font-display font-bold text-sm text-brand-dark mb-3 tracking-wide">Budget</h3>
+                    <div class="mb-4 mt-2 px-1 relative">
+                        <div class="range-slider">
+                            <div class="range-slider-track" :style="`left: ${(minBudget/50000)*100}%; right: ${100 - (maxBudget/50000)*100}%`"></div>
+                            <input type="range" min="0" max="50000" step="500" x-model.number="minBudget" @input="minBudget = Math.min(minBudget, maxBudget - 500)" class="z-20">
+                            <input type="range" min="0" max="50000" step="500" x-model.number="maxBudget" @input="maxBudget = Math.max(maxBudget, minBudget + 500)" class="z-20">
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="relative flex-1">
+                            <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-semibold">₹</span>
+                            <input type="number" x-model.number="minBudget" class="w-full bg-gray-50 border border-gray-200 rounded-xl py-1.5 pl-6 pr-2 text-xs font-bold text-gray-700 focus:outline-none focus:border-brand-cyan transition-colors" @change="minBudget = Math.min(Math.max(0, minBudget), maxBudget - 500)">
+                        </div>
+                        <span class="text-gray-400 text-xs">-</span>
+                        <div class="relative flex-1">
+                            <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs font-semibold">₹</span>
+                            <input type="number" x-model.number="maxBudget" class="w-full bg-gray-50 border border-gray-200 rounded-xl py-1.5 pl-6 pr-2 text-xs font-bold text-gray-700 focus:outline-none focus:border-brand-cyan transition-colors" @change="maxBudget = Math.max(Math.min(50000, maxBudget), minBudget + 500)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Duration (Added 1-3 Days) -->
+                <div>
+                    <h4 class="font-bold text-sm text-gray-800 mb-3">Duration</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <template x-for="d in ['1-3', '3-5', '5-7', '7+']">
+                            <button @click="toggleFilter('duration', d)" :class="filters.duration.includes(d) ? 'bg-brand-cyan text-white border-brand-cyan shadow-sm' : 'bg-gray-50 text-gray-600 border-gray-200'" class="px-4 py-2 rounded-full text-xs font-bold border transition-all" x-text="d + ' Days'"></button>
+                        </template>
+                    </div>
+                </div>
+                <!-- Month -->
+                <div>
+                    <h4 class="font-bold text-sm text-gray-800 mb-3">Month</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <template x-for="m in ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb']">
+                            <button @click="toggleFilter('month', m)" :class="filters.month.includes(m) ? 'bg-brand-cyan text-white border-brand-cyan shadow-sm' : 'bg-gray-50 text-gray-600 border-gray-200'" class="px-4 py-2 rounded-full text-xs font-bold border transition-all" x-text="m"></button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-3 mt-8 pt-4 border-t border-gray-100">
+                <button @click="clearFilters(); showMobileFilter = false" class="flex-1 py-3 rounded-full border-2 border-gray-200 text-gray-600 font-bold text-sm">Clear all</button>
+                <button @click="showMobileFilter = false" class="flex-1 py-3 rounded-full bg-brand-cyan text-white font-bold text-sm shadow-md">Show results</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Ticker Strip -->
+    <section class="py-8 bg-white border-t border-gray-100 overflow-hidden mt-8 md:mt-12">
+        <div class="mb-6 text-center">
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">What travelers say about Ladakh</p>
+        </div>
+        <div class="relative">
+            <div class="flex animate-ticker w-max gap-6">
+                <div class="flex gap-6 shrink-0">
+                    <div class="bg-gray-50 rounded-2xl px-6 py-4 flex items-center gap-4 w-[380px] shrink-0 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" class="w-10 h-10 rounded-full object-cover shrink-0" alt="">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-sm text-gray-700 font-medium truncate">"Absolutely breathtaking views at Pangong Lake!"</p>
+                            <p class="text-xs text-gray-400 font-semibold mt-0.5">Priya M. • Sep 2026</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl px-6 py-4 flex items-center gap-4 w-[380px] shrink-0 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" class="w-10 h-10 rounded-full object-cover shrink-0" alt="">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-sm text-gray-700 font-medium truncate">"The Umling La pass was a once-in-a-lifetime experience"</p>
+                            <p class="text-xs text-gray-400 font-semibold mt-0.5">Arjun K. • Aug 2026</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl px-6 py-4 flex items-center gap-4 w-[380px] shrink-0 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" class="w-10 h-10 rounded-full object-cover shrink-0" alt="">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-sm text-gray-700 font-medium truncate">"Best trip captain ever! Made us feel so safe"</p>
+                            <p class="text-xs text-gray-400 font-semibold mt-0.5">Sneha R. • Jul 2026</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl px-6 py-4 flex items-center gap-4 w-[380px] shrink-0 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" class="w-10 h-10 rounded-full object-cover shrink-0" alt="">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                            <p class="text-sm text-gray-700 font-medium truncate">"Hanle stargazing was magical. Zero light pollution!"</p>
+                            <p class="text-xs text-gray-400 font-semibold mt-0.5">Rohan D. • Aug 2026</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl px-6 py-4 flex items-center gap-4 w-[380px] shrink-0 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" class="w-10 h-10 rounded-full object-cover shrink-0" alt="">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-sm text-gray-700 font-medium truncate">"Met amazing people, the group vibe was incredible"</p>
+                            <p class="text-xs text-gray-400 font-semibold mt-0.5">Meera S. • Jun 2026</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl px-6 py-4 flex items-center gap-4 w-[380px] shrink-0 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" class="w-10 h-10 rounded-full object-cover shrink-0" alt="">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-sm text-gray-700 font-medium truncate">"Worth every rupee. Camping at Tso Moriri was surreal"</p>
+                            <p class="text-xs text-gray-400 font-semibold mt-0.5">Vikram P. • Jul 2026</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="flex gap-6 shrink-0">
+                    <div class="bg-gray-50 rounded-2xl px-6 py-4 flex items-center gap-4 w-[380px] shrink-0 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" class="w-10 h-10 rounded-full object-cover shrink-0" alt="">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-sm text-gray-700 font-medium truncate">"Absolutely breathtaking views at Pangong Lake!"</p>
+                            <p class="text-xs text-gray-400 font-semibold mt-0.5">Priya M. • Sep 2026</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl px-6 py-4 flex items-center gap-4 w-[380px] shrink-0 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" class="w-10 h-10 rounded-full object-cover shrink-0" alt="">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-sm text-gray-700 font-medium truncate">"The Umling La pass was a once-in-a-lifetime experience"</p>
+                            <p class="text-xs text-gray-400 font-semibold mt-0.5">Arjun K. • Aug 2026</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl px-6 py-4 flex items-center gap-4 w-[380px] shrink-0 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" class="w-10 h-10 rounded-full object-cover shrink-0" alt="">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-sm text-gray-700 font-medium truncate">"Best trip captain ever! Made us feel so safe"</p>
+                            <p class="text-xs text-gray-400 font-semibold mt-0.5">Sneha R. • Jul 2026</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl px-6 py-4 flex items-center gap-4 w-[380px] shrink-0 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" class="w-10 h-10 rounded-full object-cover shrink-0" alt="">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                            <p class="text-sm text-gray-700 font-medium truncate">"Hanle stargazing was magical. Zero light pollution!"</p>
+                            <p class="text-xs text-gray-400 font-semibold mt-0.5">Rohan D. • Aug 2026</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl px-6 py-4 flex items-center gap-4 w-[380px] shrink-0 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" class="w-10 h-10 rounded-full object-cover shrink-0" alt="">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-sm text-gray-700 font-medium truncate">"Met amazing people, the group vibe was incredible"</p>
+                            <p class="text-xs text-gray-400 font-semibold mt-0.5">Meera S. • Jun 2026</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl px-6 py-4 flex items-center gap-4 w-[380px] shrink-0 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" class="w-10 h-10 rounded-full object-cover shrink-0" alt="">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-sm text-gray-700 font-medium truncate">"Worth every rupee. Camping at Tso Moriri was surreal"</p>
+                            <p class="text-xs text-gray-400 font-semibold mt-0.5">Vikram P. • Jul 2026</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white text-brand-dark py-12 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <a href="index.html" class="flex items-center gap-3"><img src="logo.png" alt="WanderOn" class="h-10 w-auto object-contain"></a>
+                <div class="flex items-center gap-8 text-sm font-medium text-gray-500">
+                    <a href="#" class="hover:text-brand-cyan transition-colors">Trips</a>
+                    <a href="#" class="hover:text-brand-cyan transition-colors">Corporate</a>
+                    <a href="#" class="hover:text-brand-cyan transition-colors">Blogs</a>
+                    <a href="#" class="hover:text-brand-cyan transition-colors">About</a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-9 h-9 rounded-full bg-gray-50 text-gray-500 flex items-center justify-center hover:bg-brand-cyan hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-gray-50 text-gray-500 flex items-center justify-center hover:bg-brand-cyan hover:text-white transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-gray-50 text-gray-500 flex items-center justify-center hover:bg-brand-cyan hover:text-white transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="text-center text-xs text-gray-400 mt-8 pt-6 border-t border-gray-100">© 2026 WanderOn. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        function searchPage() {
+            return {
+                sortBy: 'popular',
+                excludeSoldOut: false,
+                showMobileFilter: false,
+                showMobileSort: false,
+                filters: { duration: [], month: [] },
+                minBudget: 0,
+                maxBudget: 50000,
+                sortOptions: [
+                    { label: 'Popular', value: 'popular' },
+                    { label: 'Price: Low → High', value: 'price_asc' },
+                    { label: 'Price: High → Low', value: 'price_desc' },
+                    { label: 'Newest', value: 'newest' }
+                ],
+                cards: [
+                    {
+                        id: 1, title: 'Ladakh & Umling La: Classic Value Circuit',
+                        image: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=800&auto=format&fit=crop',
+                        date: '24 Sept', duration: '6N / 7D', location: 'Leh Airport',
+                        price: '₹18,999', oldPrice: '₹22,999', priceNum: 18999,
+                        tag: '🔥 90% Full', tagClass: 'bg-red-500 animate-pulse',
+                        soldOut: false, href: 'ladakh.html', durationCat: '5-7', month: 'Sep', popularity: 95
+                    },
+                    {
+                        id: 2, title: 'Leh Ladakh Royal Enfield Bike Trip',
+                        image: 'https://images.unsplash.com/photo-1609766857041-ed402ea8069a?q=80&w=800&auto=format&fit=crop',
+                        date: '28 Sept', duration: '6N / 7D', location: 'Manali',
+                        price: '₹21,499', oldPrice: '₹25,999', priceNum: 21499,
+                        tag: '✨ High Demand', tagClass: 'bg-indigo-500',
+                        soldOut: false, href: 'ladakh.html', durationCat: '5-7', month: 'Sep', popularity: 88
+                    },
+                    {
+                        id: 3, title: 'Ladakh with Hanle & Turtuk Explorer',
+                        image: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop',
+                        date: '5 Oct', duration: '7N / 8D', location: 'Leh Airport',
+                        price: '₹24,999', oldPrice: '₹29,999', priceNum: 24999,
+                        tag: '🚨 Last 3 Seats', tagClass: 'bg-red-600 animate-pulse',
+                        soldOut: false, href: 'ladakh.html', durationCat: '7+', month: 'Oct', popularity: 82
+                    },
+                    {
+                        id: 4, title: 'Srinagar to Leh Grand Road Trip',
+                        image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=800&auto=format&fit=crop',
+                        date: '12 Oct', duration: '8N / 9D', location: 'Srinagar Airport',
+                        price: '₹27,999', oldPrice: null, priceNum: 27999,
+                        tag: null, tagClass: '',
+                        soldOut: false, href: 'ladakh.html', durationCat: '7+', month: 'Oct', popularity: 75
+                    },
+                    {
+                        id: 5, title: 'Leh Express Weekend: Monasteries & Hall of Fame',
+                        image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop',
+                        date: '15 Sep', duration: '2N / 3D', location: 'Leh Airport',
+                        price: '₹14,499', oldPrice: '₹17,999', priceNum: 14499,
+                        tag: '⚡ Quick Getaway', tagClass: 'bg-amber-500',
+                        soldOut: false, href: 'ladakh.html', durationCat: '1-3', month: 'Sep', popularity: 72
+                    },
+                    {
+                        id: 6, title: 'Ladakh Winter Chadar Frozen River Trek',
+                        image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop',
+                        date: '15 Jan', duration: '5N / 6D', location: 'Leh Airport',
+                        price: '₹19,999', oldPrice: null, priceNum: 19999,
+                        tag: null, tagClass: '',
+                        soldOut: true, href: '#', durationCat: '5-7', month: 'Jan', popularity: 60
+                    }
+                ],
+                get visibleCards() {
+                    let result = [...this.cards];
+                    if (this.excludeSoldOut) result = result.filter(c => !c.soldOut);
+                    result = result.filter(c => c.priceNum >= this.minBudget && c.priceNum <= this.maxBudget);
+                    if (this.filters.duration.length) result = result.filter(c => this.filters.duration.includes(c.durationCat));
+                    if (this.filters.month.length) result = result.filter(c => this.filters.month.includes(c.month));
+                    if (this.sortBy === 'price_asc') result.sort((a, b) => a.priceNum - b.priceNum);
+                    else if (this.sortBy === 'price_desc') result.sort((a, b) => b.priceNum - a.priceNum);
+                    else if (this.sortBy === 'newest') result.sort((a, b) => b.id - a.id);
+                    else result.sort((a, b) => b.popularity - a.popularity);
+                    return result;
+                },
+                toggleFilter(category, value) {
+                    const idx = this.filters[category].indexOf(value);
+                    if (idx > -1) this.filters[category].splice(idx, 1);
+                    else this.filters[category].push(value);
+                },
+                clearFilters() {
+                    this.filters = { duration: [], month: [] };
+                    this.excludeSoldOut = false;
+                    this.minBudget = 0;
+                    this.maxBudget = 50000;
+                }
+            };
+        }
+    </script>
+</body>
+</html>
