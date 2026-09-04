@@ -129,7 +129,7 @@
                 
                 <div class="hidden md:flex items-center space-x-6 font-display font-semibold text-sm">
                     <a href="#" class="text-gray-600 hover:text-brand-cyan transition-colors">Log In</a>
-                    <button onclick="document.getElementById('enquiry-modal').classList.remove('hidden')" class="bg-brand-dark text-white px-6 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:bg-brand-cyan hover:-translate-y-0.5 transition-all">Submit Enquiry</button>
+                    <button onclick="openEnquiryModal('default')" class="bg-brand-dark text-white px-6 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:bg-brand-cyan hover:-translate-y-0.5 transition-all">Submit Enquiry</button>
                 </div>
             </div>
         </div>
@@ -763,7 +763,7 @@
                     <p class="text-gray-500 text-sm leading-relaxed mb-8 flex-grow">
                         Don't worry, our community is here with you. Join thousands of solo travelers who found their tribe.
                     </p>
-                    <button onclick="document.getElementById('enquiry-modal').classList.remove('hidden')" class="w-full bg-white border border-brand-cyan text-brand-dark hover:bg-brand-cyan hover:text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center mt-auto text-sm">
+                    <button onclick="openEnquiryModal('solo')" class="w-full bg-white border border-brand-cyan text-brand-dark hover:bg-brand-cyan hover:text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center mt-auto text-sm">
                         Contact Us
                     </button>
                 </div>
@@ -783,7 +783,7 @@
                         <i class="fa-solid fa-tags"></i> View discount tiers
                     </button>
                     
-                    <button onclick="document.getElementById('enquiry-modal').classList.remove('hidden')" class="w-full bg-white border border-brand-cyan text-brand-dark hover:bg-brand-cyan hover:text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center mt-auto text-sm">
+                    <button onclick="openEnquiryModal('group')" class="w-full bg-white border border-brand-cyan text-brand-dark hover:bg-brand-cyan hover:text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center mt-auto text-sm">
                         Contact Us
                     </button>
                 </div>
@@ -1842,6 +1842,41 @@
     </footer>
 
     <script>
+        
+        function openEnquiryModal(type) {
+            const modal = document.getElementById('enquiry-modal');
+            const select = document.getElementById('travelers-select');
+            
+            // Reset to default options
+            select.innerHTML = `
+                <option value="" disabled selected>Select</option>
+                <option value="1">1 (Solo)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5+">5+</option>
+            `;
+            select.disabled = false;
+            select.value = "";
+            
+            if (type === 'solo') {
+                select.value = "1";
+                select.disabled = true; // disabled as per request
+            } else if (type === 'group') {
+                // Remove solo option
+                select.innerHTML = `
+                    <option value="" disabled selected>Select</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5+">5+</option>
+                `;
+                select.value = "";
+            }
+            
+            modal.classList.remove('hidden');
+        }
+
         // Soft navbar blur effect on scroll
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
@@ -1937,7 +1972,7 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div class="relative">
                             <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1.5 ml-1">Travelers</label>
-                            <select required class="w-full bg-gray-50 border border-gray-200 text-brand-dark text-sm rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-all appearance-none cursor-pointer">
+                            <select id="travelers-select" required class="w-full bg-gray-50 border border-gray-200 text-brand-dark text-sm rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-all appearance-none cursor-pointer">
                                 <option value="" disabled selected>Select</option>
                                 <option value="1">1 (Solo)</option>
                                 <option value="2">2</option>
