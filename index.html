@@ -107,9 +107,39 @@
 </head>
 <body class="bg-brand-cream text-brand-slate font-sans antialiased">
 
-    <!-- Static Top Announcement Banner -->
-    <div class="bg-brand-sky text-brand-darkcyan border-b border-blue-100 py-2.5 px-4 text-center z-50 relative text-xs md:text-sm font-semibold tracking-wide">
-        <span>WE'VE JUST RAISED $5.7M TO MAKE TRAVEL SEAMLESS</span>
+    <!-- Festive Top Announcement Banner -->
+    <div class="relative bg-gradient-to-r from-red-600 via-green-600 to-red-600 text-white border-b border-red-700 py-2.5 px-4 text-center z-50 overflow-hidden text-xs md:text-sm font-medium tracking-wide shadow-sm" style="background-size: 200% auto; animation: gradientShift 5s ease infinite;">
+        <style>
+            @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+            @keyframes snowfall { 0% { transform: translateY(-10px) rotate(0deg); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(40px) rotate(360deg); opacity: 0; } }
+            .snow { display: inline-block; animation: snowfall 3s linear infinite; font-size: 10px; color: rgba(255,255,255,0.7); }
+        </style>
+        
+        <!-- Snowflakes Background Animation -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden flex justify-around items-start pt-1">
+            <span class="snow" style="animation-delay: 0s; animation-duration: 3s;">❄️</span>
+            <span class="snow" style="animation-delay: 1.5s; animation-duration: 4s;">❄️</span>
+            <span class="snow" style="animation-delay: 0.5s; animation-duration: 3.5s;">❄️</span>
+            <span class="snow" style="animation-delay: 2s; animation-duration: 4.5s;">❄️</span>
+            <span class="snow" style="animation-delay: 1s; animation-duration: 3.2s;">❄️</span>
+            <span class="snow" style="animation-delay: 0.2s; animation-duration: 4.1s;">❄️</span>
+            <span class="snow" style="animation-delay: 1.8s; animation-duration: 3.8s;">❄️</span>
+            <span class="snow" style="animation-delay: 0.8s; animation-duration: 3.1s;">❄️</span>
+            <span class="snow" style="animation-delay: 2.2s; animation-duration: 3.7s;">❄️</span>
+        </div>
+
+        <div class="relative z-10 flex items-center justify-center gap-1.5 md:gap-2 flex-wrap">
+            <span class="animate-bounce drop-shadow-md text-base md:text-lg">🎄</span>
+            <span class="drop-shadow-sm font-semibold">
+                Christmas & New Year sale is live. Up to 
+                <span class="text-yellow-300 font-extrabold text-sm md:text-base px-0.5 drop-shadow-md animate-pulse">₹10,000</span> 
+                off. 
+            </span>
+            <a href="search.html" class="text-red-200 hover:text-white underline underline-offset-2 font-bold ml-1 transition-colors">
+                View trips
+            </a>
+            <span class="animate-bounce drop-shadow-md text-base md:text-lg hidden sm:inline-block" style="animation-delay: 0.5s;">🎅</span>
+        </div>
     </div>
 
     <!-- Soft Navigation -->
